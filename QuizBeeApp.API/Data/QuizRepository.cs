@@ -122,7 +122,6 @@ namespace QuizBeeApp.API.Data
                     await SaveChoices(QuizItemDto,quizItem);
                 }
                 return quizItem;
-
             }
             else
                 throw new InvalidOperationException("unable to save quiz item");

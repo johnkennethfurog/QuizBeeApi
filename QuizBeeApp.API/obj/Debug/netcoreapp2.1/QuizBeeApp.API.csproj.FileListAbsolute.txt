@@ -1,0 +1,14 @@
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\bin\Debug\netcoreapp2.1\QuizBeeApp.API.deps.json
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\bin\Debug\netcoreapp2.1\QuizBeeApp.API.runtimeconfig.json
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\bin\Debug\netcoreapp2.1\QuizBeeApp.API.runtimeconfig.dev.json
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\bin\Debug\netcoreapp2.1\QuizBeeApp.API.dll
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\bin\Debug\netcoreapp2.1\QuizBeeApp.API.pdb
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.csprojAssemblyReference.cache
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.csproj.CoreCompileInputs.cache
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.RazorAssemblyInfo.cache
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.RazorAssemblyInfo.cs
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.AssemblyInfoInputs.cache
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.AssemblyInfo.cs
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.RazorTargetAssemblyInfo.cache
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.dll
+C:\Users\John Kenneth Furog\source\repos\QuizBeeApp\QuizBeeApp.API\obj\Debug\netcoreapp2.1\QuizBeeApp.API.pdb

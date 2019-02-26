@@ -29,6 +29,7 @@ namespace QuizBeeApp.API
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IQuizRepository,QuizRepository>();
             services.AddCors();
         }
 

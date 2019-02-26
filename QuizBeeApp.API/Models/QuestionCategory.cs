@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QuizBeeApp.API.Models
 {
-    public class QuestionType
+    public class QuestionCategory
     {
         [Key]
         public int Id { get; set; }

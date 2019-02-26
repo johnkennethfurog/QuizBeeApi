@@ -11,5 +11,6 @@ namespace QuizBeeApp.API.Models
         public Event Event { get; set; }
         public double TotalScores { get; set; }
         public List<ParticipantAnswer> ParticipantAnswers { get; set; }
+        public bool IsVerify { get; set; }
     }
 }

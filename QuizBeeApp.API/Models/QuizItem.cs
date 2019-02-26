@@ -6,10 +6,10 @@ namespace QuizBeeApp.API.Models
     public class QuizItem
     {
         public int TimeLimit { get; set; }
-        public string Category { get; set; }
+        public QuestionCategory Category { get; set; }
         public string  Question{ get; set; }
         public string Answer { get; set; }
-        public QuestionType Type { get; set; }
+        public int Type { get; set; }
         [Key]
         public int Id { get; set; }
 

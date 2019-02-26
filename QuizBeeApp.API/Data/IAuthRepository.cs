@@ -7,6 +7,6 @@ namespace QuizBeeApp.API.Data
     {
          Task<User> LoginAsync(string emailAddress,string password);
          Task<User> RegisterAsync(User user,string password);
-         Task<User> UserExistAsync(string emailAddress);
+         Task<bool> IsUserExistAsync(string emailAddress);
     }
 }

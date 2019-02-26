@@ -10,5 +10,6 @@ namespace QuizBeeApp.API.Models
         public string EmailAddress { get; set; }
         public Event Event { get; set; }
         public bool IsHead { get; set; }
+        public bool IsVerify { get; set; }
     }
 }

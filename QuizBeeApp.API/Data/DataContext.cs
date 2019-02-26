@@ -14,7 +14,7 @@ namespace QuizBeeApp.API.Data
         public DbSet<Participant> Participants { get; set; }
         public DbSet<ParticipantAnswer> ParticipantAnswers { get; set; }
         public DbSet<QuestionChoice> QuestionChoices { get; set; }
-        public DbSet<QuestionType> QuestionTypes { get; set; }
+        public DbSet<QuestionCategory> QuestionCategories { get; set; }
         public DbSet<QuizItem> QuizItems { get; set; }
     }
 }

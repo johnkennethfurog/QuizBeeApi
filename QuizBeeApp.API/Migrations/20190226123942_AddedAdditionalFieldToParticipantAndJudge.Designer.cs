@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuizBeeApp.API.Data;
 
 namespace QuizBeeApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190226123942_AddedAdditionalFieldToParticipantAndJudge")]
+    partial class AddedAdditionalFieldToParticipantAndJudge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,21 +126,6 @@ namespace QuizBeeApp.API.Migrations
                     b.ToTable("ParticipantAnswers");
                 });
 
-            modelBuilder.Entity("QuizBeeApp.API.Models.QuestionCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DefaultTimeLimit");
-
-                    b.Property<string>("Description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("QuestionCategories");
-                });
-
             modelBuilder.Entity("QuizBeeApp.API.Models.QuestionChoice", b =>
                 {
                     b.Property<int>("Id")
@@ -156,6 +143,21 @@ namespace QuizBeeApp.API.Migrations
                     b.ToTable("QuestionChoices");
                 });
 
+            modelBuilder.Entity("QuizBeeApp.API.Models.QuestionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DefaultTimeLimit");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionTypes");
+                });
+
             modelBuilder.Entity("QuizBeeApp.API.Models.QuizItem", b =>
                 {
                     b.Property<int>("Id")
@@ -164,7 +166,7 @@ namespace QuizBeeApp.API.Migrations
 
                     b.Property<string>("Answer");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<string>("Category");
 
                     b.Property<int?>("EventId");
 
@@ -174,13 +176,13 @@ namespace QuizBeeApp.API.Migrations
 
                     b.Property<int>("TimeLimit");
 
-                    b.Property<int>("Type");
+                    b.Property<int?>("TypeId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("EventId");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("QuizItems");
                 });
@@ -249,13 +251,13 @@ namespace QuizBeeApp.API.Migrations
 
             modelBuilder.Entity("QuizBeeApp.API.Models.QuizItem", b =>
                 {
-                    b.HasOne("QuizBeeApp.API.Models.QuestionCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
                     b.HasOne("QuizBeeApp.API.Models.Event", "Event")
                         .WithMany("QuezItems")
                         .HasForeignKey("EventId");
+
+                    b.HasOne("QuizBeeApp.API.Models.QuestionType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId");
                 });
 #pragma warning restore 612, 618
         }

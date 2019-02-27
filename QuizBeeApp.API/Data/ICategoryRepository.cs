@@ -12,5 +12,6 @@ namespace QuizBeeApp.API.Data
         Task<bool> DeleteQuestionCategoryAsync(int QuestionCategoryId);
         Task<List<QuestionCategory>> GetQuestionCategorysAsync();
         Task<QuestionCategory> GetQuestionCategory(int QuestionCategoryId);
+        Task<bool> IsCategoryExist(string description);
     }
 }

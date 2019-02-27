@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +31,10 @@ namespace QuizBeeApp.API
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("SQLServerConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IQuizRepository,QuizRepository>();
+            services.AddScoped<IEventRepository,EventRepository>();
+            services.AddScoped<ICategoryRepository,CategoryRepository>();
             services.AddCors();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

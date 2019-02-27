@@ -12,7 +12,7 @@ namespace QuizBeeApp.API.Models
     
         public string Code { get; set; }
 
-        public List<QuizItem> QuezItems { get; set; }
+        public List<QuizItem> QuizItems { get; set; }
         public List<Participant> Participants { get; set; }
         public List<Judge> Judges { get; set; }
     }

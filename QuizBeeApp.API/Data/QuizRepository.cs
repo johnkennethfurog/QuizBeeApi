@@ -46,17 +46,23 @@ namespace QuizBeeApp.API.Data
 
         private async Task SaveChoices(CreateQuizItemDto QuizItem,QuizItem quizItem)
         {
+            if(QuizItem.Choices == null || QuizItem.Choices.Count ==0)
+                await ReverseSavingOfQuiz(quizItem);
+                
             QuizItem.Choices.ForEach(async choice =>
             {
                 await SaveQuestionChoiceAsync(quizItem,choice);
             });
 
             if(await context.SaveChangesAsync() == 0)
-            {
-                context.QuizItems.Remove(quizItem);
-                await context.SaveChangesAsync();
-                throw new InvalidOperationException("Unable to save choices");
-            }                    
+                await ReverseSavingOfQuiz(quizItem);
+        }
+
+        private async Task ReverseSavingOfQuiz(QuizItem quizItem)
+        {
+            context.QuizItems.Remove(quizItem);
+            await context.SaveChangesAsync();
+            throw new InvalidOperationException("Unable to save choices");
         }
 
         public async Task<bool> DeleteQuizItemAsync(int QuizItemId)
@@ -71,17 +77,27 @@ namespace QuizBeeApp.API.Data
 
         public async Task<QuizItem> GetQuizItemAsync(int QuestionId)
         {
-            return await context.QuizItems.FirstOrDefaultAsync(x => x.Id == QuestionId);
+            return await context.QuizItems.Where(x => x.Id == QuestionId)
+            .Include(x => x.Event)
+            .Include(x => x.QuestionChoices)
+            .Include(x => x.Category)
+            .FirstOrDefaultAsync();
         }
 
         public async Task<List<QuizItem>> GetQuizItemsAsync(int EventId)
         {
-            return await context.QuizItems.FromSql("SELECT * FROM QUIZITEMS WHERE EVENTID = {0}",EventId).ToListAsync();
+            return await context.QuizItems.FromSql("SELECT * FROM QUIZITEMS WHERE EVENTID = {0}",EventId)
+            .Include(x => x.Event)
+            .Include(x => x.QuestionChoices)
+            .Include(x => x.Category).ToListAsync();
         }
 
         public async Task<List<QuizItem>> GetQuizItemsAsync(int EventId, int CategoryId)
         {
-            return await context.QuizItems.FromSql("SELECT * FROM QUIZITEMS WHERE EVENTID = {0} AND CATEGORYID = {1}",EventId,CategoryId).ToListAsync();
+            return await context.QuizItems.FromSql("SELECT * FROM QUIZITEMS WHERE EVENTID = {0} AND CATEGORYID = {1}",EventId,CategoryId)
+            .Include(x => x.Event)
+            .Include(x => x.QuestionChoices)
+            .Include(x => x.Category).ToListAsync();
         }
 
         public async Task<bool> RemoveQuestionChoiceAsync(int questionId)

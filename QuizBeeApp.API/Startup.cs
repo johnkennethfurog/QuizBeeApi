@@ -33,6 +33,8 @@ namespace QuizBeeApp.API
             services.AddScoped<IQuizRepository,QuizRepository>();
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<IParticipantRepository,ParticipantRepository>();
+            services.AddScoped<IJudgeRepository,JudgeRepository>();
             services.AddCors();
             services.AddAutoMapper();
         }

@@ -17,16 +17,22 @@ namespace QuizBeeApp.API.Controllers
         private readonly IMapper mapper;
         private readonly IEventRepository eventRepository;
         private readonly ICategoryRepository categoryRepository;
+        private readonly IParticipantRepository participantRepository;
+        private readonly IJudgeRepository judgeRepository;
 
         public AdminController(IQuizRepository quizRepository,
         IMapper mapper,
         IEventRepository eventRepository,
-        ICategoryRepository categoryRepository)
+        ICategoryRepository categoryRepository,
+        IParticipantRepository participantRepository,
+        IJudgeRepository judgeRepository)
         {
             this.quizRepository = quizRepository;
             this.mapper = mapper;
             this.eventRepository = eventRepository;
             this.categoryRepository = categoryRepository;
+            this.participantRepository = participantRepository;
+            this.judgeRepository = judgeRepository;
         }
 
         [HttpGet("event/{eventId}/question")]
@@ -284,6 +290,42 @@ namespace QuizBeeApp.API.Controllers
             var category = await categoryRepository.GetQuestionCategory(categoryId);
             var categoryDto = mapper.Map<CategoryDto>(category);
             return Ok(category);
+        }
+
+        [HttpPut("verify/participant/{participantId}")]
+        public async Task<IActionResult> VerifyParticipant(int participantId)
+        {
+            try
+            {
+                var isVerify = await participantRepository.VerifyParticipant(participantId);
+                return Ok(isVerify);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch(NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut("verify/judge/{judgeId}")]
+        public async Task<IActionResult> VerifyJudge(int judgeId)
+        {
+            try
+            {
+                var isVerify = await judgeRepository.VerifyJudge(judgeId);
+                return Ok(isVerify);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch(NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

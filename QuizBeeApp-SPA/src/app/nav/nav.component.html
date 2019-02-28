@@ -1,0 +1,24 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal">E-Quizbee</h5>
+  <nav class="my-2 my-md-0 mr-md-3" *ngIf="loggedIn()">
+    <a class="p-2 text-dark" href="#">Events</a>
+    <a class="p-2 text-dark" href="#">Participants</a>
+    <a class="p-2 text-dark" href="#">Judges</a>
+  </nav>
+  <div class="dropdown" *ngIf="loggedIn()" dropdown>
+      <a class="btn dropdown-toggle" dropdownToggle>
+        Welcome {{authService.decodedToken.unique_name | titlecase}}
+      </a>
+    
+      <div class="dropdown-menu" *dropdownMenu mt-3>
+        <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="loggedOut()" ><i class="fa fa-sign-out"></i>Logout</a>
+      </div>
+  </div>
+  <form #loginForm="ngForm" *ngIf="!loggedIn()" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" name="email" required type="email" placeholder="Email" [(ngModel)]="model.email">
+      <input class="form-control mr-sm-2" name="password" required type="password" placeholder="Password" [(ngModel)]="model.password">
+      <button class="btn btn-success my-2 my-sm-0" [disabled]="!loginForm.valid" type="submit">Login</button>
+  </form>
+</div>

@@ -41,7 +41,7 @@ namespace QuizBeeApp.API.Data
         {
             var evnt = await context.Events.Where(x => x.Id == EventId)
             .Include(x => x.Judges)
-            .Include(x => x.QuizItems)
+            .Include(x => x.QuizItems).ThenInclude(x => x.Category)
             .Include(x => x.Participants)
             .FirstOrDefaultAsync();
             if(evnt == null)

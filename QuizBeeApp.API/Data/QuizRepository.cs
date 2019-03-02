@@ -46,10 +46,10 @@ namespace QuizBeeApp.API.Data
 
         private async Task SaveChoices(CreateQuizItemDto QuizItem,QuizItem quizItem)
         {
-            if(QuizItem.Choices == null || QuizItem.Choices.Count ==0)
+            if(QuizItem.QuestionChoices == null || QuizItem.QuestionChoices.Count ==0)
                 await ReverseSavingOfQuiz(quizItem);
                 
-            QuizItem.Choices.ForEach(async choice =>
+            QuizItem.QuestionChoices.ForEach(async choice =>
             {
                 await SaveQuestionChoiceAsync(quizItem,choice);
             });

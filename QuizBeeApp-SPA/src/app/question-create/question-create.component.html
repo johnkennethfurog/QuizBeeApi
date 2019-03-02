@@ -22,9 +22,11 @@
             </div>
             <!-- CATEGORY -->
             <div class="form-group">
-              <select class="custom-select d-block" formControlName="category" required="">
+              <select class="custom-select d-block" formControlName="categoryName" required=""
+              
+              >
                   <option value="">Select Category ...</option>
-                  <option>United States</option>
+                  <option *ngFor="let category of categories">{{category.description}}</option>
               </select>
 
             </div>
@@ -66,7 +68,7 @@
               <div class="input-group mb-3">
                   <div class="input-group-prepend">                         
                     <div class="input-group-text"> 
-                        <input type="radio" name="trueOrFalse">
+                        <input type="radio" value="True" formControlName="trueOrFalseAnswer" name="trueOrFalseAnswer">
                     </div>
                   </div>
                   <span class="form-control">True</span>
@@ -74,7 +76,7 @@
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <input type="radio" name="trueOrFalse">
+                    <input type="radio" value="False" formControlName="trueOrFalseAnswer" name="trueOrFalseAnswer">
                   </div>
                 </div>
                 <span class="form-control">False</span>
@@ -85,34 +87,34 @@
               <div class="input-group mb-3">
                   <div class="input-group-prepend">                         
                     <div class="input-group-text"> 
-                        <input type="radio" name="multiChoice">
+                        <input type="radio" formControlName="multipleChoiceAnswer" [value]="createQuestionForm.get('choiceA').value">
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input type="text" formControlName="choiceA" class="form-control" placeholder="Enter first choice">
               </div>
               <div class="input-group mb-3">
                   <div class="input-group-prepend">                         
                     <div class="input-group-text"> 
-                        <input type="radio" name="multiChoice">
+                        <input type="radio" [value]="createQuestionForm.get('choiceB').value" formControlName="multipleChoiceAnswer">
                       </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" >
+                  <input type="text" formControlName="choiceB" class="form-control" placeholder="Enter second choice" >
               </div>
               <div class="input-group mb-3">
                   <div class="input-group-prepend">                         
                     <div class="input-group-text"> 
-                        <input type="radio" name="multiChoice">
+                        <input type="radio" [value]="createQuestionForm.get('choiceC').value" formControlName="multipleChoiceAnswer">
                       </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input type="text" formControlName="choiceC" class="form-control" placeholder="Enter third choice">
               </div>
               <div class="input-group mb-3">
                   <div class="input-group-prepend">                         
                     <div class="input-group-text"> 
-                        <input type="radio" name="multiChoice">
+                        <input type="radio" [value]="createQuestionForm.get('choiceD').value" formControlName="multipleChoiceAnswer">
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input type="text" formControlName="choiceD" class="form-control" placeholder="Enter fourth choice">
               </div>
           </div>
           
@@ -124,7 +126,7 @@
         </form>
       </div>
       <div class="modal-footer form-group text-center">
-          <button class="btn btn-success" type="submit">Register</button>
+          <button class="btn btn-success" (click)="saveQuestion()" type="submit">Register</button>
           <button class="btn btn-default" type="button">Cancel</button>
       </div>
 </div>

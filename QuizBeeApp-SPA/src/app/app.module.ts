@@ -19,6 +19,8 @@ import { EventService } from './_services/event.service';
 import { EventCardComponent } from './event-card/event-card.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { QuestionCreateComponent } from './question-create/question-create.component';
+import { CategoryService } from './_services/category.service';
+import { QuestionService } from './_services/question.service';
 
 @NgModule({
    declarations: [
@@ -46,7 +48,9 @@ import { QuestionCreateComponent } from './question-create/question-create.compo
       AuthService,
       AlertifyService,
       AuthGuard,
-      EventService
+      EventService,
+      CategoryService,
+      QuestionService
    ],
    bootstrap: [
       AppComponent

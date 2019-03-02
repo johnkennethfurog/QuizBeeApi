@@ -6,6 +6,8 @@ import { QuizbeeEvent } from '../_model/quizbeeEvent';
 import { log } from 'util';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
+import { CategoryService } from '../_services/category.service';
+import { Category } from '../_model/category';
 
 @Component({
   selector: 'app-event-detail',
@@ -17,12 +19,21 @@ export class EventDetailComponent implements OnInit {
   constructor(private route:ActivatedRoute,
     private eventService:EventService,
     private alertify:AlertifyService,
-    private modalService:BsModalService) { }
+    private modalService:BsModalService,
+    private categoryService:CategoryService) { }
 
     event:QuizbeeEvent;
     modalRef: BsModalRef;
+    categories: Category[];
   ngOnInit() {
     this.loadEvent();
+    this.loadCategory();
+  }
+
+  loadCategory(){
+    this.categoryService.getCategories().subscribe((categories:Category[])=>{
+      this.categories = categories;
+    })
   }
 
   loadEvent(){
@@ -33,8 +44,11 @@ export class EventDetailComponent implements OnInit {
     });
   }
   openModalWithComponent() {
-   
-    this.modalRef = this.modalService.show(QuestionCreateComponent);
+   const initialState={
+     categories:this.categories,
+     eventId:this.event.id
+   };
+    this.modalRef = this.modalService.show(QuestionCreateComponent,{initialState});
     this.modalRef.content.closeBtnName = 'Close';
   }
 

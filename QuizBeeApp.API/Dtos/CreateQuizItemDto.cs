@@ -11,6 +11,6 @@ namespace QuizBeeApp.API.Dtos
         public int Type { get; set; }
         public double Points { get; set; }
         public int EventId { get; set; }
-        public List<string> Choices { get; set; }
+        public List<string> QuestionChoices { get; set; }
     }
 }

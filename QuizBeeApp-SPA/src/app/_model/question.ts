@@ -2,11 +2,13 @@ import { Category } from './category';
 
 export interface Question {
     timeLimit:number;
-    category: Category
+    category?: Category;
+    categoryId?:number;
     question: string;
     answer: string;
     type: number;
-    id: number;
-    point: number;
+    id?: number;
+    points: number;
     questionChoices: string[];
+    eventId: number;
 }

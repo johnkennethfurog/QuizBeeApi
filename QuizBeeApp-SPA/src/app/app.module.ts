@@ -21,6 +21,7 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { QuestionCreateComponent } from './question-create/question-create.component';
 import { CategoryService } from './_services/category.service';
 import { QuestionService } from './_services/question.service';
+import { EmitterService } from './_services/emitter.service';
 
 @NgModule({
    declarations: [
@@ -50,7 +51,8 @@ import { QuestionService } from './_services/question.service';
       AuthGuard,
       EventService,
       CategoryService,
-      QuestionService
+      QuestionService,
+      EmitterService
    ],
    bootstrap: [
       AppComponent

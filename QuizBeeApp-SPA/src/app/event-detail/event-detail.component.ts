@@ -9,6 +9,7 @@ import { QuestionCreateComponent } from '../question-create/question-create.comp
 import { CategoryService } from '../_services/category.service';
 import { Category } from '../_model/category';
 import { Question } from '../_model/question';
+import { EmitterService } from '../_services/emitter.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -21,7 +22,8 @@ export class EventDetailComponent implements OnInit {
     private eventService:EventService,
     private alertify:AlertifyService,
     private modalService:BsModalService,
-    private categoryService:CategoryService) { }
+    private categoryService:CategoryService,
+    private emitterService:EmitterService) { }
 
     event:QuizbeeEvent;
     modalRef: BsModalRef;
@@ -29,6 +31,18 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {
     this.loadEvent();
     this.loadCategory();
+    this.subscribeToEmitter();
+  }
+
+  subscribeToEmitter(){
+    this.emitterService.questionCreatedEvent.subscribe((question)=>{
+      this.event.quizItems.push(question);
+    })
+
+    this.emitterService.questionUpdatedEvent.subscribe((question)=>{
+      var ind = this.event.quizItems.findIndex(x => x.id == question.id);
+      this.event.quizItems[ind] = question;
+    });
   }
 
   loadCategory(){

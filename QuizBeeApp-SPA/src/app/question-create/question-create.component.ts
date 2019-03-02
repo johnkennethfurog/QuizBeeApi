@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, AfterViewInit, EventEmitter } from "@angular/core";
+import { Component, OnInit, TemplateRef, AfterViewInit } from "@angular/core";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { log } from "util";
@@ -7,6 +7,7 @@ import { Question } from "../_model/question";
 import { stringify } from "@angular/compiler/src/util";
 import { QuestionService } from "../_services/question.service";
 import { AlertifyService } from "../_services/alertify.service";
+import { EmitterService } from '../_services/emitter.service';
 
 @Component({
   selector: "app-question-create",
@@ -18,7 +19,8 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
   constructor(
     public modalRef: BsModalRef,
     private questionService: QuestionService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private emitterService: EmitterService
   ) {}
 
   createQuestionForm: FormGroup;
@@ -27,32 +29,32 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
   qstn: Question;
   eventId: number;
 
-  public questionCreatedEvent = new EventEmitter();
-  public questionUpdatedEvent = new EventEmitter();
-
   ngAfterViewInit(){
-    this.createQuestionForm.get('categoryName').setValue(this.qstn.category.description);
+    if(this.qstn)
+    {
+      this.createQuestionForm.get('categoryName').setValue(this.qstn.category.description);
+    }
   }
 
   ngOnInit() {
     this.createQuestionForm = new FormGroup({
-      question: new FormControl("Hello", [
+      question: new FormControl("", [
         Validators.required,
         Validators.minLength(4)
       ]),
-      categoryName: new FormControl("Easy"),
-      points: new FormControl("1"),
-      timeLimit: new FormControl("1"),
+      categoryName: new FormControl("",Validators.required),
+      points: new FormControl("0",Validators.min(1)),
+      timeLimit: new FormControl("0",Validators.min(1)),
       type: new FormControl("0"),
 
-      choiceA: new FormControl("aaa"),
-      choiceB: new FormControl("bbb"),
-      choiceC: new FormControl("ccc"),
-      choiceD: new FormControl("ddd"),
+      choiceA: new FormControl("aa",Validators.required),
+      choiceB: new FormControl("aa",Validators.required),
+      choiceC: new FormControl("aa",Validators.required),
+      choiceD: new FormControl("aa",Validators.required),
 
-      multipleChoiceAnswer: new FormControl(""),
+      multipleChoiceAnswer: new FormControl("",Validators.required),
       trueOrFalseAnswer: new FormControl("True"),
-      identificationAnswer: new FormControl("")
+      identificationAnswer: new FormControl("",Validators.required)
     });
 
     if(this.qstn){
@@ -99,13 +101,36 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
 
     log(this.createQuestionForm.valid + "");
 
-    if (this.createQuestionForm.valid) {
+    if (this.isAllRequiredFieldValid() && this.isIdentificationRequired() && this.ismultipleChoiceRequired()) {
       if (this.qstn) {
         this.updateQuestion();
       } else {
         this.createNewQuestion();
       }
     }
+    else{
+      this.alertifyService.error("Provive required field");
+    }
+  }
+
+  isAllRequiredFieldValid():boolean{
+    return this.createQuestionForm.get('question').valid &&
+    this.createQuestionForm.get('categoryName').valid &&
+    this.createQuestionForm.get('points').valid &&
+    this.createQuestionForm.get('timeLimit').valid;
+  }
+
+  isIdentificationRequired():boolean{
+    return this.createQuestionForm.get('type').value != "2" || this.createQuestionForm.get('identificationAnswer').valid;
+  }
+
+  ismultipleChoiceRequired():boolean{
+    return this.createQuestionForm.get('type').value != "1" || 
+    (this.createQuestionForm.get('choiceA').valid &&
+      this.createQuestionForm.get('choiceB').valid &&
+      this.createQuestionForm.get('choiceC').valid &&
+      this.createQuestionForm.get('choiceD').valid &&
+      this.createQuestionForm.get('multipleChoiceAnswer').valid );
   }
 
   updateQuestion(){
@@ -114,7 +139,7 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     this.questionService.updateQuestion(this.qstn,this.qstn.id).subscribe(
       (question: Question) => {
         this.alertifyService.success("Question updated");
-        this.questionUpdatedEvent.emit(question);
+        this.emitterService.questionUpdatedEvent.emit(question);
       },
       error => {
         this.alertifyService.error("Unable to save question");
@@ -139,7 +164,7 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     this.questionService.createQuestion(this.qstn).subscribe(
       (question: Question) => {
         this.alertifyService.success("Question added");
-        this.questionCreatedEvent.emit(question);
+        this.emitterService.questionCreatedEvent.emit(question);
       },
       error => {
         this.alertifyService.error("Unable to save question");

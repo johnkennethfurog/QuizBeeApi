@@ -1,134 +1,307 @@
 <div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Question</h4>
-        <button type="button" class="close pull-right" (click)="modalRef.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Question</h4>
+    <button type="button" class="close pull-right" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="createQuestionForm" (ngSubmit)="saveQuestion()">
+      <!-- QUESTION TYPE -->
+      <label class="control-label" style="margin-right:10px"
+        >Question Type:
+      </label>
+      <div class="form-group">
+        <label class="radio-inline">
+          <input
+            class="mr-3"
+            type="radio"
+            value="0"
+            formControlName="type"
+          />True or False
+        </label>
+        <label class="radio-inline ml-3">
+          <input
+            class="mr-3"
+            type="radio"
+            value="1"
+            formControlName="type"
+          />Multiple Choice
+        </label>
+        <label class="radio-inline ml-3">
+          <input
+            class="mr-3"
+            type="radio"
+            value="2"
+            formControlName="type"
+          />Identification
+        </label>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="createQuestionForm" (ngSubmit)="saveQuestion()">
-            <!-- QUESTION TYPE -->
-            <label class="control-label" style="margin-right:10px">Question Type: </label>
-            <div class="form-group">
-                <label class="radio-inline">
-                  <input class="mr-3" type="radio" value="0" formControlName="type">True or False
-                </label>
-                <label class="radio-inline ml-3">
-                  <input class="mr-3" type="radio" value="1" formControlName="type">Multiple Choice
-                </label>
-                <label class="radio-inline ml-3">
-                    <input class="mr-3" type="radio" value="2" formControlName="type">Identification
-                  </label>    
-            </div>
-            <!-- CATEGORY -->
-            <div class="form-group">
-              <select class="custom-select d-block" (loadeddata)="setSelectedCategory()" formControlName="categoryName"               
-              >
-                  <option value="">Select Category ...</option>
-                  <option *ngFor="let category of categories">{{category.description}}</option>
-              </select>
-
-            </div>
-            
-            <!-- POINTS ANT TIME LIMIT -->
-            <div class="form-group row">
-              <div class="col-lg-12">
-                <div class="input-group">
-
-                <!-- POINTS -->
-                <input type="number" class="form-control" formControlName="points" placeholder="Enter Points">
-                <div class="input-group-append mr-3">
-                  <span class="input-group-text">pts</span>
-                </div>
-                
-                  <!-- TIME LIMIT -->
-                <input type="number" class="form-control" formControlName="timeLimit" placeholder="Enter Time Limit">
-                <div class="input-group-append">
-                  <span class="input-group-text">sec</span>                      
-                </div>
-              </div>
-            </div>
-            </div>
-
-          <!-- QUESTION -->
-          <div class="form-group">
-              <textarea rows="6"
-              [ngClass]="{'is-invalid': createQuestionForm.get('question').errors &&
-                        createQuestionForm.get('question').touched}"
-              class="form-control is-invalid" 
-              formControlName="question"></textarea>
-              <div class="invalid-feedback" *ngIf="createQuestionForm.get('question').hasError('minlength')">asda</div>
-              <div class="invalid-feedback" *ngIf="createQuestionForm.get('question').hasError('required')">Please enter a question</div>
-          </div>
-
-          
-          <!-- TRUE OR FALSE -->
-          <div class="form-group" *ngIf="createQuestionForm.get('type').value == '0'">
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">                         
-                    <div class="input-group-text"> 
-                        <input type="radio" value="True" formControlName="trueOrFalseAnswer" name="trueOrFalseAnswer">
-                    </div>
-                  </div>
-                  <span class="form-control">True</span>
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <input type="radio" value="False" formControlName="trueOrFalseAnswer" name="trueOrFalseAnswer">
-                  </div>
-                </div>
-                <span class="form-control">False</span>
-              </div>
-          </div>
-          <!-- MULTIPLE CHOICE -->
-          <div class="form-group" *ngIf="createQuestionForm.get('type').value == '1'">
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">                         
-                    <div class="input-group-text"> 
-                        <input type="radio" formControlName="multipleChoiceAnswer" [value]="createQuestionForm.get('choiceA').value">
-                    </div>
-                  </div>
-                  <input type="text" formControlName="choiceA" class="form-control" placeholder="Enter first choice">
-              </div>
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">                         
-                    <div class="input-group-text"> 
-                        <input type="radio" [value]="createQuestionForm.get('choiceB').value" formControlName="multipleChoiceAnswer">
-                      </div>
-                  </div>
-                  <input type="text" formControlName="choiceB" class="form-control" placeholder="Enter second choice" >
-              </div>
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">                         
-                    <div class="input-group-text"> 
-                        <input type="radio" [value]="createQuestionForm.get('choiceC').value" formControlName="multipleChoiceAnswer">
-                      </div>
-                  </div>
-                  <input type="text" formControlName="choiceC" class="form-control" placeholder="Enter third choice">
-              </div>
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">                         
-                    <div class="input-group-text"> 
-                        <input type="radio" [value]="createQuestionForm.get('choiceD').value" formControlName="multipleChoiceAnswer">
-                    </div>
-                  </div>
-                  <input type="text" formControlName="choiceD" class="form-control" placeholder="Enter fourth choice">
-              </div>
-          </div>
-          
-          <!-- IDENTIFICATION -->
-          <div class="form-group" *ngIf="createQuestionForm.get('type').value == '2'">
-              <input type="text" class="form-control"  formControlName="identificationAnswer" placeholder="Enter answer here">
-            </div>
-
-        </form>
+      <!-- CATEGORY -->
+      <div class="form-group">
+        <select
+          class="form-control"
+          formControlName="categoryName"
+          [ngClass]="{
+            'is-invalid':
+              createQuestionForm.get('categoryName').errors &&
+              createQuestionForm.get('categoryName').touched
+          }"
+        >
+          <option value="">Select Category ...</option>
+          <option *ngFor="let category of categories">{{
+            category.description
+          }}</option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="createQuestionForm.get('categoryName').errors"
+        >
+          Category is required
+        </div>
       </div>
-      <div class="modal-footer form-group text-center">
-          <button class="btn btn-success" (click)="saveQuestion()" type="submit">Register</button>
-          <button class="btn btn-default" (click)="cancelClick()" type="button">Cancel</button>
+
+      <!-- POINTS ANT TIME LIMIT -->
+
+      <div class="form-group row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <!-- POINTS -->
+            <input
+              type="number"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  createQuestionForm.get('points').errors &&
+                  createQuestionForm.get('points').touched
+              }"
+              formControlName="points"
+              placeholder="Enter Points"
+            />
+            <div class="input-group-append mr-3">
+              <span class="input-group-text">pts</span>
+            </div>
+
+            <!-- TIME LIMIT -->
+            <input
+              type="number"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  createQuestionForm.get('timeLimit').errors &&
+                  createQuestionForm.get('timeLimit').touched
+              }"
+              formControlName="timeLimit"
+              placeholder="Enter Time Limit"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text">sec</span>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- <div class="invalid-feedback" >Point is required</div>
+            <div class="invalid-feedback" >Time limit is required</div> -->
+      <!-- QUESTION -->
+      <div class="form-group">
+        <textarea
+          rows="6"
+          [ngClass]="{
+            'is-invalid':
+              createQuestionForm.get('question').errors &&
+              createQuestionForm.get('question').touched
+          }"
+          class="form-control"
+          formControlName="question"
+        ></textarea>
+        <div
+          class="invalid-feedback"
+          *ngIf="createQuestionForm.get('question').hasError('minlength')"
+        >
+          asda
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="createQuestionForm.get('question').hasError('required')"
+        >
+          Please enter a question
+        </div>
+      </div>
+
+      <!-- TRUE OR FALSE -->
+      <div
+        class="form-group"
+        *ngIf="createQuestionForm.get('type').value == '0'"
+      >
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                value="True"
+                formControlName="trueOrFalseAnswer"
+                name="trueOrFalseAnswer"
+              />
+            </div>
+          </div>
+          <span class="form-control">True</span>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                value="False"
+                formControlName="trueOrFalseAnswer"
+                name="trueOrFalseAnswer"
+              />
+            </div>
+          </div>
+          <span class="form-control">False</span>
+        </div>
+      </div>
+      <!-- MULTIPLE CHOICE -->
+      <div
+        class="form-group"
+        *ngIf="createQuestionForm.get('type').value == '1'"
+      >
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                formControlName="multipleChoiceAnswer"
+                [value]="createQuestionForm.get('choiceA').value"
+              />
+            </div>
+          </div>
+          <input
+            type="text"
+            formControlName="choiceA"
+            class="form-control"
+            placeholder="Enter first choice"
+            [ngClass]="{
+              'is-invalid':
+                createQuestionForm.get('choiceA').errors &&
+                createQuestionForm.get('choiceA').touched
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="createQuestionForm.get('choiceA').errors"
+          >
+            this is required
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                [value]="createQuestionForm.get('choiceB').value"
+                formControlName="multipleChoiceAnswer"
+              />
+            </div>
+          </div>
+          <input
+            type="text"
+            formControlName="choiceB"
+            class="form-control"
+            placeholder="Enter second choice"
+            [ngClass]="{
+              'is-invalid':
+                createQuestionForm.get('choiceB').errors &&
+                createQuestionForm.get('choiceB').touched
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="createQuestionForm.get('choiceB').errors"
+          >
+            this is required
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                [value]="createQuestionForm.get('choiceC').value"
+                formControlName="multipleChoiceAnswer"
+              />
+            </div>
+          </div>
+          <input
+            type="text"
+            formControlName="choiceC"
+            class="form-control"
+            placeholder="Enter third choice"
+            [ngClass]="{
+              'is-invalid':
+                createQuestionForm.get('choiceC').errors &&
+                createQuestionForm.get('choiceC').touched
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="createQuestionForm.get('choiceC').errors"
+          >
+            this is required
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="radio"
+                [value]="createQuestionForm.get('choiceD').value"
+                formControlName="multipleChoiceAnswer"
+              />
+            </div>
+          </div>
+          <input
+            type="text"
+            formControlName="choiceD"
+            class="form-control"
+            placeholder="Enter fourth choice"
+            [ngClass]="{
+              'is-invalid':
+                createQuestionForm.get('choiceD').errors &&
+                createQuestionForm.get('choiceD').touched
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="createQuestionForm.get('choiceD').errors"
+          >
+            this is required
+          </div>
+        </div>
+      </div>
+
+      <!-- IDENTIFICATION -->
+      <div
+        class="form-group"
+        *ngIf="createQuestionForm.get('type').value == '2'"
+      >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="identificationAnswer"
+          placeholder="Enter answer here"
+          [ngClass]="{'is-invalid': createQuestionForm.get('identificationAnswer').errors &&
+          createQuestionForm.get('identificationAnswer').touched}" 
+    >
+    <div class="invalid-feedback" *ngIf="createQuestionForm.get('identificationAnswer').errors">Answer is required</div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer form-group text-center">
+    <button class="btn btn-success" (click)="saveQuestion()" type="submit">
+      Save
+    </button>
+    <button class="btn btn-default" (click)="cancelClick()" type="button">
+      Cancel
+    </button>
+  </div>
 </div>
-
-
-

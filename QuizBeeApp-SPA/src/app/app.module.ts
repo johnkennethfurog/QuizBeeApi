@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { AlertifyService } from './_services/alertify.service';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { EventComponent } from './event/event.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guard/auth.guard';
@@ -38,7 +38,9 @@ import { QuestionCreateComponent } from './question-create/question-create.compo
       FormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      TabsModule.forRoot()
+      TabsModule.forRoot(),
+      ModalModule.forRoot(),
+      ReactiveFormsModule
    ],
    providers: [
       AuthService,

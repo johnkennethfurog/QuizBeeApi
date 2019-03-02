@@ -24,7 +24,7 @@
         <tabset class="member-tabset">
           <tab heading="Question">
               <div class="text-end">
-                  <button class="btn btn-success mb-2" [routerLink]="['/question-create']" routerLinkActive="router-link-active" ><i class="fa fa-plus"></i> Add</button>
+                  <button class="btn btn-success mb-2 pull-right" (click)="openModalWithComponent()" ><i class="fa fa-plus"></i> Add</button>
                 </div>
               <table class="table table-striped">
                   <thead>

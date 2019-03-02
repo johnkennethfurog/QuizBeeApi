@@ -25,7 +25,7 @@ namespace QuizBeeApp.API.Data
                 Category = Category,
                 Question = QuizItem.Question,
                 Answer = QuizItem.Answer,
-                Point = QuizItem.Points,
+                Point = QuizItem.Point,
                 Event = Event,
                 Type = QuizItem.Type
             };
@@ -125,7 +125,7 @@ namespace QuizBeeApp.API.Data
             quizItem.Category = Category;
             quizItem.Event = Event;
             quizItem.Answer = QuizItemDto.Answer;
-            quizItem.Point = QuizItemDto.Points;
+            quizItem.Point = QuizItemDto.Point;
             quizItem.Question = QuizItemDto.Question;
             quizItem.TimeLimit = QuizItemDto.TimeLimit;
             quizItem.Type = QuizItemDto.Type;

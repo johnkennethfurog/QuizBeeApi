@@ -8,7 +8,7 @@ export interface Question {
     answer: string;
     type: number;
     id?: number;
-    points: number;
+    point: number;
     questionChoices: string[];
     eventId: number;
 }

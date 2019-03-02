@@ -22,8 +22,7 @@
             </div>
             <!-- CATEGORY -->
             <div class="form-group">
-              <select class="custom-select d-block" formControlName="categoryName" required=""
-              
+              <select class="custom-select d-block" (loadeddata)="setSelectedCategory()" formControlName="categoryName"               
               >
                   <option value="">Select Category ...</option>
                   <option *ngFor="let category of categories">{{category.description}}</option>
@@ -120,14 +119,14 @@
           
           <!-- IDENTIFICATION -->
           <div class="form-group" *ngIf="createQuestionForm.get('type').value == '2'">
-              <input type="text" class="form-control" placeholder="Enter answer here">
+              <input type="text" class="form-control"  formControlName="identificationAnswer" placeholder="Enter answer here">
             </div>
 
         </form>
       </div>
       <div class="modal-footer form-group text-center">
           <button class="btn btn-success" (click)="saveQuestion()" type="submit">Register</button>
-          <button class="btn btn-default" type="button">Cancel</button>
+          <button class="btn btn-default" (click)="cancelClick()" type="button">Cancel</button>
       </div>
 </div>
 

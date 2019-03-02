@@ -17,4 +17,8 @@ createQuestion(questionForm:Question):Observable<Question>{
   return this.httpClient.post<Question>(this.baseUrl+'question',questionForm);
 }
 
+updateQuestion(questionForm:Question,questionId:number):Observable<Question>{
+  return this.httpClient.put<Question>(this.baseUrl+'question/'+questionId,questionForm);
+}
+
 }

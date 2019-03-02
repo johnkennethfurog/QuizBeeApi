@@ -2,19 +2,26 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="card">
-        <img src="https://hiteach007.files.wordpress.com/2010/12/banner-landscape.jpg" class="card-img-top" alt="">
+        <img
+          src="https://hiteach007.files.wordpress.com/2010/12/banner-landscape.jpg"
+          class="card-img-top"
+          alt=""
+        />
         <div class="card-body" mt-4>
-            <h6 class="card-title text-center mb-1">{{event?.name}}</h6>
-            <div class="text-start">
-                <strong>Code:</strong>
-                <h1 class="text-center btn-secondary p-1">{{event?.code}}</h1>
-              </div>
-            
+          <h6 class="card-title text-center mb-1">{{ event?.name }}</h6>
+          <div class="text-start">
+            <strong>Code:</strong>
+            <h1 class="text-center btn-secondary p-1">{{ event?.code }}</h1>
+          </div>
         </div>
         <div class="card-footer">
           <div class="btn-group d-flex">
-              <button class="btn btn-primary w-100"><i class="fa fa-pencil"></i> Update</button>
-              <button class="btn btn-danger w-100"><i class="fa fa-trash-o"></i> Remove</button>
+            <button class="btn btn-primary w-100">
+              <i class="fa fa-pencil"></i> Update
+            </button>
+            <button class="btn btn-danger w-100">
+              <i class="fa fa-trash-o"></i> Remove
+            </button>
           </div>
         </div>
       </div>
@@ -23,69 +30,81 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="Question">
-              <div class="text-end">
-                  <button class="btn btn-success mb-2 pull-right" (click)="openModalWithComponent()" ><i class="fa fa-plus"></i> Add</button>
-                </div>
-              <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col" width="5">#</th>
-                      <th scope="col">Question</th>
-                      <th scope="col">Answer</th>
-                      <th scope="col" width=15>Pts.</th>
-                      <th scope="col">Mode</th>
-                      <th scope="col" width=10 ></th>
-                      <th scope="col" width=10></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let quiz of event?.quizItems; let i = index">
-                      <th scope="row" >{{i+1}}</th>
-                      <td>{{quiz.question}}</td>
-                      <td>{{quiz.answer}}</td>
-                      <td>{{quiz.points}}</td>
-                      <td>{{quiz.category?.description}}</td>
-                      <td><i class="fa fa-pencil fa-button"></i></td>
-                      <td><i class="fa fa-trash-o fa-button" ></i></td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="text-end">
+              <button
+                class="btn btn-success mb-2 pull-right"
+                (click)="openModalWithComponent()"
+              >
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col" width="5">#</th>
+                  <th scope="col">Question</th>
+                  <th scope="col">Answer</th>
+                  <th scope="col" width="15">Pts.</th>
+                  <th scope="col">Mode</th>
+                  <th scope="col" width="10"></th>
+                  <th scope="col" width="10"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let quiz of event?.quizItems; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ quiz.question }}</td>
+                  <td>{{ quiz.answer }}</td>
+                  <td>{{ quiz.point }}</td>
+                  <td>{{ quiz.category?.description }}</td>
+                  <td>
+                    <i
+                      (click)="updateQuestion(quiz)"
+                      class="fa fa-pencil fa-button"
+                    ></i>
+                  </td>
+                  <td><i class="fa fa-trash-o fa-button"></i></td>
+                </tr>
+              </tbody>
+            </table>
           </tab>
           <tab heading="Judges">
             <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" width="5">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let judge of event?.judges; let i = index">
-                    <th scope="row" >{{i+1}}</th>
-                    <td>{{judge.name}}</td>
-                    <td>{{judge.emailAddress}}</td>
-                    <td>{{judge.isVerify}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <thead>
+                <tr>
+                  <th scope="col" width="5">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email Address</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let judge of event?.judges; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ judge.name }}</td>
+                  <td>{{ judge.emailAddress }}</td>
+                  <td>{{ judge.isVerify }}</td>
+                </tr>
+              </tbody>
+            </table>
           </tab>
           <tab heading="Participants">
             <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" width="5">#</th>
-                    <th scope="col">Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let participant of event?.participants; let i = index">
-                    <th scope="row" >{{i+1}}</th>
-                    <td>{{participant.name}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <thead>
+                <tr>
+                  <th scope="col" width="5">#</th>
+                  <th scope="col">Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let participant of event?.participants; let i = index"
+                >
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ participant.name }}</td>
+                </tr>
+              </tbody>
+            </table>
           </tab>
         </tabset>
       </div>

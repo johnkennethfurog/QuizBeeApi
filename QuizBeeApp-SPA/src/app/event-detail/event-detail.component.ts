@@ -8,6 +8,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
 import { CategoryService } from '../_services/category.service';
 import { Category } from '../_model/category';
+import { Question } from '../_model/question';
 
 @Component({
   selector: 'app-event-detail',
@@ -43,13 +44,20 @@ export class EventDetailComponent implements OnInit {
       this.alertify.error("Unable to load event");
     });
   }
-  openModalWithComponent() {
+  openModalWithComponent(question?:Question) {
    const initialState={
      categories:this.categories,
-     eventId:this.event.id
+     eventId:this.event.id,
+     qstn:question
    };
+  
     this.modalRef = this.modalService.show(QuestionCreateComponent,{initialState});
     this.modalRef.content.closeBtnName = 'Close';
+  }
+
+  updateQuestion(question:Question) {
+    this.openModalWithComponent(question);
+    log(question.question + " click");
   }
 
 }

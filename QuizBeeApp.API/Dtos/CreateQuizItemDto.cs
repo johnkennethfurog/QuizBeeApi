@@ -9,7 +9,7 @@ namespace QuizBeeApp.API.Dtos
         public string Question { get; set; }
         public string Answer { get; set; }
         public int Type { get; set; }
-        public double Points { get; set; }
+        public double Point { get; set; }
         public int EventId { get; set; }
         public List<string> QuestionChoices { get; set; }
     }

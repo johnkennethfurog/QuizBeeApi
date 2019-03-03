@@ -33,6 +33,7 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     if(this.qstn)
     {
       this.createQuestionForm.get('categoryName').setValue(this.qstn.category.description);
+      this.setAnswer();
     }
   }
 
@@ -75,18 +76,6 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     this.createQuestionForm.get('choiceC').setValue(this.qstn.questionChoices[2]);
     this.createQuestionForm.get('choiceD').setValue(this.qstn.questionChoices[3]);
     
-    switch(this.qstn.type)
-    {
-      case 0:
-      this.createQuestionForm.get('trueOrFalseAnswer').setValue(this.qstn.answer);
-        break;
-      case 1:
-      this.createQuestionForm.get('multipleChoiceAnswer').setValue(this.qstn.answer);
-        break;
-      case 2:
-      this.createQuestionForm.get('identificationAnswer').setValue(this.qstn.answer);
-        break;
-    }
 
     log("Type : "+this.qstn.type);
     log("Category : "+this.createQuestionForm.get('categoryName').value);
@@ -94,6 +83,25 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     // this.createQuestionForm.get('').setValue('');
     // this.createQuestionForm.get('').setValue('');
     // this.createQuestionForm.get('').setValue('');
+  }
+
+  setAnswer(){
+    log("answer is " + this.qstn.answer);
+    switch(this.qstn.type)
+    {
+      case 0:
+      this.createQuestionForm.get('trueOrFalseAnswer').setValue(this.qstn.answer);
+        break;
+      case 1:
+      var x = this.qstn.questionChoices.findIndex(x => x == this.qstn.answer);
+      log("multiple choice index answer is :" + x);
+      log("multiple choice answer is: " + this.qstn.questionChoices[x]);
+      this.createQuestionForm.get('multipleChoiceAnswer').setValue(x.toString());
+        break;
+      case 2:
+      this.createQuestionForm.get('identificationAnswer').setValue(this.qstn.answer);
+        break;
+    }
   }
 
   saveQuestion() {
@@ -181,9 +189,10 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     this.qstn.categoryId = this.categories.find(
       x => x.description == this.createQuestionForm.get("categoryName").value
     ).id;
+    //always set choices first before setting the answer becaus multiple choice answer is dependent on questionChoices[]
+    this.setChoices();
     this.qstn.answer = this.getAnswer();
     this.qstn.eventId = this.eventId;
-    this.setChoices();
   }
 
   setChoices() {
@@ -206,7 +215,8 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
     if (this.qstn.type == 0) {
       return this.createQuestionForm.get("trueOrFalseAnswer").value;
     } else if (this.qstn.type == 1) {
-      return this.createQuestionForm.get("multipleChoiceAnswer").value;
+      var x =this.createQuestionForm.get("multipleChoiceAnswer").value; 
+      return this.qstn.questionChoices[x];
     } else {
       return this.createQuestionForm.get("identificationAnswer").value;
     }

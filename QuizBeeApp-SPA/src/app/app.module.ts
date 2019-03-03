@@ -24,6 +24,7 @@ import { QuestionService } from './_services/question.service';
 import { EmitterService } from './_services/emitter.service';
 import { ParticipantService } from './_services/participant.service';
 import { ParticipantCreateComponent } from './participant-create/participant-create.component';
+import { JudgeService } from './_services/judge.service';
 
 @NgModule({
    declarations: [
@@ -56,7 +57,8 @@ import { ParticipantCreateComponent } from './participant-create/participant-cre
       CategoryService,
       QuestionService,
       EmitterService,
-      ParticipantService
+      ParticipantService,
+      JudgeService
    ],
    bootstrap: [
       AppComponent

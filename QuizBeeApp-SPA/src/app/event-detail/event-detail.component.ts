@@ -62,6 +62,15 @@ export class EventDetailComponent implements OnInit {
       var ind = this.event.participants.findIndex(x => x.id == participant.id);
       this.event.participants[ind] = participant;
     });
+
+    this.emitterService.judgeCreatedEvent.subscribe(judge=>{
+      this.event.judges.push(judge);
+    })
+
+    this.emitterService.judgeUpatedEvent.subscribe((judge)=>{
+      var ind = this.event.judges.findIndex(x => x.id == judge.id);
+      this.event.judges[ind] = judge;
+    });
   }
 
   loadCategory(){

@@ -14,6 +14,10 @@ public userCreatedEvent = new EventEmitter();
 public judgeUpatedEvent = new EventEmitter();
 public judgeCreatedEvent = new EventEmitter();
 
+public eventUpatedEvent = new EventEmitter();
+public eventCreatedEvent = new EventEmitter();
+public eventDeletedEvent = new EventEmitter();
+
 constructor() { }
 
 }

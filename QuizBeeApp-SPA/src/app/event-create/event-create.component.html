@@ -1,0 +1,45 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Event</h4>
+      <button type="button" class="close pull-right" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="createEventForm" (ngSubmit)="saveEvent()">
+        <div class="form-group">
+            <input
+            type="text"
+            class="form-control"
+            autofocus
+            formControlName="name"
+            placeholder="Enter Event name here"
+            [ngClass]="{'is-invalid': createEventForm.get('name').errors &&
+            createEventForm.get('name').touched}" 
+      >
+      <div class="invalid-feedback" *ngIf="createEventForm.get('name').errors">Name is required</div>
+    </div>
+  
+    <div class="form-group">
+        <input
+        type="text"
+        class="form-control"
+        formControlName="code"
+        placeholder="Enter Event email here"
+        [ngClass]="{'is-invalid': createEventForm.get('code').errors &&
+        createEventForm.get('code').touched}" >
+      <div class="invalid-feedback" *ngIf="createEventForm.get('code').errors">Code is required</div>
+    </div>
+  
+  
+      </form>
+    </div>
+    <div class="modal-footer form-group text-center">
+      <button class="btn btn-success" (click)="saveEvent()" type="submit">
+        Save
+      </button>
+      <button class="btn btn-default" (click)="modalRef.hide()" type="button">
+        Cancel
+      </button>
+    </div>
+  </div>

@@ -19,4 +19,16 @@ getEvent(id:number):Observable<QuizbeeEvent>{
   return this.httpClient.get<QuizbeeEvent>(this.baseUrl + 'event/'+id);
 }
 
+createEvent(event:QuizbeeEvent):Observable<QuizbeeEvent>{
+  return this.httpClient.post<QuizbeeEvent>(this.baseUrl+'event',event);
+}
+
+updateEvent(eventId:number,event:QuizbeeEvent):Observable<QuizbeeEvent>{
+  return this.httpClient.put<QuizbeeEvent>(this.baseUrl+'event/'+eventId,event);
+}
+
+deleteEvent(eventId:number):Observable<boolean>{
+  return this.httpClient.delete<boolean>(this.baseUrl+'event/'+eventId);
+}
+
 }

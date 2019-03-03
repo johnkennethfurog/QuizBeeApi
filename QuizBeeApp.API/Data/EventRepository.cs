@@ -66,9 +66,14 @@ namespace QuizBeeApp.API.Data
             return await context.Events.AnyAsync(x => x.Code == eventCode);
         }
 
+        public async Task<bool> IsEventExist(int eventId)
+        {
+            return await context.Events.AnyAsync(x => x.Id == eventId);
+        }
+
         public async Task<Event> UpdateEventAsync(int EventId, CreateEventDto EventDto)
         {
-            var evnt = await GetEvent(EventId);
+            var evnt = await GetEventOnlyAsync(EventId);
             evnt.Name = EventDto.Name;
             evnt.Code = EventDto.Code;
             
@@ -76,6 +81,11 @@ namespace QuizBeeApp.API.Data
                 throw new InvalidOperationException();
 
             return evnt;
+        }
+
+        public async Task<Event> GetEventOnlyAsync(int EventId)
+        {
+            return await context.Events.FirstOrDefaultAsync(x => x.Id == EventId);
         }
     }
 }

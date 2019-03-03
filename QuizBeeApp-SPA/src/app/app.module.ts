@@ -26,6 +26,7 @@ import { ParticipantService } from './_services/participant.service';
 import { ParticipantCreateComponent } from './participant-create/participant-create.component';
 import { JudgeService } from './_services/judge.service';
 import { JudgeCreateComponent } from './judge-create/judge-create.component';
+import { EventCreateComponent } from './event-create/event-create.component';
 
 @NgModule({
    declarations: [
@@ -39,7 +40,8 @@ import { JudgeCreateComponent } from './judge-create/judge-create.component';
       EventDetailComponent,
       QuestionCreateComponent,
       ParticipantCreateComponent,
-      JudgeCreateComponent
+      JudgeCreateComponent,
+      EventCreateComponent
    ],
    imports: [
       BrowserModule,
@@ -67,7 +69,8 @@ import { JudgeCreateComponent } from './judge-create/judge-create.component';
    ],
    entryComponents: [
       ParticipantCreateComponent,
-      JudgeCreateComponent
+      JudgeCreateComponent,
+      EventCreateComponent
    ]
 })
 export class AppModule { }

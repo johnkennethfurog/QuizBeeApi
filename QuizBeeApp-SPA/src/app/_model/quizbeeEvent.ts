@@ -3,7 +3,7 @@ import { Participant } from './participant';
 import { Question } from './question';
 
 export interface QuizbeeEvent {
-    id: number;
+    id?: number;
     name: string;
     code: string;
     judges?: Judge[];

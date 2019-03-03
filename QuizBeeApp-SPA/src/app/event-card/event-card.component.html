@@ -3,8 +3,8 @@
     <img src="https://hiteach007.files.wordpress.com/2010/12/banner-landscape.jpg" alt="" class="card-img-top">
     <ul class="list-inline member-icons animate text-center">
         <li class="list-inline-item"><button class="btn btn-info" [routerLink]="['/event-detail/',event.id]" ><i class="fa fa-eye"></i></button></li>
-        <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-pencil"></i></button></li>
-      <li class="list-inline-item"><button class="btn btn-danger"><i class="fa fa-trash-o"></i></button></li>
+        <li class="list-inline-item"><button class="btn btn-primary" (click)="updateEvent()"><i class="fa fa-pencil"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-danger" (click)="deleteEvent()"><i class="fa fa-trash-o"></i></button></li>
     </ul>
   </div>
   <div class="card-body p1">

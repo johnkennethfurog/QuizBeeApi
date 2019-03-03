@@ -180,8 +180,8 @@ namespace QuizBeeApp.API.Controllers
         {
             try
             {
-                if(await eventRepository.IsEventExist(createEventDto.Code))
-                    return NotFound("Event code already used");
+                if(!await eventRepository.IsEventExist(eventId))
+                    return NotFound("Unable to find event");
                     
                 var evnt = await eventRepository.UpdateEventAsync(eventId,createEventDto);
                 var eventDto = mapper.Map<BaseEventDto>(evnt);

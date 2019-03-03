@@ -116,12 +116,6 @@
         ></textarea>
         <div
           class="invalid-feedback"
-          *ngIf="createQuestionForm.get('question').hasError('minlength')"
-        >
-          asda
-        </div>
-        <div
-          class="invalid-feedback"
           *ngIf="createQuestionForm.get('question').hasError('required')"
         >
           Please enter a question

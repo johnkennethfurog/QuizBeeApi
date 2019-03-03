@@ -1,0 +1,41 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Participant</h4>
+    <button type="button" class="close pull-right" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="createParticipantForm" (ngSubmit)="saveParticipant()">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter participant name here"
+          [ngClass]="{'is-invalid': createParticipantForm.get('name').errors &&
+          createParticipantForm.get('name').touched}" 
+    >
+    <div class="invalid-feedback" *ngIf="createParticipantForm.get('name').errors">Participant name is required</div>
+    </form>
+  </div>
+  <div class="modal-footer form-group text-center">
+    <button class="btn btn-success" (click)="saveParticipant()" type="submit">
+      Save
+    </button>
+    <button class="btn btn-default" (click)="cancelClick()" type="button">
+      Cancel
+    </button>
+  </div>
+</div>
+
+
+
+ <!-- <div class="modal-header">
+    <h4 class="modal-title pull-left">sss</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+  </div> -->

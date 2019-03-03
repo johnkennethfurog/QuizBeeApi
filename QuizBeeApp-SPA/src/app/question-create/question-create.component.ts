@@ -39,19 +39,16 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
     this.createQuestionForm = new FormGroup({
-      question: new FormControl("", [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
+      question: new FormControl("",Validators.required),
       categoryName: new FormControl("",Validators.required),
       points: new FormControl("0",Validators.min(1)),
       timeLimit: new FormControl("0",Validators.min(1)),
       type: new FormControl("0"),
 
-      choiceA: new FormControl("aa",Validators.required),
-      choiceB: new FormControl("aa",Validators.required),
-      choiceC: new FormControl("aa",Validators.required),
-      choiceD: new FormControl("aa",Validators.required),
+      choiceA: new FormControl("",Validators.required),
+      choiceB: new FormControl("",Validators.required),
+      choiceC: new FormControl("",Validators.required),
+      choiceD: new FormControl("",Validators.required),
 
       multipleChoiceAnswer: new FormControl("",Validators.required),
       trueOrFalseAnswer: new FormControl("True"),

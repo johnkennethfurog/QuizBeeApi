@@ -292,24 +292,6 @@ namespace QuizBeeApp.API.Controllers
             return Ok(category);
         }
 
-        [HttpPut("verify/participant/{participantId}")]
-        public async Task<IActionResult> VerifyParticipant(int participantId)
-        {
-            try
-            {
-                var isVerify = await participantRepository.VerifyParticipant(participantId);
-                return Ok(isVerify);
-            }
-            catch(InvalidOperationException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch(NullReferenceException ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-
         [HttpPut("verify/judge/{judgeId}")]
         public async Task<IActionResult> VerifyJudge(int judgeId)
         {

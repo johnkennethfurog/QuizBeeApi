@@ -56,6 +56,11 @@ namespace QuizBeeApp.API.Data
             return await context.Events.ToListAsync();
         }
 
+         public async Task<Event> GetEventOnlyAsync(string eventCode)
+        {
+            return await context.Events.FirstOrDefaultAsync(x => x.Code == eventCode);
+        }
+
         public async Task<bool> IsEventExist(string eventCode)
         {
             return await context.Events.AnyAsync(x => x.Code == eventCode);

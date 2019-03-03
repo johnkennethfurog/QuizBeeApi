@@ -35,7 +35,7 @@
                 class="btn btn-success mb-2 pull-right"
                 (click)="openModalWithComponent()"
               >
-                <i class="fa fa-plus"></i> Add
+                <i class="fa fa-plus"></i> New Question
               </button>
             </div>
             <table class="table table-striped">
@@ -67,14 +67,14 @@
                   <td>{{ quiz.point }}</td>
                   <td>{{ quiz.timeLimit }} sec</td>
                   <td>
-                    <i
-                      (click)="updateQuestion(quiz)"
+                    <i (click)="updateQuestion(quiz)"
                       class="fa fa-pencil fa-button"
                     ></i>
                   </td>
                   <td><i class="fa fa-trash-o fa-button"
                     (click)="deleteQuestion(quiz)"
-                    ></i></td>
+                    ></i>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -94,17 +94,28 @@
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ judge.name }}</td>
                   <td>{{ judge.emailAddress }}</td>
-                  <td>{{ judge.isVerify }}</td>
+                  <td *ngIf="judge.isVerify">Verified</td>
+                  <td *ngIf="!judge.isVerify"><button class="btn btn-sm btn-success">Verify</button></td>
                 </tr>
               </tbody>
             </table>
           </tab>
           <tab heading="Participants">
+              <button
+              class="btn btn-success mb-2 pull-right"
+              (click)="openModalForParticipant()"
+            >
+              <i class="fa fa-plus"></i> New Participant
+            </button>
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col" width="5">#</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" width="10"></th>
+                  <th scope="col" width="10"></th>
+
                 </tr>
               </thead>
               <tbody>
@@ -113,6 +124,20 @@
                 >
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ participant.name }}</td>
+                  <td *ngIf="participant.isVerify">Verified</td>
+                  <td *ngIf="!participant.isVerify"><button class="btn btn-sm btn-success"
+                    (click)="verifyParticipant(participant)"
+                    >Verify</button></td>
+                    <td>
+                      <i (click)="updateParticipant(participant)"
+                        class="fa fa-pencil fa-button"
+                      ></i>
+                    </td>
+                    <td><i class="fa fa-trash-o fa-button"
+                      (click)="deleteParticipant(participant)"
+                      ></i>
+                    </td>
+
                 </tr>
               </tbody>
             </table>

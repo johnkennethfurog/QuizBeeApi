@@ -12,6 +12,7 @@ namespace QuizBeeApp.API.Data
         Task<bool> DeleteEventAsync(int EventId);
         Task<List<Event>> GetEventsAsync();
         Task<Event> GetEvent(int EventId);
+        Task<Event> GetEventOnlyAsync(string EventCode);
         Task<bool> IsEventExist(string eventCode);
     }
 }

@@ -22,6 +22,8 @@ import { QuestionCreateComponent } from './question-create/question-create.compo
 import { CategoryService } from './_services/category.service';
 import { QuestionService } from './_services/question.service';
 import { EmitterService } from './_services/emitter.service';
+import { ParticipantService } from './_services/participant.service';
+import { ParticipantCreateComponent } from './participant-create/participant-create.component';
 
 @NgModule({
    declarations: [
@@ -33,7 +35,8 @@ import { EmitterService } from './_services/emitter.service';
       EventComponent,
       EventCardComponent,
       EventDetailComponent,
-      QuestionCreateComponent
+      QuestionCreateComponent,
+      ParticipantCreateComponent
    ],
    imports: [
       BrowserModule,
@@ -52,10 +55,14 @@ import { EmitterService } from './_services/emitter.service';
       EventService,
       CategoryService,
       QuestionService,
-      EmitterService
+      EmitterService,
+      ParticipantService
    ],
    bootstrap: [
       AppComponent
+   ],
+   entryComponents:[
+      ParticipantCreateComponent
    ]
 })
 export class AppModule { }

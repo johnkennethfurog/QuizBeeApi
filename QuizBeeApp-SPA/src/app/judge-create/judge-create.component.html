@@ -11,6 +11,7 @@
           <input
           type="text"
           class="form-control"
+          autofocus
           formControlName="name"
           placeholder="Enter judge name here"
           [ngClass]="{'is-invalid': createJudgeForm.get('name').errors &&
@@ -34,10 +35,12 @@
     </form>
   </div>
   <div class="modal-footer form-group text-center">
+      <input type="checkbox" [(ngModel)]="doCreateAnother"/>
+      <span>Create another</span>
     <button class="btn btn-success" (click)="saveJudge()" type="submit">
       Save
     </button>
-    <button class="btn btn-default" (click)="cancelClick()" type="button">
+    <button class="btn btn-default" (click)="modalRef.hide()" type="button">
       Cancel
     </button>
   </div>

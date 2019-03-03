@@ -21,6 +21,7 @@ export class ParticipantCreateComponent implements OnInit {
 
     eventCode:string;
     participant:Participant;
+    doCreateAnother:boolean;
 
     createParticipantForm:FormGroup;
   ngOnInit() {
@@ -60,7 +61,13 @@ export class ParticipantCreateComponent implements OnInit {
       {
         this.emitterService.userUpatedEvent.emit(x);
         this.alertify.success("Participant updated");
-        this.modalRef.hide();
+        if(this.doCreateAnother)
+        {
+          this.reset();
+        }
+        else{
+          this.modalRef.hide();
+        }
       },error =>{
         this.alertify.error("Unable to update participant");
       })
@@ -81,7 +88,14 @@ export class ParticipantCreateComponent implements OnInit {
       {
         this.emitterService.userCreatedEvent.emit(x);
         this.alertify.success("Participant added");
-        this.modalRef.hide();
+
+        if(this.doCreateAnother)
+        {
+          this.reset();
+        }
+        else{
+          this.modalRef.hide();
+        }
       },error =>{
         this.alertify.error("Unable to create new participant");
       })
@@ -90,6 +104,11 @@ export class ParticipantCreateComponent implements OnInit {
   setParticipant(){
     this.participant.name = this.createParticipantForm.get('name').value;
     this.participant.eventCode = this.eventCode;
+  }
+
+  reset(){
+    this.createParticipantForm.reset();
+    this.participant = null;
   }
 
   cancelClick(){

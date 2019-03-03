@@ -11,6 +11,9 @@ public questionUpdatedEvent = new EventEmitter();
 public userUpatedEvent = new EventEmitter();
 public userCreatedEvent = new EventEmitter();
 
+public judgeUpatedEvent = new EventEmitter();
+public judgeCreatedEvent = new EventEmitter();
+
 constructor() { }
 
 }

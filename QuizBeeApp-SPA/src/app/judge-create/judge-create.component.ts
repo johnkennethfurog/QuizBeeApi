@@ -21,6 +21,7 @@ export class JudgeCreateComponent implements OnInit {
 
     eventCode:string;
     judge:Judge;
+    doCreateAnother:boolean;
 
     createJudgeForm:FormGroup;
     ngOnInit() {
@@ -60,9 +61,15 @@ export class JudgeCreateComponent implements OnInit {
 
       this.judgeService.updateJudge(this.judge).subscribe(x =>
         {
-          this.emitterService.userUpatedEvent.emit(x);
+          this.emitterService.judgeUpatedEvent.emit(x);
           this.alertify.success("Judge updated");
-          this.modalRef.hide();
+          if(this.doCreateAnother)
+          {
+            this.reset();
+          }
+          else{
+            this.modalRef.hide();
+          }
         },error =>{
           this.alertify.error("Unable to update Judge");
         })
@@ -83,9 +90,15 @@ export class JudgeCreateComponent implements OnInit {
 
       this.judgeService.createJudge(this.judge).subscribe(x =>
         {
-          this.emitterService.userCreatedEvent.emit(x);
+          this.emitterService.judgeCreatedEvent.emit(x);
           this.alertify.success("Judge added");
-          this.modalRef.hide();
+          if(this.doCreateAnother)
+          {
+            this.reset();
+          }
+          else{
+            this.modalRef.hide();
+          }
         },error =>{
           this.alertify.error("Unable to create new Judge");
         })
@@ -95,6 +108,11 @@ export class JudgeCreateComponent implements OnInit {
       this.judge.name = this.createJudgeForm.get('name').value;
       this.judge.eventCode = this.eventCode;
       this.judge.emailAddress = this.createJudgeForm.get('emailAddress').value;
+    }
+
+    reset(){
+      this.createJudgeForm.reset();
+      this.judge = null;
     }
 
     cancelClick(){

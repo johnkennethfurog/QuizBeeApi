@@ -38,7 +38,8 @@ namespace QuizBeeApp.API.Data
             {
                 Name = createJudgeDto.Name,
                 IsVerify = isVerify,
-                Event = evnt
+                Event = evnt,
+                EmailAddress = createJudgeDto.EmailAddress
             };
 
             await context.AddAsync(judge);
@@ -51,6 +52,7 @@ namespace QuizBeeApp.API.Data
         {
             var judge = await GetJudge(createJudgeDto.Id);
             judge.Name = createJudgeDto.Name;
+            judge.EmailAddress = createJudgeDto.EmailAddress;
             await context.SaveChangesAsync();
             return judge;
         }

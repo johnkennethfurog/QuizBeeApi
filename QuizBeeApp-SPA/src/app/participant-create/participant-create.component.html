@@ -9,6 +9,7 @@
     <form [formGroup]="createParticipantForm" (ngSubmit)="saveParticipant()">
         <input
           type="text"
+          autofocus
           class="form-control"
           formControlName="name"
           placeholder="Enter participant name here"
@@ -19,10 +20,12 @@
     </form>
   </div>
   <div class="modal-footer form-group text-center">
+      <input type="checkbox" [(ngModel)]="doCreateAnother"/>
+      <span>Create another</span>
     <button class="btn btn-success" (click)="saveParticipant()" type="submit">
       Save
     </button>
-    <button class="btn btn-default" (click)="cancelClick()" type="button">
+    <button class="btn btn-default" (click)="modalRef.hide()" type="button">
       Cancel
     </button>
   </div>

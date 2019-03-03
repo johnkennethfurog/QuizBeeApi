@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using QuizBeeApp.API.Dtos;
+using QuizBeeApp.API.Models;
 
 namespace QuizBeeApp.API.Data
 {
@@ -21,6 +23,41 @@ namespace QuizBeeApp.API.Data
                 throw new InvalidOperationException("Judge is already verified");
             judge.IsVerify = true;
             return await context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteJudgeAsync(int judgeId)
+        {
+            var judge = await GetJudge(judgeId);
+            context.Judges.Remove(judge);
+            return await context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Judge> RegisterJudgeAsync(CreateJudgeDto createJudgeDto,Event evnt,bool isVerify)
+        {
+            var judge = new Judge
+            {
+                Name = createJudgeDto.Name,
+                IsVerify = isVerify,
+                Event = evnt
+            };
+
+            await context.AddAsync(judge);
+            await context.SaveChangesAsync();
+
+            return judge;
+        }
+
+        public async Task<Judge> UpdateJudgeAsync(CreateJudgeDto createJudgeDto)
+        {
+            var judge = await GetJudge(createJudgeDto.Id);
+            judge.Name = createJudgeDto.Name;
+            await context.SaveChangesAsync();
+            return judge;
+        }
+
+        public async Task<Judge>GetJudge(int judgeId)
+        {
+            return await context.Judges.FirstOrDefaultAsync(x => x.Id == judgeId);
         }
     }
 }

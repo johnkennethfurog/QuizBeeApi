@@ -4,4 +4,5 @@ export interface Judge {
     emailAddress:string;
     isHead:boolean;
     isVerify:boolean;
+    eventCode?:string;
 }

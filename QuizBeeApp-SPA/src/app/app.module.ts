@@ -25,6 +25,7 @@ import { EmitterService } from './_services/emitter.service';
 import { ParticipantService } from './_services/participant.service';
 import { ParticipantCreateComponent } from './participant-create/participant-create.component';
 import { JudgeService } from './_services/judge.service';
+import { JudgeCreateComponent } from './judge-create/judge-create.component';
 
 @NgModule({
    declarations: [
@@ -37,7 +38,8 @@ import { JudgeService } from './_services/judge.service';
       EventCardComponent,
       EventDetailComponent,
       QuestionCreateComponent,
-      ParticipantCreateComponent
+      ParticipantCreateComponent,
+      JudgeCreateComponent
    ],
    imports: [
       BrowserModule,
@@ -63,8 +65,9 @@ import { JudgeService } from './_services/judge.service';
    bootstrap: [
       AppComponent
    ],
-   entryComponents:[
-      ParticipantCreateComponent
+   entryComponents: [
+      ParticipantCreateComponent,
+      JudgeCreateComponent
    ]
 })
 export class AppModule { }

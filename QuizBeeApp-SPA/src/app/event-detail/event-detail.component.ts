@@ -16,6 +16,7 @@ import { ParticipantService } from '../_services/participant.service';
 import { ParticipantCreateComponent } from '../participant-create/participant-create.component';
 import { Judge } from '../_model/judge';
 import { JudgeService } from '../_services/judge.service';
+import { JudgeCreateComponent } from '../judge-create/judge-create.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -120,12 +121,12 @@ openModalForJudge(judge?:Judge) {
     judge:judge
   };
 
-  this.modalRef = this.modalService.show(ParticipantCreateComponent,{initialState});
+  this.modalRef = this.modalService.show(JudgeCreateComponent,{initialState});
   this.modalRef.content.closeBtnName = 'Close';
 
 }
 
-  verifyPJudge(judge:Judge){
+  verifyJudge(judge:Judge){
 
     this.judgeService.verify(judge.id).subscribe(x =>{
       judge.isVerify = true;

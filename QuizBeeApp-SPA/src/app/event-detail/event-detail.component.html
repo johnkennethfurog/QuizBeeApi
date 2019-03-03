@@ -80,6 +80,12 @@
             </table>
           </tab>
           <tab heading="Judges">
+              <button
+              class="btn btn-success mb-2 pull-right"
+              (click)="openModalForJudge()"
+            >
+              <i class="fa fa-plus"></i> New Judge
+            </button>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -87,6 +93,8 @@
                   <th scope="col">Name</th>
                   <th scope="col">Email Address</th>
                   <th scope="col">Status</th>
+                  <th scope="col" width="10"></th>
+                  <th scope="col" width="10"></th>
                 </tr>
               </thead>
               <tbody>
@@ -95,8 +103,16 @@
                   <td>{{ judge.name }}</td>
                   <td>{{ judge.emailAddress }}</td>
                   <td *ngIf="judge.isVerify">Verified</td>
-                  <td *ngIf="!judge.isVerify"><button class="btn btn-sm btn-success">Verify</button></td>
-                </tr>
+                  <td *ngIf="!judge.isVerify"><button (click)="verifyJudge(judge)" class="btn btn-sm btn-success">Verify</button></td>
+                  <td>
+                      <i (click)="updateJudge(judge)"
+                        class="fa fa-pencil fa-button"
+                      ></i>
+                    </td>
+                    <td><i class="fa fa-trash-o fa-button"
+                      (click)="deleteJudge(judge)"
+                      ></i>
+                    </td>                </tr>
               </tbody>
             </table>
           </tab>

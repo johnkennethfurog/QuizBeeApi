@@ -44,8 +44,10 @@
                   <th scope="col" width="5">#</th>
                   <th scope="col">Question</th>
                   <th scope="col">Answer</th>
+                  <th scope="col" >Type</th>
+                  <th scope="col">Category</th>
                   <th scope="col" width="15">Pts.</th>
-                  <th scope="col">Mode</th>
+                  <th scope="col" width="15">Time</th>
                   <th scope="col" width="10"></th>
                   <th scope="col" width="10"></th>
                 </tr>
@@ -55,8 +57,15 @@
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ quiz.question }}</td>
                   <td>{{ quiz.answer }}</td>
-                  <td>{{ quiz.point }}</td>
+
+                  <td *ngIf="quiz.type == 0">True or False</td>
+                  <td *ngIf="quiz.type == 1">Multiple Choice</td>
+                  <td *ngIf="quiz.type == 2">Identification</td>                  
+
                   <td>{{ quiz.category?.description }}</td>
+
+                  <td>{{ quiz.point }}</td>
+                  <td>{{ quiz.timeLimit }} sec</td>
                   <td>
                     <i
                       (click)="updateQuestion(quiz)"

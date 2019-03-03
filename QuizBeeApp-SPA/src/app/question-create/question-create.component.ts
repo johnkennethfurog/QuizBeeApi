@@ -28,7 +28,7 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
   categories: Category[];
   qstn: Question;
   eventId: number;
-
+  doCreateAnother:boolean;
   ngAfterViewInit(){
     if(this.qstn)
     {
@@ -148,12 +148,17 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
       (question: Question) => {
         this.alertifyService.success("Question updated");
         this.emitterService.questionUpdatedEvent.emit(question);
+        this.modalRef.hide();
       },
       error => {
         this.alertifyService.error("Unable to save question");
       }
     );
 
+  }
+
+  initializeQstnInteface(){
+    
   }
 
   createNewQuestion(){
@@ -173,12 +178,34 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
       (question: Question) => {
         this.alertifyService.success("Question added");
         this.emitterService.questionCreatedEvent.emit(question);
+        if(this.doCreateAnother)
+        {
+          this.resetQuestion();
+        }
+        else
+        {
+          this.modalRef.hide();
+        }
       },
       error => {
         this.alertifyService.error("Unable to save question");
       },
     );
 
+  }
+
+  resetQuestion(){
+    this.createQuestionForm.get('question').reset();
+    this.createQuestionForm.get('choiceA').reset();
+    this.createQuestionForm.get('choiceB').reset();
+    this.createQuestionForm.get('choiceC').reset();
+    this.createQuestionForm.get('choiceD').reset();
+
+    this.createQuestionForm.get('multipleChoiceAnswer').reset();
+    this.createQuestionForm.get('trueOrFalseAnswer').reset('True');
+    this.createQuestionForm.get('identificationAnswer').reset();
+
+    this.qstn = null;
   }
 
   setQuestionForSaving() {

@@ -297,6 +297,8 @@
     </form>
   </div>
   <div class="modal-footer form-group text-center">
+    <input type="checkbox" [(ngModel)]="doCreateAnother"/>
+    <span>Create another</span>
     <button class="btn btn-success" (click)="saveQuestion()" type="submit">
       Save
     </button>

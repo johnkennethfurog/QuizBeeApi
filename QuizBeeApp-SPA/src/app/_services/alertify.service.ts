@@ -8,15 +8,17 @@ export class AlertifyService {
 
 constructor() { }
 
-confirm(message:string,okCallBack: ()=>any){
-  alertify.confirm(message,function(e){
+confirm(title:string,message:string,okCallBack: ()=>any){
+  alertify.confirm(title,message,function(e){
     if(e){
       okCallBack();
     }
     else{
 
     }
-  })
+  },function(){
+
+  });
 }
 
 success(message:string){

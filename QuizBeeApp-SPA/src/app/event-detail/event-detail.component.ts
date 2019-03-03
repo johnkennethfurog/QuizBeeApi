@@ -10,6 +10,7 @@ import { CategoryService } from '../_services/category.service';
 import { Category } from '../_model/category';
 import { Question } from '../_model/question';
 import { EmitterService } from '../_services/emitter.service';
+import { QuestionService } from '../_services/question.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -23,7 +24,8 @@ export class EventDetailComponent implements OnInit {
     private alertify:AlertifyService,
     private modalService:BsModalService,
     private categoryService:CategoryService,
-    private emitterService:EmitterService) { }
+    private emitterService:EmitterService,
+    private questionService:QuestionService) { }
 
     event:QuizbeeEvent;
     modalRef: BsModalRef;
@@ -73,5 +75,24 @@ export class EventDetailComponent implements OnInit {
     this.openModalWithComponent(question);
     log(question.question + " click");
   }
+
+  deleteQuestion(question:Question){
+    this.alertify.confirm("Delete question","Are you sure ypu want to remove this question?",()=>{
+      this.delteQuestionFromServer(question);
+    });
+  }
+
+  delteQuestionFromServer(question:Question){
+    this.questionService.delteQuestion(question.id).subscribe(next =>{
+      var ind = this.event.quizItems.indexOf(question);
+      this.event.quizItems.splice(ind,1);
+      this.alertify.success("Question deleted");
+    },
+    error =>{
+      this.alertify.error("Unable to remove question");
+    })
+  }
+
+  
 
 }

@@ -148,7 +148,7 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
       (question: Question) => {
         this.alertifyService.success("Question updated");
         this.emitterService.questionUpdatedEvent.emit(question);
-        this.modalRef.hide();
+        this.shouldCreqteNewQuestion();
       },
       error => {
         this.alertifyService.error("Unable to save question");
@@ -178,19 +178,24 @@ export class QuestionCreateComponent implements OnInit,AfterViewInit {
       (question: Question) => {
         this.alertifyService.success("Question added");
         this.emitterService.questionCreatedEvent.emit(question);
-        if(this.doCreateAnother)
-        {
-          this.resetQuestion();
-        }
-        else
-        {
-          this.modalRef.hide();
-        }
+        this.shouldCreqteNewQuestion();
       },
       error => {
         this.alertifyService.error("Unable to save question");
       },
     );
+
+  }
+  
+  shouldCreqteNewQuestion(){
+    if(this.doCreateAnother)
+    {
+      this.resetQuestion();
+    }
+    else
+    {
+      this.modalRef.hide();
+    }
 
   }
 

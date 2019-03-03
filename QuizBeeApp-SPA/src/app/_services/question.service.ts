@@ -21,4 +21,8 @@ updateQuestion(questionForm:Question,questionId:number):Observable<Question>{
   return this.httpClient.put<Question>(this.baseUrl+'question/'+questionId,questionForm);
 }
 
+delteQuestion(questionId:number):Observable<boolean>{
+  return this.httpClient.delete<boolean>(this.baseUrl+'question/'+questionId);
+}
+
 }

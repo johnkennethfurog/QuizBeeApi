@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../_services/event.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { QuizbeeEvent } from '../_model/quizbeeEvent';
@@ -17,6 +17,7 @@ import { ParticipantCreateComponent } from '../participant-create/participant-cr
 import { Judge } from '../_model/judge';
 import { JudgeService } from '../_services/judge.service';
 import { JudgeCreateComponent } from '../judge-create/judge-create.component';
+import { EventCreateComponent } from '../event-create/event-create.component';
 
 @Component({
   selector: 'app-event-detail',
@@ -33,7 +34,8 @@ export class EventDetailComponent implements OnInit {
     private emitterService:EmitterService,
     private questionService:QuestionService,
     private participantService:ParticipantService,
-    private judgeService:JudgeService) { }
+    private judgeService:JudgeService,
+    private router:Router) { }
 
     event:QuizbeeEvent;
     modalRef: BsModalRef;
@@ -71,7 +73,17 @@ export class EventDetailComponent implements OnInit {
       var ind = this.event.judges.findIndex(x => x.id == judge.id);
       this.event.judges[ind] = judge;
     });
+
+    this.emitterService.eventDeletedEvent.subscribe(evnt =>{
+      this.router.navigate(['/event']);
+    });
+
+    this.emitterService.eventUpatedEvent.subscribe(evnt=>{
+      this.event = evnt;
+    });
+
   }
+  
 
   loadCategory(){
     this.categoryService.getCategories().subscribe((categories:Category[])=>{
@@ -206,5 +218,32 @@ openModalForParticipant(participant?:Participant) {
 
   }
   
+
+  //FOR EVENT
+
+      // EVENT RELATED CODE        
+      updateEvent(){
+        const initialState={
+          event:this.event
+        };
+      
+        this.modalRef = this.modalService.show(EventCreateComponent,{initialState});
+        this.modalRef.content.closeBtnName = 'Close';
+  
+      }
+    
+      deleteEvent(){
+    
+        this.alertify.confirm("Delete Event","Are you sure ypu want to remove this Event?",()=>{
+          this.eventService.deleteEvent(this.event.id).subscribe(x =>{
+            this.emitterService.eventDeletedEvent.emit(this.event);
+          },
+          error =>{
+            this.alertify.error("Unable to delete Event");
+          })
+      
+        });
+    
+      }
 
 }

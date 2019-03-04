@@ -16,11 +16,21 @@
         </div>
         <div class="card-footer">
           <div class="btn-group d-flex">
-            <button class="btn btn-primary w-100">
+            <button class="btn btn-primary w-100"
+            (click)="updateEvent()"
+            >
               <i class="fa fa-pencil"></i> Update
             </button>
-            <button class="btn btn-danger w-100">
+            <button class="btn btn-danger w-100"
+            (click)="deleteEvent()"
+            >
               <i class="fa fa-trash-o"></i> Remove
+            </button>
+            <button class="btn btn-success w-100"
+            [routerLink]="['/question-broadcast',event.id]"
+            >
+              <!-- <i class="fa fa-trash-o"></i>  -->
+              Start
             </button>
           </div>
         </div>

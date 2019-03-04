@@ -185,7 +185,6 @@ namespace QuizBeeApp.API.Controllers
                     
                 var evnt = await eventRepository.UpdateEventAsync(eventId,createEventDto);
                 var eventDto = mapper.Map<BaseEventDto>(evnt);
-
                 return Ok(eventDto);
             }
             catch(InvalidOperationException ex)
@@ -221,6 +220,8 @@ namespace QuizBeeApp.API.Controllers
         {
             var evnt = await eventRepository.GetEvent(eventId);
             var evntDto = mapper.Map<EventInfoDto>(evnt);
+            var ee = await quizRepository.GetCategoryQuestionsAsync(eventId);
+
             return Ok(evntDto);
         }
 
@@ -281,6 +282,14 @@ namespace QuizBeeApp.API.Controllers
         {
             var categories = await categoryRepository.GetQuestionCategorysAsync();
             var categoriesDto = mapper.Map<List<CategoryDto>>(categories);
+            return Ok(categoriesDto);
+        }
+
+        [HttpGet("category/questions/{eventId}")]
+        public async Task<IActionResult> GetCategoryQuestions(int eventId)
+        {
+            var categories = await quizRepository.GetCategoryQuestionsAsync(eventId);
+            var categoriesDto = mapper.Map<List<CategoryQuestionsDto>>(categories);
             return Ok(categoriesDto);
         }
 

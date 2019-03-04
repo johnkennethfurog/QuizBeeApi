@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using QuizBeeApp.API.Dtos;
 using QuizBeeApp.API.Models;
+using QuizBeeApp.API.POCOs;
 
 namespace QuizBeeApp.API.Data
 {
@@ -16,5 +17,7 @@ namespace QuizBeeApp.API.Data
         
         Task<QuestionChoice> SaveQuestionChoiceAsync(QuizItem QuizItem,string Answer);
         Task<bool> RemoveQuestionChoiceAsync(int questionId);
+
+        Task<List<CategoryQuestions>> GetCategoryQuestionsAsync(int EventId);
     }
 }

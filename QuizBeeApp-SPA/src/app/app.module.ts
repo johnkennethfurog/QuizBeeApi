@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { AlertifyService } from './_services/alertify.service';
-import { BsDropdownModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, ModalModule, AccordionModule, CollapseModule } from 'ngx-bootstrap';
 import { EventComponent } from './event/event.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guard/auth.guard';
@@ -27,6 +27,9 @@ import { ParticipantCreateComponent } from './participant-create/participant-cre
 import { JudgeService } from './_services/judge.service';
 import { JudgeCreateComponent } from './judge-create/judge-create.component';
 import { EventCreateComponent } from './event-create/event-create.component';
+import { QuestionBroadcastComponent } from './question-broadcast/question-broadcast.component';
+import { CategoryCardComponent } from './category-card/category-card.component';
+import { QuestionCardComponent } from './question-card/question-card.component';
 
 @NgModule({
    declarations: [
@@ -41,7 +44,10 @@ import { EventCreateComponent } from './event-create/event-create.component';
       QuestionCreateComponent,
       ParticipantCreateComponent,
       JudgeCreateComponent,
-      EventCreateComponent
+      EventCreateComponent,
+      QuestionBroadcastComponent,
+      CategoryCardComponent,
+      QuestionCardComponent
    ],
    imports: [
       BrowserModule,
@@ -51,7 +57,9 @@ import { EventCreateComponent } from './event-create/event-create.component';
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
       ModalModule.forRoot(),
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      AccordionModule.forRoot(),
+      CollapseModule.forRoot()
    ],
    providers: [
       AuthService,
@@ -70,7 +78,8 @@ import { EventCreateComponent } from './event-create/event-create.component';
    entryComponents: [
       ParticipantCreateComponent,
       JudgeCreateComponent,
-      EventCreateComponent
+      EventCreateComponent,
+      QuestionCreateComponent
    ]
 })
 export class AppModule { }

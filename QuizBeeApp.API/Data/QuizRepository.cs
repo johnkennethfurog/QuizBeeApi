@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using QuizBeeApp.API.Dtos;
 using QuizBeeApp.API.Helpers;
 using QuizBeeApp.API.Models;
+using QuizBeeApp.API.POCOs;
 
 namespace QuizBeeApp.API.Data
 {
@@ -141,6 +142,12 @@ namespace QuizBeeApp.API.Data
             }
             else
                 throw new InvalidOperationException("unable to save quiz item");
+        }
+
+        public async Task<List<CategoryQuestions>> GetCategoryQuestionsAsync(int EventId)
+        {
+            var questions =await GetQuizItemsAsync(EventId);
+            return questions.GroupBy(x => x.Category, y => y,(cat,qstn) => new CategoryQuestions { Category = cat, Questions = qstn.ToList()}).ToList();          
         }
     }
 }

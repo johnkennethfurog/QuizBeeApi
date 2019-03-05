@@ -6,7 +6,7 @@
     left: 0;
 }
 
-
+/* 
   
   .countdown .day, .countdown .hour, .countdown .min, .countdown .sec {
     padding: 10px;
@@ -21,4 +21,4 @@
   .countdown .day .word, .countdown .hour .word, .countdown .min .word, .countdown .sec .word {
     display: block;
     font-size: 15px;
-  }
+  } */

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { QuizbeeEvent } from '../_model/quizbeeEvent';
+import { Question } from '../_model/question';
 
 @Injectable({
   providedIn: 'root'

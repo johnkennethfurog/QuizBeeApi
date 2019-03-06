@@ -4,7 +4,7 @@
     </div>
     <ul class="list-group list-group-flush">
       <div *ngFor="let question of category.questions">
-        <app-question-card [question]="question"></app-question-card>
+        <app-question-card [question]="question" (click)="selectQuestion(question)"></app-question-card>
       </div>
     </ul>
   </div>

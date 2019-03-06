@@ -25,5 +25,20 @@ delteQuestion(questionId:number):Observable<boolean>{
   return this.httpClient.delete<boolean>(this.baseUrl+'question/'+questionId);
 }
 
+broadcastQuestion(question:Question){
+  return this.httpClient.post(this.baseUrl+'broadcastQuestion',question);
+}
+
+startTimer(){
+  return this.httpClient.get(this.baseUrl+'startTimer');
+}
+
+showAnswer(){
+  return this.httpClient.get(this.baseUrl+'showAnswer');
+}
+
+cancel(){
+  return this.httpClient.get(this.baseUrl+'cancelQuestion');
+}
 
 }

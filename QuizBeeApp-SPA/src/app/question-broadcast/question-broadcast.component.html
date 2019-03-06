@@ -6,59 +6,108 @@
           </div>
     </div>
     <div class="col-sm-9">
-      <!-- <div class="container border align-items-center" style="height:100%">
-        <h3 class="text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem provident commodi tenetur, sit doloribus asperiores animi, sapiente quia totam recusandae minus obcaecati illum quam. Possimus minima nisi ea sit commodi.</h3>
 
-        <div class="row">
-          <div class="col-md-6">
-              <div class="alert alert-dark text-center" role="alert">
-                  This is a success alert—check it out!
-                </div>      
-          </div>
-          <div class="col-md-6">
-              <div class="alert alert-success text-center" role="alert">
-                  This is a success alert—check it out!
-                </div>      
-          </div>
+      <div class="card w-100 h-100 mx-auto"  *ngIf="selectedQstn">
+        <div class="card-body">
+            <span>Question 1 of 10</span>
+            <div class="container-flex mb-5">
+                <div class="row">
+                  
+                <h5 class="mt-1 mb-5 col-lg-9">{{selectedQstn?.question}}</h5>
+                <div class="row col-lg-3 d-flex justify-content-end">
+                    <h5 class="card-title pricing-card-title text-danger">{{selectedQstn?.category?.description}} <small class="text-muted"> mode</small></h5>
+                    <span class=" ml-2 mr-2 font-weight-normal" style="font-size: 100%">|</span>
+                    <h5 class="card-title pricing-card-title text-info">{{selectedQstn?.point}} <small class="text-muted"> pts</small></h5>
+     
+                </div>
+              </div>
+
+              </div>
+
+              <!-- MULTIPLE CHOICE -->
+              <div *ngIf="selectedQstn?.type == 1">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="alert text-center" 
+                          [ngClass]="selectedQstn.answer == selectedQstn?.questionChoices[0] ? 'alert-success' : 'alert-dark'"
+                          role="alert">
+                              {{selectedQstn?.questionChoices[0]}}
+                            </div>      
+                      </div>
+                      <div class="col-md-6">
+                          <div class="alert text-center" 
+                          [ngClass]="selectedQstn.answer == selectedQstn?.questionChoices[1] ? 'alert-success' : 'alert-dark'"
+                          role="alert">
+                          {{selectedQstn?.questionChoices[1]}}
+                            </div>      
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert text-center" role="alert"
+                            [ngClass]="selectedQstn.answer == selectedQstn?.questionChoices[2] ? 'alert-success' : 'alert-dark'"
+                            >
+                            {{selectedQstn?.questionChoices[2]}}
+                              </div>      
+                        </div>
+                        <div class="col-md-6">
+                            <div class="alert text-center" role="alert"
+                            [ngClass]="selectedQstn.answer == selectedQstn?.questionChoices[3] ? 'alert-success' : 'alert-dark'"
+                            >
+                            {{selectedQstn?.questionChoices[3]}}
+                              </div>      
+                        </div>
+                      </div>
+              </div>
+
+
+              <!-- TRUE OR FALSE -->
+              <div class="row" *ngIf="selectedQstn?.type == 0">
+                  <div class="col-md-6">
+                      <div class="alert text-center" 
+                      [ngClass]="selectedQstn?.answer == 'True' ? 'alert-success' : 'alert-dark'"
+                      role="alert">
+                          True
+                        </div>      
+                  </div>
+                  <div class="col-md-6">
+                      <div class="alert text-center" role="alert"
+                      [ngClass]="selectedQstn?.answer == 'False' ? 'alert-success' : 'alert-dark'"
+                      >
+                          False
+                        </div>      
+                  </div>
+                </div>
+
+                <!-- IDENTIFICATION -->
+                <div *ngIf="selectedQstn?.type == 2">
+                    <div class="alert alert-success text-center" role="alert">
+                        {{selectedQstn?.answer}}
+                      </div>      
+                </div>
+
+  
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="alert alert-dark text-center" role="alert">
-                    This is a success alert—check it out!
-                  </div>      
-            </div>
-            <div class="col-md-6">
-                <div class="alert alert-dark text-center" role="alert">
-                    This is a success alert—check it out!
-                  </div>      
-            </div>
-          </div>
-
-        <div class="alert alert-success text-center" role="alert">
-            This is a success alert—check it out!
-          </div>
+        <div class="card-footer bg-dark flex">
+            <!-- <p>{{timer | date:'mm:ss'}}</p> -->
+            <!-- <countdown style="font-size: 150%; color: white" [config]="config">$!h!:$!m!:$!s!</countdown> -->
+            <span style="font-size: 150%; color: white">{{timerMs | date:'mm:ss'}}</span>
+            <button class="btn btn-success btn-lg pull-right ml-1" *ngIf="state == 0" (click)="broadcastQuestion()"><i class="fa fa-eye"></i> Display Question</button>
+            <button class="btn btn-danger btn-lg pull-right ml-1" *ngIf="state != 0" (click)="cancel()"><i class="fa fa-times-circle"></i> Close Question</button>
+            <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 1" (click)="startTimer()"><i class="fa fa-clock-o"></i> Start Timer</button>
+            <button class="btn btn-success btn-lg pull-right ml-1" *ngIf="state == 2" (click)="displayAnswer()"><i class="fa fa-eye"></i> Display Answer</button>
+        </div>
       </div>
-    </div> -->
 
-    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border">
+    <!-- OLD DESIGN -->
+
+    <!-- <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border">
       <div class="flex">
           <span class="badge badge-pill badge-warning p-3 font-weight-normal" style="font-size: 150%">00:30</span>
           <span class="badge badge-pill badge-info p-3 font-weight-normal pull-right" style="font-size: 150%">20 pts</span>
 
       </div>
-        <!-- <div class="row countdown mt-10"> -->
-            <!-- <div class="col-sm-4"></div>
-              <div class="col-sm-2 mr-1 min bg-secondary text-white"><span class="num text-center">01</span><span class="word">Minutes</span></div>
-              <div class="col-sm-2 ml-1 sec bg-secondary text-white"><span class="num text-center">30</span><span class="word">Seconds</span></div>
-              <div class="col-sm-4"></div>
-            </div> -->
-      
-
       <div class="mt-auto">
-        <!-- <div class="alert alert-success text-center" role="alert">
-              This is a success alert—check it out!
-          </div> -->
-
          
           <h4 class="text-center mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem provident commodi tenetur, sit doloribus asperiores animi, sapiente quia totam recusandae minus obcaecati illum quam. Possimus minima nisi ea sit commodi.</h4>
 
@@ -88,22 +137,12 @@
             </div>
             <button class="btn btn-success btn-lg pull-right"><i class="fa fa-check"></i> Start</button>
 
-  
-          <!-- <div class="alert alert-success text-center" role="alert">
-              This is a success alert—check it out!
-            </div> -->
-        <!-- </div>  -->
-          <!-- <h1 class="cover-heading">Cover your page.</h1>
-          <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-          <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-          </p> -->
       </div>
       
         <footer class="mastfoot mt-auto">
           <div class="inner">
           </div>
         </footer>
-      </div>
+      </div> -->
   </div>
 </div>

@@ -1,0 +1,15 @@
+<div class="p-5 fullView">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" *ngIf="selectedQstn">
+        <div class="mt-auto">
+            <h1 class="text-center">{{selectedQstn?.question}}</h1>
+            <h2 *ngIf="displayAnswer">{{selectedQstn?.answer}}</h2>
+          </div>
+        
+          <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <span class="text-center" style="font-size: 400%; color: rgb(46, 44, 44)">{{timerMs | date:'mm:ss'}}</span>
+               
+              </div>
+          </footer>
+        </div>
+</div>

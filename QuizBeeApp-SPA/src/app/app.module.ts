@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { RouterModule } from '@angular/router';
+import { CountdownModule, Config } from 'ngx-countdown';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -30,6 +31,8 @@ import { EventCreateComponent } from './event-create/event-create.component';
 import { QuestionBroadcastComponent } from './question-broadcast/question-broadcast.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { QuestionCardComponent } from './question-card/question-card.component';
+import { QuestionDisplayComponent } from './question-display/question-display.component';
+import { SignalRService } from './_services/signal-r.service';
 
 @NgModule({
    declarations: [
@@ -47,7 +50,8 @@ import { QuestionCardComponent } from './question-card/question-card.component';
       EventCreateComponent,
       QuestionBroadcastComponent,
       CategoryCardComponent,
-      QuestionCardComponent
+      QuestionCardComponent,
+      QuestionDisplayComponent
    ],
    imports: [
       BrowserModule,
@@ -59,7 +63,8 @@ import { QuestionCardComponent } from './question-card/question-card.component';
       ModalModule.forRoot(),
       ReactiveFormsModule,
       AccordionModule.forRoot(),
-      CollapseModule.forRoot()
+      CollapseModule.forRoot(),
+      CountdownModule
    ],
    providers: [
       AuthService,
@@ -70,7 +75,8 @@ import { QuestionCardComponent } from './question-card/question-card.component';
       QuestionService,
       EmitterService,
       ParticipantService,
-      JudgeService
+      JudgeService,
+      SignalRService
    ],
    bootstrap: [
       AppComponent

@@ -13,6 +13,7 @@ export class AuthService {
 baseUrl = environment.apiUrl + "auth/";
 jwtHelper = new JwtHelperService();
 decodedToken : any;
+visible: boolean = true;
 
 constructor(private http: HttpClient) { }
   signin(model:any){
@@ -48,5 +49,13 @@ constructor(private http: HttpClient) { }
   loggedIn(){
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  navBarShow(){
+    this.visible= true;
+  }
+
+  navBarHide(){
+    this.visible = false;
   }
 }

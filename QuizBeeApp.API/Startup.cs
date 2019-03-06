@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using QuizBeeApp.API.Data;
+using QuizBeeApp.API.SignalR;
 
 namespace QuizBeeApp.API
 {
@@ -43,6 +44,7 @@ namespace QuizBeeApp.API
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddCors();
             services.AddAutoMapper();
+            services.AddSignalR();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -68,8 +70,11 @@ namespace QuizBeeApp.API
             {
                 // app.UseHsts();
             }
-            app.UseCors(x =>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x =>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseAuthentication();
+            app.UseSignalR(route =>{
+                route.MapHub<StrongTypeHub>("/broadcast");
+            });
             // app.UseHttpsRedirection();
             app.UseMvc();
         }

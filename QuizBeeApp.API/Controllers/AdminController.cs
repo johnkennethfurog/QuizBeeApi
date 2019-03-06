@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using QuizBeeApp.API.Data;
 using QuizBeeApp.API.Dtos;
 using QuizBeeApp.API.Models;
+using QuizBeeApp.API.SignalR;
 
 namespace QuizBeeApp.API.Controllers
 {
@@ -19,13 +21,15 @@ namespace QuizBeeApp.API.Controllers
         private readonly ICategoryRepository categoryRepository;
         private readonly IParticipantRepository participantRepository;
         private readonly IJudgeRepository judgeRepository;
+        private readonly IHubContext<StrongTypeHub,IBroadcastHub> hubContext;
 
         public AdminController(IQuizRepository quizRepository,
         IMapper mapper,
         IEventRepository eventRepository,
         ICategoryRepository categoryRepository,
         IParticipantRepository participantRepository,
-        IJudgeRepository judgeRepository)
+        IJudgeRepository judgeRepository,
+        IHubContext<StrongTypeHub,IBroadcastHub> hubContext)
         {
             this.quizRepository = quizRepository;
             this.mapper = mapper;
@@ -33,6 +37,7 @@ namespace QuizBeeApp.API.Controllers
             this.categoryRepository = categoryRepository;
             this.participantRepository = participantRepository;
             this.judgeRepository = judgeRepository;
+            this.hubContext = hubContext;
         }
 
         [HttpGet("event/{eventId}/question")]
@@ -317,6 +322,30 @@ namespace QuizBeeApp.API.Controllers
             {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpPost("broadcastQuestion")]
+        public async Task<IActionResult> BroadcastQuestipn([FromBody]QuizItemDto quizItem){
+            await hubContext.Clients.All.ReceiveQuestion(quizItem);
+            return Ok();
+        }
+
+        [HttpGet("startTimer")]
+        public async Task<IActionResult> StartTimer(){
+            await hubContext.Clients.All.StartTimer();
+            return Ok();
+        }
+
+        [HttpGet("showAnswer")]
+        public async Task<IActionResult> ShowAnswer(){
+            await hubContext.Clients.All.ShowAnswer();
+            return Ok();
+        }
+
+        [HttpGet("cancelQuestion")]
+        public async Task<IActionResult> CancelQuesiton(){
+            await hubContext.Clients.All.CancelQuestion();
+            return Ok();
         }
     }
 }

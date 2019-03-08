@@ -92,6 +92,8 @@ namespace QuizBeeApp.API.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("ReferenceNumber");
+
                     b.Property<double>("TotalScores");
 
                     b.HasKey("Id");
@@ -106,6 +108,8 @@ namespace QuizBeeApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer");
 
                     b.Property<bool>("IsCorrect");
 
@@ -254,7 +258,7 @@ namespace QuizBeeApp.API.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.HasOne("QuizBeeApp.API.Models.Event", "Event")
-                        .WithMany("QuezItems")
+                        .WithMany("QuizItems")
                         .HasForeignKey("EventId");
                 });
 #pragma warning restore 612, 618

@@ -49,9 +49,11 @@ export class QuestionDisplayComponent implements OnInit,OnDestroy {
     });
     this.emitter.questionAnswerDisplayedEvent.subscribe(()=>{
       this.displayAnswer = true;
+      clearInterval(this.interval);
     });
     this.emitter.questionCancelledEvent.subscribe(()=>{
       this.selectedQstn = null;
+      clearInterval(this.interval);
     });
   }
 

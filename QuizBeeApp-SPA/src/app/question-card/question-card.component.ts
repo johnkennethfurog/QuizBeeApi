@@ -19,7 +19,7 @@ export class QuestionCardComponent implements OnInit {
   }
 
   subscribeToEmitter(){
-    this.emiiter.questionSelectedEvent.subscribe((qstn:Question)=>{
+    this.emiiter.questionActiveEvent.subscribe((qstn:Question)=>{
         this.isSelected = qstn.id == this.question.id;
     });
   }

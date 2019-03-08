@@ -9103,7 +9103,7 @@
       ]
     },
     "System.Net.Http/4.3.0": {
-      "sha512": "Z1UfSF6dlpCdZdxh6LeoGlYH+q6ptG/iiIWgUUeKhE3DbQACmZkU7Sz2nOX0qdHjz72MOdYRbkSJ5Qwl6sZgvg==",
+      "sha512": "sYg+FtILtRQuYWSIAuNOELwVuVsxVyJGWQyOnlAzhV4xvhyFnON1bAzYYC+jjRW8JREM45R0R5Dgi8MTC5sEwA==",
       "type": "package",
       "path": "system.net.http/4.3.0",
       "files": [
@@ -11902,11 +11902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\John Kenneth Furog\\source\\repos\\QuizBeeApp\\QuizBeeApp.API\\QuizBeeApp.API.csproj",
+      "projectUniqueName": "C:\\Source\\QuizBeeApp\\QuizBeeApp.API\\QuizBeeApp.API.csproj",
       "projectName": "QuizBeeApp.API",
-      "projectPath": "c:\\Users\\John Kenneth Furog\\source\\repos\\QuizBeeApp\\QuizBeeApp.API\\QuizBeeApp.API.csproj",
+      "projectPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.API\\QuizBeeApp.API.csproj",
       "packagesPath": "C:\\Users\\John Kenneth Furog\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\John Kenneth Furog\\source\\repos\\QuizBeeApp\\QuizBeeApp.API\\obj\\",
+      "outputPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

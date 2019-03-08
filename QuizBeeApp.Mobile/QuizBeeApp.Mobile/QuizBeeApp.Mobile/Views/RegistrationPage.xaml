@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="QuizBeeApp.Mobile.Views.RegistrationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <StackLayout
+        Padding="10"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <Entry
+            IsEnabled="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Placeholder="Enter your school's name"
+            Text="{Binding SchoolName}" />
+        <Entry
+            Margin="0,0,0,20"
+            IsEnabled="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Placeholder="Enter event code"
+            Text="{Binding EventCode}" />
+        <Button
+            Command="{Binding RegisterCommand}"
+            IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Style="{x:StaticResource btn}"
+            Text="Submit" />
+        <Button
+            Command="{nav:GoBack}"
+            IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Style="{x:StaticResource btnInvertedDefault}"
+            Text="Back" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+    </StackLayout>
+</ContentPage>

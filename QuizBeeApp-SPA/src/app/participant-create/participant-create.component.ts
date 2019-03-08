@@ -79,7 +79,8 @@ export class ParticipantCreateComponent implements OnInit {
       name:'',
       eventCode:'',
       isVerify:true,
-      id:0
+      id:0,
+      ReferenceNumber:''
     };
 
     this.setParticipant();

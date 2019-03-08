@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="QuizBeeApp.Mobile.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Quiz Bee Application"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Visual="Material">
+
+    <StackLayout Padding="10" VerticalOptions="CenterAndExpand">
+        <Label
+            Margin="0,30"
+            FontSize="25"
+            HorizontalTextAlignment="Center"
+            Style="{x:StaticResource Bigtext}"
+            Text="Quiz Bee Application Login" />
+        <Entry
+            HorizontalTextAlignment="Center"
+            IsEnabled="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Placeholder="Event Code"
+            Text="{Binding EventCode}" />
+        <Entry
+            HorizontalTextAlignment="Center"
+            IsEnabled="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Placeholder="Referene Code"
+            Text="{Binding ReferenceCode}" />
+        <Button
+            Command="{Binding SignInCommand}"
+            IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Style="{x:StaticResource btn}"
+            Text="Sign In" />
+        <Button
+            Command="{nav:NavigateTo 'RegistrationPage'}"
+            IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+            Style="{x:StaticResource btnInvertedDefault}"
+            Text="Register" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+    </StackLayout>
+
+</ContentPage>

@@ -12,5 +12,6 @@ namespace QuizBeeApp.API.Models
         public double TotalScores { get; set; }
         public List<ParticipantAnswer> ParticipantAnswers { get; set; }
         public bool IsVerify { get; set; }
+        public string ReferenceNumber { get; set; }
     }
 }

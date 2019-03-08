@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+    x:Class="QuizBeeApp.Mobile.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:QuizBeeApp.Mobile.Converters"
+    xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
+    <Application.Resources>
+
+
+        <!--  Converter  -->
+        <converter:BoolReverseConverter x:Key="revBool" />
+
+        <!--  Application resource dictionary  -->
+
+        <!--  THEME COLORS  -->
+        <Color x:Key="mainColor">#B00020</Color>
+        <Color x:Key="unreadNotif">#FFDFC9</Color>
+        <Color x:Key="fbColor">#4267B2</Color>
+        <Color x:Key="default">#444444</Color>
+        <Color x:Key="cloudy">#EEEEEE</Color>
+        <Color x:Key="greyD">#DDDDDD</Color>
+        <Color x:Key="silver">#AAAAAA</Color>
+        <Color x:Key="info">#1D58CF</Color>
+        <Color x:Key="success">#419F0B</Color>
+        <Color x:Key="danger">#A10909</Color>
+
+
+        <Style x:Key="subTextSmall" TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="subTextSmallItalic" TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="subTextMed" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="subTextMedItalic" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="subText" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="subTextItalic" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+        <Style x:Key="RegularTextSmall" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="RegularText" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+        <Style x:Key="HeaderTextSlim" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="HeaderText" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="HeaderSmallText" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="HeaderTextCard" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+        <Style x:Key="NavigationHeaderText" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="TitleText" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="ValueText" TargetType="Label">
+            <Setter Property="Margin" Value="0,15,0,0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <Style x:Key="Bigtext" TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <!--  LABEL  -->
+        <Style x:Key="LabelPickerText" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="Margin" Value="0,10,5,10" />
+        </Style>
+
+        <!--  DATE PICKER  -->
+        <Style x:Key="DatePickerText" TargetType="DatePicker">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="TextColor" Value="{StaticResource default}" />
+        </Style>
+
+        <!--  Font Icons Font Awesome  -->
+        <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+            <On Platform="Android">fa-regular-400.ttf#fontawesomeRegular</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+            <On Platform="Android">fa-solid-900.ttf#fontawesomeSolid</On>
+        </OnPlatform>
+        <OnPlatform x:Key="FontAwesomeBrand" x:TypeArguments="x:String">
+            <On Platform="Android">fa-brands-400.ttf#fontawesomeBrands</On>
+        </OnPlatform>
+
+        <Style x:Key="fa" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="{StaticResource silver}" />
+        </Style>
+
+        <Style
+            x:Key="fa-regular"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeRegular}" />
+        </Style>
+        <Style
+            x:Key="fa-brand"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeBrand}" />
+        </Style>
+        <Style
+            x:Key="fa-solid"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+        </Style>
+
+
+        <Style
+            x:Key="fa-regularHeader"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeRegular}" />
+            <Setter Property="Margin" Value="0,12,0,0" />
+        </Style>
+        <Style
+            x:Key="fa-solidHeader"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+            <Setter Property="Margin" Value="0,12,0,0" />
+        </Style>
+
+        <Style
+            x:Key="fa-regularHeader2"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeRegular}" />
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="HeightRequest" Value="18" />
+        </Style>
+        <Style
+            x:Key="fa-solidHeader2"
+            BasedOn="{StaticResource fa}"
+            TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="HeightRequest" Value="18" />
+        </Style>
+
+        <!--  Button  -->
+        <Style x:Key="btn" TargetType="Button">
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="TextColor" Value="#FFFFFF" />
+            <Setter Property="BackgroundColor" Value="{x:StaticResource mainColor}" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style
+            x:Key="btnInvertedDefault"
+            BasedOn="{StaticResource btn}"
+            TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="BorderColor" Value="{StaticResource mainColor}" />
+            <Setter Property="BorderWidth" Value="2" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="TextColor" Value="{StaticResource mainColor}" />
+        </Style>
+
+        <Style TargetType="ActivityIndicator">
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="Color" Value="{StaticResource mainColor}" />
+        </Style>
+
+    </Application.Resources>
+</prism:PrismApplication>

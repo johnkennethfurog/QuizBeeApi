@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QuizBeeApp.API.Dtos;
@@ -32,7 +33,11 @@ namespace QuizBeeApp.API.Data
             };
 
             await context.AddAsync(participant);
-            await context.SaveChangesAsync();
+            if(await context.SaveChangesAsync()>0)
+            {
+                participant.ReferenceNumber = $"{evnt.Code}-{participant.Id.ToString("00000")}";
+                await context.SaveChangesAsync();
+            }
 
             return participant;
         }
@@ -59,6 +64,34 @@ namespace QuizBeeApp.API.Data
         public async Task<Participant>GetParticipant(int participantId)
         {
             return await context.Participants.FirstOrDefaultAsync(x => x.Id == participantId);
+        }
+
+        public async Task<bool> SubmitAnswer(Participant participant, QuizItem question, string answer)
+        {
+            var participantAnswer = new ParticipantAnswer();
+            participantAnswer.Answer = answer;
+            participantAnswer.IsCorrect = answer.ToLower() == question.Answer;
+            participantAnswer.Participant = participant;
+            participantAnswer.PointsEarned = participantAnswer.IsCorrect ? question.Point : 0;
+            participantAnswer.QuizItem = question;
+
+            await context.AddAsync(participantAnswer);
+            return await context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Participant> SignInParticipant(string eventCode, string referenceNumber)
+        {
+            var participant = await context.Participants
+            .Where(x => x.ReferenceNumber == referenceNumber)
+            .Include(x => x.Event)
+            .FirstOrDefaultAsync();
+
+            if(participant == null)
+                throw new NullReferenceException("Unable to find participant");
+
+            if(participant.Event.Code !=  eventCode)
+                throw new NullReferenceException("Wrong event");
+            return participant;
         }
     }
 }

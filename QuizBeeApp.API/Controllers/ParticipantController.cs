@@ -13,15 +13,18 @@ namespace QuizBeeApp.API.Controllers
     {
         private readonly IParticipantRepository participantRepository;
         private readonly IMapper mapper;
+        private readonly IQuizRepository quizRepository;
         private readonly IEventRepository eventRepository;
 
         public ParticipantController(IParticipantRepository participantRepository,
         IEventRepository eventRepository,
-        IMapper mapper)
+        IMapper mapper,
+        IQuizRepository quizRepository)
         {
             this.eventRepository = eventRepository;
             this.participantRepository = participantRepository;
             this.mapper = mapper;
+            this.quizRepository = quizRepository;
         }
 
         [HttpPut("verify/{participantId}")]
@@ -81,6 +84,68 @@ namespace QuizBeeApp.API.Controllers
             catch(Exception)
             {
                 return BadRequest("Unable to delete participant");
+            }
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> RegisterParticipant([FromBody] CreateParticipantDto createParticipantDto)
+        {
+            try
+            {
+                var evnt = await eventRepository.GetEventOnlyAsync(createParticipantDto.EventCode);
+                if(evnt == null)
+                    return BadRequest(new ErrorDto("Event does not exist"));
+                var participant = await participantRepository.RegisterPartipantAsync(createParticipantDto,evnt, false);
+                var participantDto = mapper.Map<BaseParticipantDto>(participant);
+                return Ok(participantDto);
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest(new ErrorDto("Unable to register"));
+            }
+        }
+
+        [HttpPost("answer")]
+        public async Task<IActionResult> SubmitAnswer([FromBody] ParticipantAnswerDto participantAnswerDto)
+        {
+            try
+            {
+                var question = await quizRepository.GetQuizItemAsync(participantAnswerDto.QuestionId);
+                var participant = await participantRepository.GetParticipant(participantAnswerDto.ParticipantId);
+
+                if(participant == null)
+                    return BadRequest(new ErrorDto("Cannot find participant")); 
+
+                var answerSubmitted = await participantRepository.SubmitAnswer(participant,question,participantAnswerDto.Answer);
+                return Ok(answerSubmitted);
+
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest(new ErrorDto("Unable to save participant's answer"));
+            }
+        }
+
+        [HttpPost("signIn")]
+        public async Task<IActionResult> signin([FromBody] ParticipantSignInDto participantSignInDto)
+        {
+            try
+            {
+                var participant = await participantRepository.SignInParticipant(participantSignInDto.EventCode,participantSignInDto.ReferenceNumber);
+                if(participant == null)
+                    return BadRequest(new ErrorDto("Cannot find participant")); 
+
+                var participantDto = mapper.Map<BaseParticipantDto>(participant);
+                return Ok(participantDto);
+
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest( new ErrorDto("Invalid login credential"));
+            }
+            catch (NullReferenceException)
+            {
+                return BadRequest( new ErrorDto("Invalid login credential"));
             }
         }
     }

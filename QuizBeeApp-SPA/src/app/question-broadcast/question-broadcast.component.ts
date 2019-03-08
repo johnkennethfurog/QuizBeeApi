@@ -43,7 +43,16 @@ export class QuestionBroadcastComponent implements OnInit {
 
   subscribeToEmitter(){
     this.emiiter.questionSelectedEvent.subscribe((qstn:Question)=>{
-      this.setQuestion(qstn);
+      if(this.state != QuestionState.None)
+      {
+        this.alertify.confirm("Quetion on going","A question is currently on going, do you want to cancel current question?",
+        ()=>{
+          this.setQuestion(qstn);       
+        })
+      }
+      else{
+        this.setQuestion(qstn);       
+      }
     });
   }
 
@@ -51,6 +60,7 @@ export class QuestionBroadcastComponent implements OnInit {
 
   setQuestion(qstn:Question){
 
+    this.state = QuestionState.None;
     this.selectedQstn = qstn;
     clearInterval(this.interval);
     this.timerMs = this.selectedQstn.timeLimit * 1000;
@@ -70,6 +80,7 @@ export class QuestionBroadcastComponent implements OnInit {
   broadcastQuestion(){
     this.questionService.broadcastQuestion(this.selectedQstn).subscribe(next =>{
       this.state = QuestionState.QuestionDisplayed;
+      this.emiiter.questionActiveEvent.emit(this.selectedQstn);
     },error =>{
       this.alertify.error("Unable to display question");
     });
@@ -101,19 +112,34 @@ export class QuestionBroadcastComponent implements OnInit {
   displayAnswer(){
     this.questionService.showAnswer().subscribe(next =>{
         this.state = QuestionState.AnswerDisplayed;
+        clearInterval(this.interval);
+        this.timerMs = 0;
   
     },error =>{
       this.alertify.error("Unable to display answer for this question");
     });
   }
 
-  cancel(){
+  cancelQuestion(){
     this.questionService.cancel().subscribe(next =>{
       this.state = QuestionState.None;
+      clearInterval(this.interval);
+  
+    },error =>{
+      this.alertify.error("Unable to cancel the display of  this question");
+    });
+  }
 
-  },error =>{
-    this.alertify.error("Unable to cancel the display of  this question");
-  });
+  cancel(){
+    if(this.state == QuestionState.QuestionDisplayed || this.state == QuestionState.TimerStarted)
+    {
+      this.alertify.confirm("Close this question","Answer is on going are you sure you want to close this question?",()=>{
+        this.cancelQuestion();
+      });
+    }
+    else{
+      this.cancelQuestion();
+    }
   }
   
 

@@ -9,6 +9,7 @@ export class EmitterService {
 public questionCreatedEvent = new EventEmitter();
 public questionUpdatedEvent = new EventEmitter();
 public questionSelectedEvent= new EventEmitter();
+public questionActiveEvent = new EventEmitter();
 
 //signal R related
 public questionReceivedEvent = new EventEmitter<Question>();

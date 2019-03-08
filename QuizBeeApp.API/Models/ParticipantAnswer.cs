@@ -12,5 +12,6 @@ namespace QuizBeeApp.API.Models
         public double PointsEarned { get; set; }
         public bool IsCorrect { get; set; }
         public List<JudgeVerdict> JudgeVerdicts { get; set; }
+        public string Answer { get; set; }
     }
 }

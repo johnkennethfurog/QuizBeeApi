@@ -1,8 +1,10 @@
 <div class="p-5 fullView">
-    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" *ngIf="selectedQstn">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" *ngIf="selectedQstn" >
         <div class="mt-auto">
             <h1 class="text-center">{{selectedQstn?.question}}</h1>
-            <h2 *ngIf="displayAnswer">{{selectedQstn?.answer}}</h2>
+            <div *ngIf="displayAnswer" class="container p-3 text-light text-center bg-success mt-5">
+                <h1>{{selectedQstn?.answer}}</h1>
+            </div>
           </div>
         
           <footer class="mastfoot mt-auto">

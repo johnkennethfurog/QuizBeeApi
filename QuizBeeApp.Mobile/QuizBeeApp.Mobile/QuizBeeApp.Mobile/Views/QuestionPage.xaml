@@ -3,15 +3,22 @@
     x:Class="QuizBeeApp.Mobile.Views.QuestionPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:QuizBeeApp.Mobile.Converters"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:helper="clr-namespace:QuizBeeApp.Mobile.Helpers"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    Title="00:00"
+    Title="Questions"
     prism:ViewModelLocator.AutowireViewModel="True"
     Visual="Material">
-    <ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToColorConverter x:Key="answerToColor" />
+            <converter:BoolToAnimationConverter x:Key="answerToAnimate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding SubmitQuestion}" Text="Submit" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ScrollView>
         <StackLayout>
             <StackLayout
@@ -31,13 +38,32 @@
                 Padding="10"
                 IsVisible="{Binding IsIdleMode, Converter={x:StaticResource revBool}}"
                 Spacing="10"
-                VerticalOptions="CenterAndExpand">
-                <!--<Label
-                    Margin="0,0,0,90"
+                VerticalOptions="FillAndExpand">
+                <Label
+                    Margin="0,20"
                     FontSize="50"
                     HorizontalTextAlignment="Center"
-                    Text="00:00"
-                    VerticalTextAlignment="Center" />-->
+                    IsVisible="{Binding IsAnswerSubmitted, Converter={x:StaticResource revBool}}"
+                    Text="{Binding Time}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    FontSize="60"
+                    HorizontalTextAlignment="Center"
+                    IsVisible="{Binding IsAnswerSubmitted}"
+                    Text="{Binding Answer}"
+                    TextColor="{Binding IsCorrectAnswer, Converter={x:StaticResource answerToColor}}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <forms:AnimationView
+                    Margin="0"
+                    Animation="{Binding IsCorrectAnswer, Converter={x:StaticResource answerToAnimate}}"
+                    AutoPlay="True"
+                    HeightRequest="150"
+                    IsVisible="{Binding IsAnswerDisplayed}"
+                    Loop="True"
+                    VerticalOptions="Center"
+                    WidthRequest="150" />
 
                 <!--<Label
                     Margin="0,0,0,20"
@@ -46,7 +72,7 @@
                     Text="{Binding QuestionItem.Question}" />-->
 
                 <!--  ANSWER  -->
-                <Label IsVisible="{Binding ShowAnswer}" Text="Answer is" />
+                <!--<Label IsVisible="{Binding ShowAnswer}" Text="Answer is" />
                 <Frame
                     Margin="0,0,0,15"
                     Padding="0"
@@ -59,111 +85,121 @@
                         Text="{Binding QuestionItem.Answer}"
                         TextColor="White"
                         VerticalTextAlignment="Center" />
-                </Frame>
+                </Frame>-->
+                <StackLayout IsVisible="{Binding IsAnswerSubmitted,Converter={x:StaticResource revBool}}}">
 
-                <!--  TRUE OR FALSE  -->
-                <Frame IsVisible="{Binding IsTrueOrFalse}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference lblTrue}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label
-                            Style="{x:StaticResource fa-solid}"
-                            Text="{x:Static helper:FontAwesomeHelper.Circle}"
-                            TextColor="Black" />
-                        <Label
-                            x:Name="lblTrue"
-                            Style="{x:StaticResource TitleText}"
-                            Text="True" />
-                    </StackLayout>
-                </Frame>
-                <Frame IsVisible="{Binding IsTrueOrFalse}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference lblTrue}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
+                    <!--  TRUE OR FALSE  -->
+                    <Frame IsVisible="{Binding IsTrueOrFalse}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference lblTrue}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="lblTrue"
+                                Style="{x:StaticResource TitleText}"
+                                Text="True" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="{Binding IsTrueOrFalse}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference lblFalse}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
-                        <Label
-                            x:Name="lblFalse"
-                            Style="{x:StaticResource TitleText}"
-                            Text="False" />
-                    </StackLayout>
-                </Frame>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="lblFalse"
+                                Style="{x:StaticResource TitleText}"
+                                Text="False" />
+                        </StackLayout>
+                    </Frame>
 
-                <!--  MULTIPLE CHOICE  -->
-                <Frame IsVisible="{Binding IsMultipleChoice}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference choiceA}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
-                        <Label
-                            x:Name="choiceA"
-                            Style="{x:StaticResource TitleText}"
-                            Text="{Binding QuestionItem.QuestionChoices[0]}" />
-                    </StackLayout>
-                </Frame>
-                <Frame IsVisible="{Binding IsMultipleChoice}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference choiceB}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
-                        <Label
-                            x:Name="choiceB"
-                            Style="{x:StaticResource TitleText}"
-                            Text="{Binding QuestionItem.QuestionChoices[1]}" />
-                    </StackLayout>
-                </Frame>
-                <Frame IsVisible="{Binding IsMultipleChoice}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference choiceC}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
-                        <Label
-                            x:Name="choiceC"
-                            Style="{x:StaticResource TitleText}"
-                            Text="{Binding QuestionItem.QuestionChoices[2]}" />
-                    </StackLayout>
-                </Frame>
-                <Frame IsVisible="{Binding IsMultipleChoice}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding AnswerSelectedCommand}"
-                            CommandParameter="{Binding Path=Text, Source={Reference choiceD}}"
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
-                        <Label
-                            x:Name="choiceD"
-                            Style="{x:StaticResource TitleText}"
-                            Text="{Binding QuestionItem.QuestionChoices[3]}" />
-                    </StackLayout>
-                </Frame>
-                <!--  IDENTIFICATION  -->
-                <Entry
-                    HorizontalTextAlignment="Center"
-                    IsVisible="{Binding IsIdentification}"
-                    Placeholder="Answer"
-                    Text="{Binding Answer}" />
+                    <!--  MULTIPLE CHOICE  -->
+                    <Frame IsVisible="{Binding IsMultipleChoice}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference choiceA}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="choiceA"
+                                Style="{x:StaticResource TitleText}"
+                                Text="{Binding QuestionItem.QuestionChoices[0]}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="{Binding IsMultipleChoice}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference choiceB}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="choiceB"
+                                Style="{x:StaticResource TitleText}"
+                                Text="{Binding QuestionItem.QuestionChoices[1]}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="{Binding IsMultipleChoice}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference choiceC}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="choiceC"
+                                Style="{x:StaticResource TitleText}"
+                                Text="{Binding QuestionItem.QuestionChoices[2]}" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsVisible="{Binding IsMultipleChoice}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AnswerSelectedCommand}"
+                                CommandParameter="{Binding Path=Text, Source={Reference choiceD}}"
+                                Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Style="{x:StaticResource fa-solid}" Text="{x:Static helper:FontAwesomeHelper.Circle}" />
+                            <Label
+                                x:Name="choiceD"
+                                Style="{x:StaticResource TitleText}"
+                                Text="{Binding QuestionItem.QuestionChoices[3]}" />
+                        </StackLayout>
+                    </Frame>
+                    <!--  IDENTIFICATION  -->
+                    <Entry
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding IsIdentification}"
+                        Placeholder="Answer"
+                        Text="{Binding Answer}" />
+
+                    <Button
+                        Clicked="Button_Clicked"
+                        Command="{Binding SubmitQuestion}"
+                        HorizontalOptions="EndAndExpand"
+                        IsEnabled="{Binding IsTimerStarted}"
+                        IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
+                        Style="{x:StaticResource btn}"
+                        Text="Submit"
+                        WidthRequest="140" />
+                </StackLayout>
+
             </StackLayout>
         </StackLayout>
     </ScrollView>

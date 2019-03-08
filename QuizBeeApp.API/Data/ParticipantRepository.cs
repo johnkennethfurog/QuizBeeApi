@@ -75,6 +75,8 @@ namespace QuizBeeApp.API.Data
             participantAnswer.PointsEarned = participantAnswer.IsCorrect ? question.Point : 0;
             participantAnswer.QuizItem = question;
 
+            participant.TotalScores += participantAnswer.PointsEarned;
+
             await context.AddAsync(participantAnswer);
             return await context.SaveChangesAsync() > 0;
         }

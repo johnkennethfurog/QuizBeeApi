@@ -132,8 +132,14 @@ namespace QuizBeeApp.API.Controllers
             try
             {
                 var participant = await participantRepository.SignInParticipant(participantSignInDto.EventCode,participantSignInDto.ReferenceNumber);
+                
+                
                 if(participant == null)
                     return BadRequest(new ErrorDto("Cannot find participant")); 
+
+                
+                if(!participant.IsVerify)
+                    return BadRequest(new ErrorDto("Participant need to be verify first"));
 
                 var participantDto = mapper.Map<BaseParticipantDto>(participant);
                 return Ok(participantDto);

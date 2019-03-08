@@ -3,5 +3,6 @@ export interface Participant {
     name:string;
     isVerify:boolean;
     eventCode?:string;
-    ReferenceNumber:string;
+    referenceNumber:string;
+    totalScores?:number;
 }

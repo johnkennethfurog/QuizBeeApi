@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace QuizBeeApp.Mobile.ViewModels
 {
@@ -49,13 +50,6 @@ namespace QuizBeeApp.Mobile.ViewModels
             set { SetProperty(ref _isIdentification, value); }
         }
 
-        private bool _showAnswer;
-        public bool ShowAnswer
-        {
-            get { return _showAnswer; }
-            set { SetProperty(ref _showAnswer, value); }
-        }
-
         private QuestionType _questionType;
 
         public QuestionType QuestionType
@@ -67,6 +61,13 @@ namespace QuizBeeApp.Mobile.ViewModels
             }
         }
 
+        private string _time;
+        public string Time
+        {
+            get { return _time; }
+            set { SetProperty(ref _time, value); }
+        }
+
         private bool _isIdleMode = true;
         public bool IsIdleMode
         {
@@ -74,7 +75,43 @@ namespace QuizBeeApp.Mobile.ViewModels
             set { SetProperty(ref _isIdleMode , value); }
         }
 
-        public string Answer { get; set; }
+        private bool _isAnswerSubmitted;
+        public bool IsAnswerSubmitted
+        {
+            get { return _isAnswerSubmitted; }
+            set { SetProperty(ref _isAnswerSubmitted, value); }
+        }
+
+        private string _answer;
+        public string Answer
+        {
+            get { return _answer; }
+            set { SetProperty(ref _answer, value); }
+        }
+
+        private bool _isCorrectAnswer;
+        public bool IsCorrectAnswer
+        {
+            get { return _isCorrectAnswer; }
+            set { SetProperty(ref _isCorrectAnswer, value); }
+        }
+
+        private bool _isTimerStarted;
+        public bool IsTimerStarted
+        {
+            get { return _isTimerStarted; }
+            set { SetProperty(ref _isTimerStarted, value); }
+        }
+
+        private bool _isAnswerDisplayed;
+        public bool IsAnswerDisplayed
+        {
+            get { return _isAnswerDisplayed; }
+            set { SetProperty(ref _isAnswerDisplayed, value); }
+        }
+
+        private int timerSeconds;
+        private bool isDisposing;
 
         void SetQuestionType()
         {
@@ -114,13 +151,19 @@ namespace QuizBeeApp.Mobile.ViewModels
                 .Build();
 
             _hubConnection.Closed += _hubConnection_Closed;
-            
-           await Connect();
+
+            RegisterToBroadcast();
+            RegisterToCancelleation();
+            RetgisterToDispayingOfAnswer();
+            RegisterToTimerStart();
+
+            await Connect();
         }
 
         private async Task _hubConnection_Closed(Exception arg)
         {
-
+            if (!isDisposing)
+                await Connect();
         }
 
         void RegisterToBroadcast()
@@ -142,15 +185,18 @@ namespace QuizBeeApp.Mobile.ViewModels
 
         void Reset()
         {
+
             IsTrueOrFalse = false;
             IsMultipleChoice = false;
             IsIdentification = false;
-            ShowAnswer = false;
 
             QuestionItem = null;
             Answer = string.Empty;
 
             IsIdleMode = true;
+            IsTimerStarted = false;
+            IsAnswerSubmitted = false;
+            IsAnswerDisplayed = false;
 
         }
 
@@ -158,6 +204,8 @@ namespace QuizBeeApp.Mobile.ViewModels
         {
             _hubConnection.On("StartTimer", () =>
             {
+                IsTimerStarted = true;
+                StartTimer();
             });
 
         }
@@ -166,19 +214,22 @@ namespace QuizBeeApp.Mobile.ViewModels
         {
             _hubConnection.On("ShowAnswer", () =>
             {
-                ShowAnswer = true;
+                IsAnswerDisplayed = true;
+                IsAnswerCorrect();
             });
 
+        }
+
+        bool IsAnswerCorrect()
+        {
+            IsCorrectAnswer =  Answer.ToLower() == QuestionItem.Answer.ToLower();
+            return IsCorrectAnswer;
         }
 
         async Task Connect()
         {
             try
             {
-                RegisterToBroadcast();
-                RegisterToCancelleation();
-                RetgisterToDispayingOfAnswer();
-                RegisterToTimerStart();
 
                 await _hubConnection.StartAsync();
             }
@@ -193,6 +244,8 @@ namespace QuizBeeApp.Mobile.ViewModels
         {
             IsIdleMode = false;
             QuestionItem = question;
+            timerSeconds = QuestionItem.TimeLimit;
+            SetSecondsToTimeFormat();
 
             QuestionType = (QuestionType)QuestionItem.Type;
         }
@@ -207,6 +260,7 @@ namespace QuizBeeApp.Mobile.ViewModels
         public async override void Destroy()
         {
             base.Destroy();
+            isDisposing = true;
             await _hubConnection.DisposeAsync();
         }
 
@@ -227,6 +281,12 @@ namespace QuizBeeApp.Mobile.ViewModels
         {
             if (IsBusy)
                 return;
+
+            if(string.IsNullOrWhiteSpace(Answer))
+            {
+                messageService.ShowMessage("You need to answer");
+                return;
+            }
             try
             {
                 IsBusy = true;
@@ -238,7 +298,7 @@ namespace QuizBeeApp.Mobile.ViewModels
                 });
 
                 messageService.ShowMessage("Answer submitted");
-                IsIdleMode = true;
+                IsAnswerSubmitted = true;
 
             }
             catch (ParticipantServiceException ex)
@@ -249,6 +309,28 @@ namespace QuizBeeApp.Mobile.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        void StartTimer()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                // Do something
+                timerSeconds--;
+                SetSecondsToTimeFormat();
+
+                if (timerSeconds == 0)
+                    SubmitQuestion.Execute();
+
+                return timerSeconds > 0 && !IsIdleMode && !IsAnswerSubmitted; // True = Repeat again, False = Stop the timer
+            });
+        }
+
+        void SetSecondsToTimeFormat()
+        {
+            var time = TimeSpan.FromSeconds(timerSeconds);
+            Time = $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}";
+
         }
     }
 }

@@ -67,7 +67,7 @@ namespace QuizBeeApp.Mobile.ViewModels
                 };
                 IsBusy = false;
 
-                await NavigationService.NavigateAsync($"app:///NavigationPage/{nameof(Views.QuestionPage)}", param, animated: false);
+                await NavigationService.GoBackAsync();
             }
             catch(ParticipantServiceException ex)
             {

@@ -31,5 +31,15 @@ namespace QuizBeeApp.Mobile.Views
             var indicator = (Label) stack.Children[0];
             indicator.TextColor = (Color)App.Current.Resources[isOn ? "success" : "silver"]; 
         }
+
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+            if (_selectedFrame == null)
+                return;
+
+            _selectedFrame.BorderColor = Color.FromHex("#FFFFFF");
+            ToggleIndicator(false);
+
+        }
     }
 }

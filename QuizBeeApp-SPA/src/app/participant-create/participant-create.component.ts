@@ -80,7 +80,7 @@ export class ParticipantCreateComponent implements OnInit {
       eventCode:'',
       isVerify:true,
       id:0,
-      ReferenceNumber:''
+      referenceNumber:''
     };
 
     this.setParticipant();

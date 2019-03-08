@@ -94,6 +94,8 @@
     <AndroidAsset Include="Assets\fa-regular-400.ttf" />
     <AndroidAsset Include="Assets\fa-solid-900.ttf" />
     <AndroidAsset Include="Assets\paper.json" />
+    <AndroidAsset Include="Assets\correct.json" />
+    <AndroidAsset Include="Assets\wrong.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

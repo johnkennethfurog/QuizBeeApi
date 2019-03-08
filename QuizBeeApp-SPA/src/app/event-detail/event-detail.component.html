@@ -27,7 +27,7 @@
               <i class="fa fa-trash-o"></i> Remove
             </button>
             <button class="btn btn-success w-100"
-            [routerLink]="['/question-broadcast',event.id]"
+            [routerLink]="['/question-broadcast',event?.id]"
             >
               <!-- <i class="fa fa-trash-o"></i>  -->
               Start
@@ -138,6 +138,8 @@
                 <tr>
                   <th scope="col" width="5">#</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Pts</th>
+                  <th scope="col">Reference Number</th>
                   <th scope="col">Status</th>
                   <th scope="col" width="10"></th>
                   <th scope="col" width="10"></th>
@@ -150,6 +152,8 @@
                 >
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ participant.name }}</td>
+                  <td>{{ participant.totalScores }}</td>
+                  <td>{{ participant.referenceNumber }}</td>
                   <td *ngIf="participant.isVerify">Verified</td>
                   <td *ngIf="!participant.isVerify"><button class="btn btn-sm btn-success"
                     (click)="verifyParticipant(participant)"

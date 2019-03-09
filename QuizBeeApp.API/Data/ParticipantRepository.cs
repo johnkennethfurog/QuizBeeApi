@@ -66,11 +66,11 @@ namespace QuizBeeApp.API.Data
             return await context.Participants.FirstOrDefaultAsync(x => x.Id == participantId);
         }
 
-        public async Task<bool> SubmitAnswer(Participant participant, QuizItem question, string answer)
+        public async Task<ParticipantAnswer> SubmitAnswer(Participant participant, QuizItem question, string answer)
         {
             var participantAnswer = new ParticipantAnswer();
             participantAnswer.Answer = answer;
-            participantAnswer.IsCorrect = answer.ToLower() == question.Answer;
+            participantAnswer.IsCorrect = answer.ToLower() == question.Answer.ToLower();
             participantAnswer.Participant = participant;
             participantAnswer.PointsEarned = participantAnswer.IsCorrect ? question.Point : 0;
             participantAnswer.QuizItem = question;
@@ -78,7 +78,10 @@ namespace QuizBeeApp.API.Data
             participant.TotalScores += participantAnswer.PointsEarned;
 
             await context.AddAsync(participantAnswer);
-            return await context.SaveChangesAsync() > 0;
+            if(await context.SaveChangesAsync() < 1)
+                throw new InvalidOperationException("Unable to save answer");
+            
+            return participantAnswer;
         }
 
         public async Task<Participant> SignInParticipant(string eventCode, string referenceNumber)

@@ -9,5 +9,6 @@ namespace QuizBeeApp.API.SignalR
          Task StartTimer();
          Task ShowAnswer();
          Task CancelQuestion();
+         Task StartEvaluationPeriod();
     }
 }

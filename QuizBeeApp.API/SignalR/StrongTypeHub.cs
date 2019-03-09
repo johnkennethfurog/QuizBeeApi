@@ -21,5 +21,9 @@ namespace QuizBeeApp.API.SignalR
         public async Task CancelQuestion(){
             await Clients.All.CancelQuestion();
         }
+
+        public async Task StartEvaluationPeriod(){
+            await Clients.All.StartEvaluationPeriod();
+        }
     }
 }

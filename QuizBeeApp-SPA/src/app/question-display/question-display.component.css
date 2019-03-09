@@ -4,3 +4,10 @@
     top: 0;
     left: 0;
 }
+
+.notEvaluationMode{
+    font-style: normal
+}
+.evaluationMode{
+    font-size: 200%;
+}

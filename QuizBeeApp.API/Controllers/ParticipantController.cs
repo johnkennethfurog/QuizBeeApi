@@ -116,8 +116,9 @@ namespace QuizBeeApp.API.Controllers
                 if(participant == null)
                     return BadRequest(new ErrorDto("Cannot find participant")); 
 
-                var answerSubmitted = await participantRepository.SubmitAnswer(participant,question,participantAnswerDto.Answer);
-                return Ok(answerSubmitted);
+                var participantAnswer = await participantRepository.SubmitAnswer(participant,question,participantAnswerDto.Answer);
+                var answerDto = mapper.Map<AnswerDto>(participantAnswer);
+                return Ok(answerDto);
 
             }
             catch (InvalidOperationException)
@@ -152,6 +153,18 @@ namespace QuizBeeApp.API.Controllers
             catch (NullReferenceException)
             {
                 return BadRequest( new ErrorDto("Invalid login credential"));
+            }
+        }
+        [HttpPost("verification")]
+        public async Task<IActionResult> VerifyAnswer([FromBody] AnswerDto answerDto)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ErrorDto(ex.Message));
             }
         }
     }

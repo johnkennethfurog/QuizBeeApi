@@ -347,5 +347,11 @@ namespace QuizBeeApp.API.Controllers
             await hubContext.Clients.All.CancelQuestion();
             return Ok();
         }
+
+        [HttpGet("startEvaluationPeriod")]
+        public async Task<IActionResult> startEvaluationPeriod(){
+            await hubContext.Clients.All.StartEvaluationPeriod();
+            return Ok();
+        }
     }
 }

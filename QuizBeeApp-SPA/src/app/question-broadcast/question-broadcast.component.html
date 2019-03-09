@@ -96,6 +96,7 @@
             <button class="btn btn-danger btn-lg pull-right ml-1" *ngIf="state != 0" (click)="cancel()"><i class="fa fa-times-circle"></i> Close Question</button>
             <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 1" (click)="startTimer()"><i class="fa fa-clock-o"></i> Start Timer</button>
             <button class="btn btn-success btn-lg pull-right ml-1" *ngIf="state == 2" (click)="displayAnswer()"><i class="fa fa-eye"></i> Display Answer</button>
+            <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 3" (click)="startEvaluationPeriod()"><i class="fa fa-eye"></i> Start Evaluation Period</button>
         </div>
       </div>
 

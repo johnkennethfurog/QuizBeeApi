@@ -11,7 +11,7 @@ namespace QuizBeeApp.API.Data
          Task<Participant> UpdateParticipantAsync(CreateParticipantDto createParticipantDto);
          Task<bool> DeleteParticipantAsync(int participantId);
          Task<bool> VerifyParticipant(int participantId);
-         Task<bool> SubmitAnswer(Participant participant,QuizItem question,string answer);
+         Task<ParticipantAnswer> SubmitAnswer(Participant participant,QuizItem question,string answer);
          Task<Participant> GetParticipant(int participantId);
          Task<Participant> SignInParticipant(string eventCode,string referenceNumber);
     }

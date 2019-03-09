@@ -4,8 +4,17 @@
 
 export const environment = {
   production: false,
+
+  // FAITH
+  // apiUrl:"http://172.16.123.183:5000/api/",
+  // apiUrlRoot:"http://172.16.123.183:5000/"
+
+
+  //HOME
   apiUrl:"http://192.168.100.65:5000/api/",
   apiUrlRoot:"http://192.168.100.65:5000/"
+
+  //DRAKE
   // apiUrl:"http://10.40.1.119:5000/api/",
   // apiUrlRoot:"http://10.40.1.119:5000/"
 };

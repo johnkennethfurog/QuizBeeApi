@@ -9,7 +9,7 @@ namespace QuizBeeApp.Mobile.Interfaces
     public interface IParticipantService
     {
         Task<Participant> RegisterAsync(Participant participant);
-        Task<bool> SubmitAnswerAsync(PayloadAnswer answer);
+        Task<AnswerReturn> SubmitAnswerAsync(PayloadAnswer answer);
         Task<Participant> SignInAsync(PayloadSignIn participant);
     }
 }

@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QuizBeeApp.API.Dtos;
 using QuizBeeApp.API.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuizBeeApp.API.Data
 {
@@ -60,6 +62,27 @@ namespace QuizBeeApp.API.Data
         public async Task<Judge>GetJudge(int judgeId)
         {
             return await context.Judges.FirstOrDefaultAsync(x => x.Id == judgeId);
+        }
+
+        public async Task<List<JudgeVerdict>> RequestForVerification(ParticipantAnswer participantAnswer, string answer,int eventId)
+        {
+            var evntJudges = await context.Events.Where(x => x.Id == eventId)
+            .Include(x => x.Judges).FirstOrDefaultAsync();
+
+            List<JudgeVerdict> verdicts = new List<JudgeVerdict>();
+            evntJudges.Judges.ForEach(async judge =>{
+                var verdict = new JudgeVerdict()
+                {
+                    Judge = judge,
+                    Status =0,
+                    ParticipantAnswer = participantAnswer,
+                    Answer = answer
+                };
+                await context.AddAsync(verdict);
+            });
+            await context.SaveChangesAsync();
+            return verdicts;
+
         }
     }
 }

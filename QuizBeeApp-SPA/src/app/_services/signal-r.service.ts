@@ -54,4 +54,11 @@ public cancelQuestionListener = () => {
   });
 }
 
+public evaluationPeriodListener = () => {
+  this.hubConnection.on('startEvaluationPeriod', () => {
+    log("evaluation period start");
+    this.emitter.evaluatioPeriodStartedEvent.emit();
+  });
+}
+
 }

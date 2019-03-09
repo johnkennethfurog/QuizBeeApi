@@ -41,4 +41,8 @@ cancel(){
   return this.httpClient.get(this.baseUrl+'cancelQuestion');
 }
 
+startEvaluationPeriod(){
+  return this.httpClient.get(this.baseUrl+'startEvaluationPeriod');
+}
+
 }

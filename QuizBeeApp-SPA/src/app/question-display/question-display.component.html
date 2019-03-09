@@ -1,7 +1,8 @@
 <div class="p-5 fullView">
-    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" *ngIf="selectedQstn" >
+  <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" *ngIf="selectedQstn" >
         <div class="mt-auto">
-            <h1 class="text-center">{{selectedQstn?.question}}</h1>
+            <h1 class="text-center" [ngClass]="evaluationPeriodStarted?'display-1':'notEvaluationMode'">{{question}}</h1>
+            <p class="lead text-center" *ngIf="evaluationPeriodStarted" style="font-size: 200%">If you have issue regarding you answer, you have <b>{{evaluationTimerMs | date:'s'}} SECONDS</b> to tap the blue button</p>
             <div *ngIf="displayAnswer" class="container p-3 text-light text-center bg-success mt-5">
                 <h1>{{selectedQstn?.answer}}</h1>
             </div>
@@ -9,7 +10,7 @@
         
           <footer class="mastfoot mt-auto">
             <div class="inner">
-                <span class="text-center" style="font-size: 400%; color: rgb(46, 44, 44)">{{timerMs | date:'mm:ss'}}</span>
+                <span class="text-center" *ngIf="!evaluationPeriodStarted" style="font-size: 400%; color: rgb(46, 44, 44)">{{timerMs | date:'mm:ss'}}</span>
                
               </div>
           </footer>

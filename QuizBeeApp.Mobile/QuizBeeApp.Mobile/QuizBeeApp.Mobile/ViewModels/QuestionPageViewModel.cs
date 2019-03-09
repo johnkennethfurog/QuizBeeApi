@@ -111,6 +111,7 @@ namespace QuizBeeApp.Mobile.ViewModels
         }
 
         private int timerSeconds;
+        private AnswerReturn answer;
         private bool isDisposing;
 
         void SetQuestionType()
@@ -185,6 +186,7 @@ namespace QuizBeeApp.Mobile.ViewModels
 
         void Reset()
         {
+            answer = null;
 
             IsTrueOrFalse = false;
             IsMultipleChoice = false;
@@ -290,13 +292,14 @@ namespace QuizBeeApp.Mobile.ViewModels
             try
             {
                 IsBusy = true;
-                var isSubmitted = await participantService.SubmitAnswerAsync(new PayloadAnswer
+                var answerSubmitted = await participantService.SubmitAnswerAsync(new PayloadAnswer
                 {
                     Answer = Answer,
                     ParticipantId = _loggedParticipant.Id,
                     QuestionId = QuestionItem.Id
                 });
 
+                answer = answerSubmitted;
                 messageService.ShowMessage("Answer submitted");
                 IsAnswerSubmitted = true;
 
@@ -330,6 +333,15 @@ namespace QuizBeeApp.Mobile.ViewModels
         {
             var time = TimeSpan.FromSeconds(timerSeconds);
             Time = $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}";
+
+        }
+
+        private DelegateCommand _requestEvaluationCommand;
+        public DelegateCommand RequestEvaluationCommand =>
+            _requestEvaluationCommand ?? (_requestEvaluationCommand = new DelegateCommand(ExecuteRequestEvaluationCommand));
+
+        void ExecuteRequestEvaluationCommand()
+        {
 
         }
     }

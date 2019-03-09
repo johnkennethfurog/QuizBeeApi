@@ -27,9 +27,9 @@ namespace QuizBeeApp.Mobile.Services
             return await requestHandler.PostAsync<Participant, PayloadSignIn>(EndpointHelper.SIGN_IN, payload);
         }
 
-        public async Task<bool> SubmitAnswerAsync(PayloadAnswer answer)
+        public async Task<AnswerReturn> SubmitAnswerAsync(PayloadAnswer answer)
         {
-            return await requestHandler.PostAsync<bool, PayloadAnswer>(EndpointHelper.SUBMIT_ANSWER, answer);
+            return await requestHandler.PostAsync<AnswerReturn, PayloadAnswer>(EndpointHelper.SUBMIT_ANSWER, answer);
         }
     }
 }

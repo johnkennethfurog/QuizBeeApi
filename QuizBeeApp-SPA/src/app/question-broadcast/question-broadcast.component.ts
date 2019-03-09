@@ -113,7 +113,7 @@ export class QuestionBroadcastComponent implements OnInit {
     this.questionService.showAnswer().subscribe(next =>{
         this.state = QuestionState.AnswerDisplayed;
         clearInterval(this.interval);
-        this.timerMs = 0;
+        this.timerMs = 5000;
   
     },error =>{
       this.alertify.error("Unable to display answer for this question");
@@ -131,7 +131,7 @@ export class QuestionBroadcastComponent implements OnInit {
   }
 
   cancel(){
-    if(this.state == QuestionState.QuestionDisplayed || this.state == QuestionState.TimerStarted)
+    if(this.state == QuestionState.QuestionDisplayed || this.state == QuestionState.TimerStarted || this.state == QuestionState.AnswerDisplayed)
     {
       this.alertify.confirm("Close this question","Answer is on going are you sure you want to close this question?",()=>{
         this.cancelQuestion();
@@ -141,7 +141,14 @@ export class QuestionBroadcastComponent implements OnInit {
       this.cancelQuestion();
     }
   }
-  
 
+  startEvaluationPeriod(){
+    this.questionService.startEvaluationPeriod().subscribe(()=>{
+      this.state = QuestionState.EvaluationPeriod;
+      this.startCountDown();
+    },error =>{
+      this.alertify.error("Unable to start evaluation period");
+    })
+  }
 
 }

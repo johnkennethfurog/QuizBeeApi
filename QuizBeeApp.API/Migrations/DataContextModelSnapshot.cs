@@ -69,6 +69,8 @@ namespace QuizBeeApp.API.Migrations
 
                     b.Property<int?>("ParticipantAnswerId");
 
+                    b.Property<string>("Remarks");
+
                     b.Property<int>("Status");
 
                     b.HasKey("Id");
@@ -118,6 +120,8 @@ namespace QuizBeeApp.API.Migrations
                     b.Property<double>("PointsEarned");
 
                     b.Property<int?>("QuizItemId");
+
+                    b.Property<bool>("RequestedForVerification");
 
                     b.HasKey("Id");
 

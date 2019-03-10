@@ -6827,11 +6827,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\QuizBeeApp.Mobile.Android.csproj",
+      "projectUniqueName": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\QuizBeeApp.Mobile.Android.csproj",
       "projectName": "QuizBeeApp.Mobile.Android",
-      "projectPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\QuizBeeApp.Mobile.Android.csproj",
+      "projectPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\QuizBeeApp.Mobile.Android.csproj",
       "packagesPath": "C:\\Users\\John Kenneth Furog\\.nuget\\packages\\",
-      "outputPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\obj\\",
+      "outputPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
@@ -6850,8 +6850,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj": {
-              "projectPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj"
+            "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj": {
+              "projectPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj"
             }
           }
         }

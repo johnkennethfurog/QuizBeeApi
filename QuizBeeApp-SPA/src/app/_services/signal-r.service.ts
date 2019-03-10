@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { log } from 'util';
 import { Question } from '../_model/question';
 import { EmitterService } from './emitter.service';
+import { ItemToVerify } from '../_model/itemToVerify';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,13 @@ public evaluationPeriodListener = () => {
   this.hubConnection.on('startEvaluationPeriod', () => {
     log("evaluation period start");
     this.emitter.evaluatioPeriodStartedEvent.emit();
+  });
+}
+
+public receiveItemToVerifyListener = () => {
+  this.hubConnection.on('broadcastVerification', (itemToVerify:ItemToVerify[]) => {
+    log("ite mto verify:" + itemToVerify.length);
+    this.emitter.ItemToVerifyReceiveEvent.emit(itemToVerify);
   });
 }
 

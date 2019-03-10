@@ -3,6 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Judge } from '../_model/judge';
+import { ItemToVerify } from '../_model/itemToVerify';
+import { JudgeVerdict } from '../_model/judgeVerdict';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +30,11 @@ export class JudgeService {
     return this.httpClient.delete<boolean>(this.baseUrl+'admin/'+judgeId);
   }
 
+  getItemsToVerify(judgeId:number):Observable<ItemToVerify[]>{
+    return this.httpClient.get<ItemToVerify[]>(this.baseUrl+judgeId+'/forVerification');
+  }
+
+  verifyItem(judgeVerdict:JudgeVerdict){
+    return this.httpClient.post(this.baseUrl+'verify',judgeVerdict);
+  }
 }

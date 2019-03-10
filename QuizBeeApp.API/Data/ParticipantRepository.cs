@@ -74,6 +74,7 @@ namespace QuizBeeApp.API.Data
             participantAnswer.Participant = participant;
             participantAnswer.PointsEarned = participantAnswer.IsCorrect ? question.Point : 0;
             participantAnswer.QuizItem = question;
+            participantAnswer.RequestedForVerification = false;
 
             participant.TotalScores += participantAnswer.PointsEarned;
 
@@ -97,6 +98,11 @@ namespace QuizBeeApp.API.Data
             if(participant.Event.Code !=  eventCode)
                 throw new NullReferenceException("Wrong event");
             return participant;
+        }
+
+        public async Task<ParticipantAnswer> GetParticipantAnswer(int participantAnswerId)
+        {
+            return await context.ParticipantAnswers.FirstOrDefaultAsync(x => x.Id == participantAnswerId);
         }
     }
 }

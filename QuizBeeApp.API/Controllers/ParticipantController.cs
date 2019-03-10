@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using QuizBeeApp.API.Data;
 using QuizBeeApp.API.Dtos;
 using AutoMapper;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.SignalR;
+using QuizBeeApp.API.SignalR;
 
 namespace QuizBeeApp.API.Controllers
 {
@@ -14,17 +17,23 @@ namespace QuizBeeApp.API.Controllers
         private readonly IParticipantRepository participantRepository;
         private readonly IMapper mapper;
         private readonly IQuizRepository quizRepository;
+        private readonly IJudgeRepository judgeRepository;
+        private readonly IHubContext<StrongTypeHub, IBroadcastHub> hubContext;
         private readonly IEventRepository eventRepository;
 
         public ParticipantController(IParticipantRepository participantRepository,
         IEventRepository eventRepository,
         IMapper mapper,
-        IQuizRepository quizRepository)
+        IQuizRepository quizRepository,
+        IJudgeRepository judgeRepository,
+        IHubContext<StrongTypeHub,IBroadcastHub> hubContext)
         {
             this.eventRepository = eventRepository;
             this.participantRepository = participantRepository;
             this.mapper = mapper;
             this.quizRepository = quizRepository;
+            this.judgeRepository = judgeRepository;
+            this.hubContext = hubContext;
         }
 
         [HttpPut("verify/{participantId}")]
@@ -156,11 +165,17 @@ namespace QuizBeeApp.API.Controllers
             }
         }
         [HttpPost("verification")]
-        public async Task<IActionResult> VerifyAnswer([FromBody] AnswerDto answerDto)
+        public async Task<IActionResult> VerifyAnswer([FromBody] VerificationRequestDto requestDto)
         {
             try
             {
-
+                var participantAnswer = await participantRepository.GetParticipantAnswer(requestDto.Id);
+                var judgeVerdicts = await judgeRepository.RequestForVerification(participantAnswer,requestDto);
+                var verdictsDto = mapper.Map<List<JudgeVerdictDto>>(judgeVerdicts);
+                
+                await hubContext.Clients.All.BroadcastVerification(verdictsDto);
+                
+                return Ok(true);
             }
             catch (Exception ex)
             {

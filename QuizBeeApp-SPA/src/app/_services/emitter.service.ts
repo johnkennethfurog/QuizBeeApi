@@ -17,6 +17,7 @@ public questionTimerStartedEvent= new EventEmitter();
 public questionAnswerDisplayedEvent= new EventEmitter();
 public questionCancelledEvent= new EventEmitter();
 public evaluatioPeriodStartedEvent= new EventEmitter();
+public ItemToVerifyReceiveEvent= new EventEmitter();
 
 public userUpatedEvent = new EventEmitter();
 public userCreatedEvent = new EventEmitter();

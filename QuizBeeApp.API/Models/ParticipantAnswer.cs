@@ -13,5 +13,6 @@ namespace QuizBeeApp.API.Models
         public bool IsCorrect { get; set; }
         public List<JudgeVerdict> JudgeVerdicts { get; set; }
         public string Answer { get; set; }
+        public bool RequestedForVerification { get; set; }
     }
 }

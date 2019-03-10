@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using QuizBeeApp.API.Dtos;
 
@@ -10,5 +11,6 @@ namespace QuizBeeApp.API.SignalR
          Task ShowAnswer();
          Task CancelQuestion();
          Task StartEvaluationPeriod();
+         Task BroadcastVerification(List<JudgeVerdictDto> verdicts);
     }
 }

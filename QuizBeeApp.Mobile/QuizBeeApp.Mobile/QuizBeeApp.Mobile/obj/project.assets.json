@@ -4066,11 +4066,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
+      "projectUniqueName": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
       "projectName": "QuizBeeApp.Mobile",
-      "projectPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
+      "projectPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
       "packagesPath": "C:\\Users\\John Kenneth Furog\\.nuget\\packages\\",
-      "outputPath": "C:\\Source\\QuizBeeApp\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\obj\\",
+      "outputPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

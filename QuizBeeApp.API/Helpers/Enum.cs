@@ -8,5 +8,12 @@ namespace QuizBeeApp.API.Helpers
             MultipleChoice,
             Identification
         }
+
+        public enum JudgesVerdict
+        {
+            Pending = 0,
+            Corrent = 1,
+            Wrong = 2
+        }
     }
 }

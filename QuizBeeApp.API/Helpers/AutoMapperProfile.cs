@@ -10,6 +10,12 @@ namespace QuizBeeApp.API.Helpers
         {
            CreateMap<QuestionChoice,string>()
            .ConstructUsing(x => x.Choice);
+
+           CreateMap<Judge,int>()
+           .ConstructUsing(x => x.Id);
+
+           CreateMap<ParticipantAnswer,int>()
+           .ConstructUsing(x => x.Id);
         }   
     }
 }

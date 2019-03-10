@@ -4,6 +4,7 @@ using AutoMapper;
 using QuizBeeApp.API.Dtos;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 namespace QuizBeeApp.API.Controllers
 {
@@ -84,6 +85,42 @@ namespace QuizBeeApp.API.Controllers
             catch (Exception)
             {
                 return BadRequest("Unable to delete Judge");
+            }
+        }
+
+        [HttpGet("{judgeId}/forVerification")]
+        public async Task<IActionResult> GetItemsToVerify(int judgeId)
+        {
+            try
+            {
+            var itemsToVerify = await judgeRepository.GetItemsToVerify(judgeId);
+            var itemsToVerifyDto = mapper.Map<List<JudgeVerdictDto>>(itemsToVerify);
+
+            return Ok(itemsToVerifyDto);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("verify")]
+        public async Task<IActionResult> VerifyAnswer([FromBody]BaseJudgeVerdictDto verdictDto)
+        {
+            try
+            {
+                var state = await this.judgeRepository.VerifyAnswer(verdictDto);
+                if(state != Helpers.Enum.JudgesVerdict.Pending)
+                {
+                    // TODO :
+                    //check if there are still pending answers that need to be verify for current question
+                    //if none , send signal to cacel displayig of notification at admin side
+                }
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

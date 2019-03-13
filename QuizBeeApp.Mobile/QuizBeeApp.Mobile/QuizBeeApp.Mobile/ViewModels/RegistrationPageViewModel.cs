@@ -54,7 +54,7 @@ namespace QuizBeeApp.Mobile.ViewModels
                 IsBusy = true;
                 var participant = await participantService.RegisterAsync(new Participant
                 {
-                    EventCode = EventCode,
+                    Event = EventCode,
                     IsVerify = false,
                     Name = SchoolName,
                     ReferenceNumber = ""

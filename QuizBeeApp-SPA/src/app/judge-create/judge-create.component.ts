@@ -29,12 +29,14 @@ export class JudgeCreateComponent implements OnInit {
       log("Judge create")
       this.createJudgeForm=new FormGroup({
         name: new FormControl("",Validators.required),
-        emailAddress: new FormControl("",Validators.required)
+        emailAddress: new FormControl("",Validators.required),
+        refNo: new FormControl("",Validators.required)
       });
 
       if(this.judge){
         this.createJudgeForm.get('name').setValue(this.judge.name);
         this.createJudgeForm.get('emailAddress').setValue(this.judge.emailAddress);
+        this.createJudgeForm.get('refNo').setValue(this.judge.refNo);
       }
     }
 
@@ -83,7 +85,8 @@ export class JudgeCreateComponent implements OnInit {
         isVerify:true,
         emailAddress:'',
         isHead:false,
-        id:0
+        id:0,
+        refNo:''
       };
 
       this.setJudge();

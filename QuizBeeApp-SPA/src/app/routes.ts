@@ -6,6 +6,7 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { QuestionBroadcastComponent } from './question-broadcast/question-broadcast.component';
 import { QuestionDisplayComponent } from './question-display/question-display.component';
 import { JudgeWallComponent } from './judge-wall/judge-wall.component';
+import { JudgeLoginComponent } from './judge-login/judge-login.component';
 export const appRoutes: Routes = [
     {path: 'home',component: HomeComponent},
     {path: 'judge-wall',component:JudgeWallComponent},
@@ -13,5 +14,6 @@ export const appRoutes: Routes = [
     {path: 'question-broadcast/:id',component:QuestionBroadcastComponent,canActivate:[AuthGuard]},
     {path: 'event-detail/:id',component:EventDetailComponent,canActivate:[AuthGuard]},
     {path: 'display',component:QuestionDisplayComponent},
+    {path: 'judge-login',component:JudgeLoginComponent},
     {path: '**',redirectTo: 'home',pathMatch:'full'}
 ]

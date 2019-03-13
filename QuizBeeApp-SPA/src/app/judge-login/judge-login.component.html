@@ -1,0 +1,35 @@
+<div  style="height: 100vh;width: 100vw;top: 0;left: 0;">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column border" >
+        <div class="mt-auto row justify-content-center">
+        <form #loginForm="ngForm" class="form-signin w-25 text-center" (ngSubmit)="signIn()">
+            <h1 class="h3 mb-3 font-weight-normal">Welcom Judge !</h1>
+            <p class="lead">Please sign in using your reference number provided by the administrator</p>
+            <div class="form-group">
+                <input  class="form-control"
+                [(ngModel)]="refNo"
+                name="refNo"
+                placeholder="Reference Number" >
+              </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+
+        </div>  
+          <footer class="mastfoot mt-auto">
+            <div class="inner">
+               
+              </div>
+          </footer>
+        </div>
+  <!-- <div class=" w-100 h-100 p-3 mx-auto border">
+    <div class="mt-auto"> -->
+
+      <!-- </div>
+      <footer class="mastfoot mt-auto">
+          <div class="inner">
+              <span class="text-center" *ngIf="!evaluationPeriodStarted" style="font-size: 400%; color: rgb(46, 44, 44)">{{timerMs | date:'mm:ss'}}</span>
+             
+            </div>
+        </footer>
+  
+  </div> -->
+</div>

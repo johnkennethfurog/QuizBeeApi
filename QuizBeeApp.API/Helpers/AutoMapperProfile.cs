@@ -16,6 +16,9 @@ namespace QuizBeeApp.API.Helpers
 
            CreateMap<ParticipantAnswer,int>()
            .ConstructUsing(x => x.Id);
+
+           CreateMap<Event,string>()
+           .ConstructUsing(x => x.Code);
         }   
     }
 }

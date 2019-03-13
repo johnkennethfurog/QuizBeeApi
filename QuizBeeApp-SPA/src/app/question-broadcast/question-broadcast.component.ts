@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { EventService } from '../_services/event.service';
 import { QuizbeeEvent } from '../_model/quizbeeEvent';
 import { AlertifyService } from '../_services/alertify.service';
@@ -12,6 +12,7 @@ import { CountdownComponent,Config } from 'ngx-countdown';
 import { log } from 'util';
 import { QuestionService } from '../_services/question.service';
 import { QuestionState } from '../_enum/question-state.enum';
+import { SignalRService } from '../_services/signal-r.service';
 
 @Component({
   selector: 'app-question-broadcast',
@@ -28,15 +29,21 @@ export class QuestionBroadcastComponent implements OnInit {
   timerMs:number;
   state:QuestionState= QuestionState.None;
 
+  toVerifyCount:number = 0;
+
   constructor(private route:ActivatedRoute,
     private eventService:EventService,
     private alertify:AlertifyService,
     private categortService:CategoryService,
     private emiiter:EmitterService,
-    private questionService:QuestionService) { }
+    private router:Router,
+    private questionService:QuestionService,
+    private signalRService:SignalRService) { }
 
   ngOnInit() {
     this.loadQuestion();
+    this.signalRService.startConnection();
+    this.signalRService.receiveVerificationEventListener();
     this.subscribeToEmitter();
     
   }
@@ -53,6 +60,15 @@ export class QuestionBroadcastComponent implements OnInit {
       else{
         this.setQuestion(qstn);       
       }
+    });
+
+    this.emiiter.verificationReceiveEvent.subscribe((isNew:boolean) =>{
+      log("verification receive event");
+      if(isNew)
+        this.toVerifyCount = this.toVerifyCount + 1;
+      else
+      this.toVerifyCount = this.toVerifyCount - 1;
+        log(("toVerifyCount  " +this.toVerifyCount ));
     });
   }
 
@@ -131,7 +147,7 @@ export class QuestionBroadcastComponent implements OnInit {
   }
 
   cancel(){
-    if(this.state == QuestionState.QuestionDisplayed || this.state == QuestionState.TimerStarted || this.state == QuestionState.AnswerDisplayed)
+    if(this.state == QuestionState.QuestionDisplayed || this.state == QuestionState.TimerStarted || (this.state == QuestionState.AnswerDisplayed && this.selectedQstn.type == 2 ))
     {
       this.alertify.confirm("Close this question","Answer is on going are you sure you want to close this question?",()=>{
         this.cancelQuestion();
@@ -141,6 +157,16 @@ export class QuestionBroadcastComponent implements OnInit {
       this.cancelQuestion();
     }
   }
+
+  endQuizBee(){
+    this.alertify.confirm("End Quiz Bee","Are you sure you want to end this Quiz bee?",()=>{
+      this.eventService.endEvent().subscribe(()=>{
+        this.router.navigate(['/event-detail',+this.route.snapshot.params['id']]);
+      
+      });
+    });
+  }
+
 
   startEvaluationPeriod(){
     this.questionService.startEvaluationPeriod().subscribe(()=>{

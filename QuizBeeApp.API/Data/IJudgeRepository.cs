@@ -16,5 +16,7 @@ namespace QuizBeeApp.API.Data
          Task<List<JudgeVerdict>> GetItemsToVerify(int participantsAnswerId,bool getUntouched);
          Task<List<JudgeVerdict>> GetItemsToVerifyForParticipansAnswer(int participantsAnswerId);
          Task<Helpers.Enum.JudgesVerdict> VerifyAnswer(BaseJudgeVerdictDto verdict);
+         Task<bool> IsReferenceNumberExist(string judgeRefNo,int id = 0);
+         Task<Judge> SignIn(string ReferenceNumber);
     }
 }

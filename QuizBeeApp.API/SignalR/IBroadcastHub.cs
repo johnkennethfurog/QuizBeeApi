@@ -12,5 +12,9 @@ namespace QuizBeeApp.API.SignalR
          Task CancelQuestion();
          Task StartEvaluationPeriod();
          Task BroadcastVerification(List<JudgeVerdictDto> verdicts);
+         Task VerificationEvent(bool isNewVerification);
+         Task JudgesVerdict(int answerId,bool isCorrect);
+
+         Task EndQuizBee();
     }
 }

@@ -69,4 +69,10 @@ public receiveItemToVerifyListener = () => {
   });
 }
 
+public receiveVerificationEventListener = () => {
+  this.hubConnection.on('verificationEvent', (isNew:boolean) => {
+    this.emitter.verificationReceiveEvent.emit(isNew);
+  });
+}
+
 }

@@ -11,5 +11,6 @@ namespace QuizBeeApp.Mobile.Interfaces
         Task<Participant> RegisterAsync(Participant participant);
         Task<AnswerReturn> SubmitAnswerAsync(PayloadAnswer answer);
         Task<Participant> SignInAsync(PayloadSignIn participant);
+        Task<bool> SendVerificationRequest(PayloadVerificataion verificataion);
     }
 }

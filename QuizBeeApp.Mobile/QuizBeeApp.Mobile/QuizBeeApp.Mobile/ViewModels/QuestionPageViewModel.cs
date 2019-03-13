@@ -93,7 +93,10 @@ namespace QuizBeeApp.Mobile.ViewModels
         public bool IsCorrectAnswer
         {
             get { return _isCorrectAnswer; }
-            set { SetProperty(ref _isCorrectAnswer, value); }
+            set {
+                    SetProperty(ref _isCorrectAnswer, value);
+               
+            }
         }
 
         private bool _isTimerStarted;
@@ -110,9 +113,17 @@ namespace QuizBeeApp.Mobile.ViewModels
             set { SetProperty(ref _isAnswerDisplayed, value); }
         }
 
+        private bool _isEvaluationStarted;
+        public bool IsEvaluationStarted
+        {
+            get { return _isEvaluationStarted; }
+            set { SetProperty(ref _isEvaluationStarted, value); }
+        }
+
         private int timerSeconds;
         private AnswerReturn answer;
         private bool isDisposing;
+        private bool timeIsOver = false;
 
         void SetQuestionType()
         {
@@ -157,6 +168,9 @@ namespace QuizBeeApp.Mobile.ViewModels
             RegisterToCancelleation();
             RetgisterToDispayingOfAnswer();
             RegisterToTimerStart();
+            RegistertoEvaluationStart();
+            RegistertoJudgeVerdict();
+            RegisterToQuizBeeEnded();
 
             await Connect();
         }
@@ -200,6 +214,50 @@ namespace QuizBeeApp.Mobile.ViewModels
             IsAnswerSubmitted = false;
             IsAnswerDisplayed = false;
 
+            timeIsOver = false;
+
+        }
+
+        void RegisterToQuizBeeEnded()
+        {
+            _hubConnection.On("EndQuizBee",async () =>
+            {
+
+                await NavigationService.NavigateAsync($"app:///{nameof(Views.PointsDisplayPage)}",animated: false);
+            });
+        }
+
+        
+        void RegistertoJudgeVerdict()
+        {
+            _hubConnection.On("JudgesVerdict", (int answerId, bool isCorrect) =>
+            {
+                if(answer.Id == answerId)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        if (isCorrect)
+                        {
+                            messageService.ShowMessage("Judges accepted your answer!");
+                            IsCorrectAnswer = true;
+                            SetPoints(); 
+                        }
+                        else
+                            messageService.ShowMessage("Judges did not accept your answer");
+
+                    });
+                }
+
+            });
+        }
+
+
+        void RegistertoEvaluationStart()
+        {
+            _hubConnection.On("StartEvaluationPeriod", () =>
+            {
+                StartEvaluationTimer();
+            });
         }
 
         void RegisterToTimerStart()
@@ -225,7 +283,14 @@ namespace QuizBeeApp.Mobile.ViewModels
         bool IsAnswerCorrect()
         {
             IsCorrectAnswer =  Answer.ToLower() == QuestionItem.Answer.ToLower();
+            SetPoints();
             return IsCorrectAnswer;
+        }
+
+        void SetPoints()
+        {
+            if(IsCorrectAnswer)
+                ParticipantHelper.points += QuestionItem.Point;
         }
 
         async Task Connect()
@@ -255,7 +320,10 @@ namespace QuizBeeApp.Mobile.ViewModels
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            _loggedParticipant = parameters["participant"] as Participant;
+
+            var participant = parameters["participant"] as Participant;
+            if(participant != null)
+                _loggedParticipant = participant;
 
         }
 
@@ -286,18 +354,23 @@ namespace QuizBeeApp.Mobile.ViewModels
 
             if(string.IsNullOrWhiteSpace(Answer))
             {
-                messageService.ShowMessage("You need to answer");
+                if (timeIsOver)
+                    IsAnswerSubmitted = true;
+                else
+                    messageService.ShowMessage("You need to answer");
+
                 return;
             }
             try
             {
                 IsBusy = true;
-                var answerSubmitted = await participantService.SubmitAnswerAsync(new PayloadAnswer
+                var payload = new PayloadAnswer
                 {
                     Answer = Answer,
                     ParticipantId = _loggedParticipant.Id,
                     QuestionId = QuestionItem.Id
-                });
+                };
+                var answerSubmitted = await participantService.SubmitAnswerAsync(payload);
 
                 answer = answerSubmitted;
                 messageService.ShowMessage("Answer submitted");
@@ -323,9 +396,29 @@ namespace QuizBeeApp.Mobile.ViewModels
                 SetSecondsToTimeFormat();
 
                 if (timerSeconds == 0)
+                {
+                    timeIsOver = true;
                     SubmitQuestion.Execute();
+                }
 
                 return timerSeconds > 0 && !IsIdleMode && !IsAnswerSubmitted; // True = Repeat again, False = Stop the timer
+            });
+        }
+
+        void StartEvaluationTimer()
+        {
+            IsEvaluationStarted = true;
+            timerSeconds = 5;
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                // Do something
+                timerSeconds--;
+                //SetSecondsToTimeFormat();
+
+                if (timerSeconds == 0)
+                    IsEvaluationStarted = false;
+
+                return timerSeconds > 0;
             });
         }
 
@@ -340,9 +433,22 @@ namespace QuizBeeApp.Mobile.ViewModels
         public DelegateCommand RequestEvaluationCommand =>
             _requestEvaluationCommand ?? (_requestEvaluationCommand = new DelegateCommand(ExecuteRequestEvaluationCommand));
 
-        void ExecuteRequestEvaluationCommand()
+        async void ExecuteRequestEvaluationCommand()
         {
+            var payload = new PayloadVerificataion
+            {
+                Id = answer.Id,
+                Answer = answer.Answer,
+                EventCode = _loggedParticipant.Event,
+                Remarks = ""
+            };
 
+            var param = new NavigationParameters
+            {
+                {"payload",payload }
+            };
+
+            await NavigationService.NavigateAsync(nameof(Views.VerificationPage), param);
         }
     }
 }

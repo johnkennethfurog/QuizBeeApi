@@ -31,6 +31,17 @@
     <div class="invalid-feedback" *ngIf="createJudgeForm.get('emailAddress').errors">Email is required</div>
   </div>
 
+  <div class="form-group">
+    <input
+    type="text"
+    class="form-control"
+    formControlName="refNo"
+    placeholder="Enter judge Reference no here"
+    [ngClass]="{'is-invalid': createJudgeForm.get('refNo').errors &&
+    createJudgeForm.get('refNo').touched}" >
+  <div class="invalid-feedback" *ngIf="createJudgeForm.get('refNo').errors">Reference Number is required</div>
+</div>
+
 
     </form>
   </div>

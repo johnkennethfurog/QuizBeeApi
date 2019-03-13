@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { JudgeService } from '../_services/judge.service';
 import { ItemToVerify } from '../_model/itemToVerify';
 import { AlertifyService } from '../_services/alertify.service';
@@ -6,6 +6,8 @@ import { EmitterService } from '../_services/emitter.service';
 import { SignalRService } from '../_services/signal-r.service';
 import { JudgeVerdict } from '../_model/judgeVerdict';
 import { log } from 'util';
+import { AuthService } from '../_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-judge-wall',
@@ -16,21 +18,33 @@ export class JudgeWallComponent implements OnInit {
 
   itemsToVerify:ItemToVerify[];
   judgeId:number;
+  judgeName:string;
 
   constructor(private judgeService:JudgeService,
     private alertify:AlertifyService,
     private emitter:EmitterService,
-    private signalR:SignalRService) { }
+    private signalR:SignalRService,
+    private authService:AuthService,
+    private router:Router) { }
+
 
   ngOnInit() {
+
+    this.authService.navBarHide();
 
     this.signalR.startConnection();
     this.signalR.receiveItemToVerifyListener();
 
-    this.judgeId = 3;
+    this.getJudgeInfo();
     this.LoadItemsToVerify();
 
     this.subscribeToEmitter();
+  }
+
+  getJudgeInfo(){
+
+    this.judgeId = +localStorage.getItem('judgeId');
+    this.judgeName = localStorage.getItem('judgeName');
   }
 
   subscribeToEmitter(){
@@ -66,5 +80,10 @@ export class JudgeWallComponent implements OnInit {
     },error =>{
       this.alertify.error("Unable to verify item");
     });
+  }
+
+  signOut(){
+    localStorage.clear();
+    this.router.navigate(['judge-login'])
   }
 }

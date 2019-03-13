@@ -7,5 +7,7 @@ namespace QuizBeeApp.API.Dtos
         public string EmailAddress { get; set; }
         public bool IsHead { get; set; }
         public bool IsVerify { get; set; }
+
+        public string RefNo { get; set; }
     }
 }

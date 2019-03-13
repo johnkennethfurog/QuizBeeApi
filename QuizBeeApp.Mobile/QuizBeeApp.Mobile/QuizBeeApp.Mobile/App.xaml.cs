@@ -48,6 +48,8 @@ namespace QuizBeeApp.Mobile
             containerRegistry.Register<IParticipantService, ParticipantService>();
             containerRegistry.Register<IRequestHandler, RequestHandler>();
 
+            containerRegistry.RegisterForNavigation<VerificationPage, VerificationPageViewModel>();
+            containerRegistry.RegisterForNavigation<PointsDisplayPage, PointsDisplayPageViewModel>();
         }
     }
 }

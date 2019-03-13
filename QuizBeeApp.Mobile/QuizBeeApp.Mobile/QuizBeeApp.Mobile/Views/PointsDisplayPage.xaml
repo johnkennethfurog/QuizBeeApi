@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="QuizBeeApp.Mobile.Views.PointsDisplayPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <StackLayout VerticalOptions="CenterAndExpand">
+        <forms:AnimationView
+            x:Name="AnimationView"
+            Animation="fireworks.json"
+            AutoPlay="True"
+            HeightRequest="200"
+            Loop="True"
+            WidthRequest="200" />
+        <Label
+            HorizontalTextAlignment="Center"
+            Style="{x:StaticResource TitleText}"
+            Text="Congratulations ! you've got" />
+        <Label
+            Margin="0,-12,0,0"
+            FontSize="50"
+            HorizontalTextAlignment="Center"
+            Text="{Binding Points, StringFormat='{0} pts'}"
+            TextColor="Black" />
+    </StackLayout>
+</ContentPage>

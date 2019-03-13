@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Judge } from '../_model/judge';
 import { ItemToVerify } from '../_model/itemToVerify';
 import { JudgeVerdict } from '../_model/judgeVerdict';
+import { PayloadSignIn } from '../_model/payloadSignIn';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,12 @@ export class JudgeService {
 
   verifyItem(judgeVerdict:JudgeVerdict){
     return this.httpClient.post(this.baseUrl+'verify',judgeVerdict);
+  }
+
+  signIn(refNo:string):Observable<Judge>{
+    var payload:PayloadSignIn={
+      refNo:refNo
+    };
+    return this.httpClient.post<Judge>(this.baseUrl+'signIn',payload);
   }
 }

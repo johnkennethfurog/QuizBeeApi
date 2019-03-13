@@ -32,4 +32,8 @@ deleteEvent(eventId:number):Observable<boolean>{
   return this.httpClient.delete<boolean>(this.baseUrl+'event/'+eventId);
 }
 
+endEvent(){
+  return this.httpClient.get(this.baseUrl+"endQuizBee");
+}
+
 }

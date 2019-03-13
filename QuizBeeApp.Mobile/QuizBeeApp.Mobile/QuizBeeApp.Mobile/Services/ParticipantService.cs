@@ -22,6 +22,11 @@ namespace QuizBeeApp.Mobile.Services
             return await requestHandler.PostAsync<Participant, Participant>(EndpointHelper.REGISTER,participant);
         }
 
+        public async Task<bool> SendVerificationRequest(PayloadVerificataion verificataion)
+        {
+            return await requestHandler.PostAsync<bool, PayloadVerificataion>(EndpointHelper.VERIFY, verificataion);
+        }
+
         public async Task<Participant> SignInAsync(PayloadSignIn payload)
         {
             return await requestHandler.PostAsync<Participant, PayloadSignIn>(EndpointHelper.SIGN_IN, payload);

@@ -102,6 +102,7 @@
                   <th scope="col" width="5">#</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email Address</th>
+                  <th scope="col">Ref No.</th>
                   <th scope="col">Status</th>
                   <th scope="col" width="10"></th>
                   <th scope="col" width="10"></th>
@@ -112,6 +113,7 @@
                   <th scope="row">{{ i + 1 }}</th>
                   <td>{{ judge.name }}</td>
                   <td>{{ judge.emailAddress }}</td>
+                  <td>{{ judge.refNo }}</td>
                   <td *ngIf="judge.isVerify">Verified</td>
                   <td *ngIf="!judge.isVerify"><button (click)="verifyJudge(judge)" class="btn btn-sm btn-success">Verify</button></td>
                   <td>

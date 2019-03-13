@@ -5,4 +5,5 @@ export interface Judge {
     isHead:boolean;
     isVerify:boolean;
     eventCode?:string;
+    refNo:string;
 }

@@ -34,6 +34,7 @@ import { QuestionCardComponent } from './question-card/question-card.component';
 import { QuestionDisplayComponent } from './question-display/question-display.component';
 import { SignalRService } from './_services/signal-r.service';
 import { JudgeWallComponent } from './judge-wall/judge-wall.component';
+import { JudgeLoginComponent } from './judge-login/judge-login.component';
 
 @NgModule({
    declarations: [
@@ -53,7 +54,8 @@ import { JudgeWallComponent } from './judge-wall/judge-wall.component';
       CategoryCardComponent,
       QuestionCardComponent,
       QuestionDisplayComponent,
-      JudgeWallComponent
+      JudgeWallComponent,
+      JudgeLoginComponent
    ],
    imports: [
       BrowserModule,

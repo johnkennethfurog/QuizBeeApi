@@ -11,5 +11,6 @@ namespace QuizBeeApp.API.Models
         public Event Event { get; set; }
         public bool IsHead { get; set; }
         public bool IsVerify { get; set; }
+        public string RefNo { get; set; }
     }
 }

@@ -174,6 +174,7 @@ namespace QuizBeeApp.API.Controllers
                 var verdictsDto = mapper.Map<List<JudgeVerdictDto>>(judgeVerdicts);
                 
                 await hubContext.Clients.All.BroadcastVerification(verdictsDto);
+                await hubContext.Clients.All.VerificationEvent(true);
                 
                 return Ok(true);
             }

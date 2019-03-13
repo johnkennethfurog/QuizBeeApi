@@ -7,6 +7,7 @@ namespace QuizBeeApp.Mobile.Helpers
 {
     class ParticipantHelper
     {
+        public static double points;
         //public static Participant Participant;
     }
 }

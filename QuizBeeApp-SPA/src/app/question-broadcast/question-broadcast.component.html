@@ -4,12 +4,17 @@
         <div *ngFor="let cat of categoryQuestions">
             <app-category-card [category]="cat"></app-category-card>
           </div>
+          <button class="btn btn-danger btn-lg pull-right m-3" (click)="endQuizBee()"><i class="fa fa-times-circle"></i> End QuizBee</button>
+
     </div>
     <div class="col-sm-9">
 
       <div class="card w-100 h-100 mx-auto"  *ngIf="selectedQstn">
+          <div class="alert alert-warning" *ngIf="toVerifyCount > 0" role="alert">
+              {{toVerifyCount}} still need to be verify!
+            </div>
         <div class="card-body">
-            <span>Question 1 of 10</span>
+
             <div class="container-flex mb-5">
                 <div class="row">
                   
@@ -96,7 +101,7 @@
             <button class="btn btn-danger btn-lg pull-right ml-1" *ngIf="state != 0" (click)="cancel()"><i class="fa fa-times-circle"></i> Close Question</button>
             <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 1" (click)="startTimer()"><i class="fa fa-clock-o"></i> Start Timer</button>
             <button class="btn btn-success btn-lg pull-right ml-1" *ngIf="state == 2" (click)="displayAnswer()"><i class="fa fa-eye"></i> Display Answer</button>
-            <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 3" (click)="startEvaluationPeriod()"><i class="fa fa-eye"></i> Start Evaluation Period</button>
+            <button class="btn btn-warning btn-lg pull-right ml-1" *ngIf="state == 3 && this.selectedQstn.type == 2" (click)="startEvaluationPeriod()"><i class="fa fa-eye"></i> Start Evaluation Period</button>
         </div>
       </div>
 

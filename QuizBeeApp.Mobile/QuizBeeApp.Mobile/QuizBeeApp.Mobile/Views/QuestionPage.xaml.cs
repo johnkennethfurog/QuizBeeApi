@@ -28,6 +28,10 @@ namespace QuizBeeApp.Mobile.Views
         private void ToggleIndicator(bool isOn)
         {
             var stack = (StackLayout)_selectedFrame.Content;
+
+            if (stack.Children.Count < 1)
+                return;
+
             var indicator = (Label) stack.Children[0];
             indicator.TextColor = (Color)App.Current.Resources[isOn ? "success" : "silver"]; 
         }

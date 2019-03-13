@@ -96,6 +96,7 @@
     <AndroidAsset Include="Assets\paper.json" />
     <AndroidAsset Include="Assets\correct.json" />
     <AndroidAsset Include="Assets\wrong.json" />
+    <AndroidAsset Include="Assets\fireworks.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

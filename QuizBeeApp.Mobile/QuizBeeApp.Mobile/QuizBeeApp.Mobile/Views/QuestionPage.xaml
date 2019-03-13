@@ -196,9 +196,14 @@
                         IsEnabled="{Binding IsTimerStarted}"
                         IsVisible="{Binding IsBusy, Converter={x:StaticResource revBool}}"
                         Style="{x:StaticResource btn}"
-                        Text="Submit"
-                        WidthRequest="140" />
+                        Text="Submit" />
+
                 </StackLayout>
+                <Button
+                    Command="{Binding RequestEvaluationCommand}"
+                    IsVisible="{Binding IsEvaluationStarted}"
+                    Style="{x:StaticResource btn}"
+                    Text="Request Verification" />
 
             </StackLayout>
         </StackLayout>

@@ -7,5 +7,7 @@ namespace QuizBeeApp.API.Dtos
         public bool IsVerify { get; set; }
         public string ReferenceNumber { get; set; }
         public int TotalScores { get; set; }
+
+        public string Event { get; set; }
     }
 }

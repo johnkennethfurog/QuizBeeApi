@@ -50,6 +50,8 @@ namespace QuizBeeApp.API.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("RefNo");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");

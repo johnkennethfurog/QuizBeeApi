@@ -38,12 +38,14 @@ namespace QuizBeeApp.API.Data
 
         public async Task<Judge> RegisterJudgeAsync(CreateJudgeDto createJudgeDto,Event evnt,bool isVerify)
         {
+            
             var judge = new Judge
             {
                 Name = createJudgeDto.Name,
                 IsVerify = isVerify,
                 Event = evnt,
-                EmailAddress = createJudgeDto.EmailAddress
+                EmailAddress = createJudgeDto.EmailAddress,
+                RefNo = createJudgeDto.RefNo
             };
 
             await context.AddAsync(judge);
@@ -57,10 +59,11 @@ namespace QuizBeeApp.API.Data
             var judge = await GetJudge(createJudgeDto.Id);
             judge.Name = createJudgeDto.Name;
             judge.EmailAddress = createJudgeDto.EmailAddress;
+            judge.RefNo = createJudgeDto.RefNo;
+            
             await context.SaveChangesAsync();
             return judge;
         }
-
         public async Task<Judge>GetJudge(int judgeId)
         {
             return await context.Judges.FirstOrDefaultAsync(x => x.Id == judgeId);
@@ -68,7 +71,7 @@ namespace QuizBeeApp.API.Data
 
         public async Task<List<JudgeVerdict>> RequestForVerification(ParticipantAnswer participantAnswer, VerificationRequestDto request)
         {
-            var evntJudges = await context.Events.Where(x => x.Id == request.EventId)
+            var evntJudges = await context.Events.Where(x => x.Code == request.EventCode)
             .Include(x => x.Judges).FirstOrDefaultAsync();
 
             participantAnswer.RequestedForVerification = true;
@@ -152,6 +155,16 @@ namespace QuizBeeApp.API.Data
         {
             return await context.JudgeVerdicts.FromSql("SELECT * FROM JudgeVerdicts WHERE ParticipantAnswerId = {0} ",participantsAnswerId).ToListAsync();
 
+        }
+
+        public async Task<bool> IsReferenceNumberExist(string judgeRefNo,int id = 0)
+        {
+            return await context.Judges.AnyAsync(x => x.RefNo == judgeRefNo && x.Id != id);
+        }
+
+        public async Task<Judge> SignIn(string ReferenceNumber)
+        {
+            return await context.Judges.FirstOrDefaultAsync(x => x.RefNo == ReferenceNumber);
         }
     }
 }

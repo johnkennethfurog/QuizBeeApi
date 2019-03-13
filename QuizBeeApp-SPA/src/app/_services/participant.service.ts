@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Participant } from '../_model/participant';
+import { ParticipantScore } from '../_model/participantScore';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ updateParticipant(participant:Participant):Observable<Participant>{
 
 deleteParticipant(participantId:number):Observable<boolean>{
   return this.httpClient.delete<boolean>(this.baseUrl+'admin/'+participantId);
+}
+
+getParticipantScores(eventId:number):Observable<ParticipantScore[]>{
+  return this.httpClient.get<ParticipantScore[]>(environment.apiUrl+'admin/printScores/'+eventId);
 }
 
 }

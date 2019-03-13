@@ -359,5 +359,20 @@ namespace QuizBeeApp.API.Controllers
             await hubContext.Clients.All.EndQuizBee();
             return Ok();
         }
+
+        [HttpGet("printScores/{eventId}")]
+        public async Task<IActionResult> printScores(int eventId)
+        {
+            try
+            {
+                var participants = await participantRepository.GetParticipants(eventId);
+                var participantsDto = mapper.Map<List<ScoreDto>>(participants);
+                return Ok(participantsDto);
+            }
+            catch(Exception)
+            {
+                return BadRequest(new ErrorDto("Unable to print scores"));
+            }
+        }
     }
 }

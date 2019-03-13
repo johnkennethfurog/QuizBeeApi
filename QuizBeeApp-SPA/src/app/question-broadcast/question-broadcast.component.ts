@@ -15,7 +15,7 @@ import { QuestionState } from '../_enum/question-state.enum';
 import { SignalRService } from '../_services/signal-r.service';
 
 @Component({
-  selector: 'app-question-broadcast',
+  selector: 'app-question-broadcas  t',
   templateUrl: './question-broadcast.component.html',
   styleUrls: ['./question-broadcast.component.css']
 })

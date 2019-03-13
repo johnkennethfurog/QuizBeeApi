@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +104,12 @@ namespace QuizBeeApp.API.Data
         public async Task<ParticipantAnswer> GetParticipantAnswer(int participantAnswerId)
         {
             return await context.ParticipantAnswers.FirstOrDefaultAsync(x => x.Id == participantAnswerId);
+        }
+
+        public async Task<List<Participant>> GetParticipants(int eventId)
+        {
+            return await context.Participants.FromSql("SELECT * FROM Participants WHERE EventId = {0} AND IsVerify = 1 ORDER BY TotalScores DESC",eventId)
+            .ToListAsync();
         }
     }
 }

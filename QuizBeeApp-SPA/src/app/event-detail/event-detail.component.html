@@ -133,7 +133,13 @@
               class="btn btn-success mb-2 pull-right"
               (click)="openModalForParticipant()"
             >
-              <i class="fa fa-plus"></i> New Participant
+            <i class="fa fa-plus"></i>New Participant
+          </button>
+            <button
+            class="btn btn-info mb-2 "
+            [routerLink]="['/print-scores/',event.id]"
+          >
+              <i class="fa fa-print"></i>Print Scores
             </button>
             <table class="table table-striped">
               <thead>

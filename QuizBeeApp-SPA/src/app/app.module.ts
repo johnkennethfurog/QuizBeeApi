@@ -34,7 +34,9 @@ import { QuestionCardComponent } from './question-card/question-card.component';
 import { QuestionDisplayComponent } from './question-display/question-display.component';
 import { SignalRService } from './_services/signal-r.service';
 import { JudgeWallComponent } from './judge-wall/judge-wall.component';
+import {NgxPrintModule} from 'ngx-print';
 import { JudgeLoginComponent } from './judge-login/judge-login.component';
+import { PrintScoreComponent } from './print-score/print-score.component';
 
 @NgModule({
    declarations: [
@@ -55,7 +57,8 @@ import { JudgeLoginComponent } from './judge-login/judge-login.component';
       QuestionCardComponent,
       QuestionDisplayComponent,
       JudgeWallComponent,
-      JudgeLoginComponent
+      JudgeLoginComponent,
+      PrintScoreComponent
    ],
    imports: [
       BrowserModule,
@@ -68,7 +71,8 @@ import { JudgeLoginComponent } from './judge-login/judge-login.component';
       ReactiveFormsModule,
       AccordionModule.forRoot(),
       CollapseModule.forRoot(),
-      CountdownModule
+      CountdownModule,
+      NgxPrintModule
    ],
    providers: [
       AuthService,

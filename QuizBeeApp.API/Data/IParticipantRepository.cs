@@ -15,5 +15,6 @@ namespace QuizBeeApp.API.Data
          Task<Participant> GetParticipant(int participantId);
          Task<Participant> SignInParticipant(string eventCode,string referenceNumber);
          Task<ParticipantAnswer> GetParticipantAnswer(int participantAnswerId);
+         Task<List<Participant>> GetParticipants(int eventId);
     }
 }

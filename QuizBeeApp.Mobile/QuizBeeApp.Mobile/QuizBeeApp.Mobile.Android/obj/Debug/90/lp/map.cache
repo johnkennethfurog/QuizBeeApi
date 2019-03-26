@@ -101,3 +101,9 @@ System.Resources.ResourceManager
 System.Diagnostics.Tools
 System.ComponentModel
 System.Runtime.InteropServices.WindowsRuntime
+Microsoft.AppCenter.Analytics.Android.Bindings
+Microsoft.AppCenter.Analytics
+Microsoft.AppCenter.Android.Bindings
+Microsoft.AppCenter
+Microsoft.AppCenter.Crashes.Android.Bindings
+Microsoft.AppCenter.Crashes

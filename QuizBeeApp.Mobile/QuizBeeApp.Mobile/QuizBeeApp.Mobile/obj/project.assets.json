@@ -37,6 +37,53 @@
           "lib/netstandard1.1/Merq.dll": {}
         }
       },
+      "Microsoft.AppCenter/1.14.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.0/Microsoft.AppCenter.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.AppCenter.dll": {}
+        }
+      },
+      "Microsoft.AppCenter.Analytics/1.14.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AppCenter": "1.14.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.AppCenter.Analytics.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.AppCenter.Analytics.dll": {}
+        }
+      },
+      "Microsoft.AppCenter.Crashes/1.14.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AppCenter": "1.14.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.AppCenter.Crashes.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.AppCenter.Crashes.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/WatsonRegistrationUtility.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/WatsonRegistrationUtility.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/WatsonRegistrationUtility.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Connections.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1053,7 +1100,7 @@
       ]
     },
     "GitInfo/2.0.1": {
-      "sha512": "10x4O46MQAZs3OwHmmNoR/+4pSELcYTcGbLIwIpPu9yO9xjU49Uxc4OmvRk1Ru8P+SBID+pEJ3EFMBzw37b73g==",
+      "sha512": "BYbUb1HwyYcifygktwseMXWEGkaBOWiLO1o+n8ldjbzTop34EMWdkp6YoaQkeheBxq3qd6AhWzhuozia09mBZA==",
       "type": "package",
       "path": "gitinfo/2.0.1",
       "files": [
@@ -1081,6 +1128,80 @@
         "lib/netstandard1.1/Merq.xml",
         "merq.1.0.0-rc.nupkg.sha512",
         "merq.nuspec"
+      ]
+    },
+    "Microsoft.AppCenter/1.14.0": {
+      "sha512": "Rg21L6IA7uH3OGUXToKn5BRsyU8I9WYrv1CYEfV07WXJS3fv5H+WMjAnhitpsZE8JeyUCnRjofFpDZ2+L2kvKg==",
+      "type": "package",
+      "path": "microsoft.appcenter/1.14.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Android.Bindings.dll",
+        "lib/MonoAndroid403/Microsoft.AppCenter.dll",
+        "lib/MonoAndroid403/Microsoft.AppCenter.xml",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.iOS.Bindings.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.xml",
+        "lib/netstandard1.0/Microsoft.AppCenter.dll",
+        "lib/netstandard1.0/Microsoft.AppCenter.xml",
+        "lib/portable-net45+win8+wpa81+wp8/Microsoft.AppCenter.dll",
+        "lib/portable-net45+win8+wpa81+wp8/Microsoft.AppCenter.xml",
+        "lib/uap10.0/Microsoft.AppCenter.dll",
+        "lib/uap10.0/Microsoft.AppCenter.xml",
+        "microsoft.appcenter.1.14.0.nupkg.sha512",
+        "microsoft.appcenter.nuspec"
+      ]
+    },
+    "Microsoft.AppCenter.Analytics/1.14.0": {
+      "sha512": "JTQwT/MkKSrhWIzvLE/ZKgOx0BLHPA82S6NNN+VAPGQSuMqKQi+sOvXw3mtv1sqldlDw5PgOl1P3ZMqAfpQong==",
+      "type": "package",
+      "path": "microsoft.appcenter.analytics/1.14.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Analytics.Android.Bindings.dll",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Analytics.dll",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Analytics.xml",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.Analytics.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.Analytics.iOS.Bindings.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.Analytics.xml",
+        "lib/netstandard1.0/Microsoft.AppCenter.Analytics.dll",
+        "lib/netstandard1.0/Microsoft.AppCenter.Analytics.xml",
+        "lib/portable-net45+win8+wpa81+wp8/Microsoft.AppCenter.Analytics.dll",
+        "lib/portable-net45+win8+wpa81+wp8/Microsoft.AppCenter.Analytics.xml",
+        "lib/uap10.0/Microsoft.AppCenter.Analytics.dll",
+        "lib/uap10.0/Microsoft.AppCenter.Analytics.xml",
+        "microsoft.appcenter.analytics.1.14.0.nupkg.sha512",
+        "microsoft.appcenter.analytics.nuspec"
+      ]
+    },
+    "Microsoft.AppCenter.Crashes/1.14.0": {
+      "sha512": "YgtZO+ckxfsLZwwMLfgVBB/jxrzUoAor5EZwC8wiAXVQLfwhl/4+aeuMvUV7GIITGsurYRuJxZOkw45XM6bqtA==",
+      "type": "package",
+      "path": "microsoft.appcenter.crashes/1.14.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/uap10.0/Microsoft.AppCenter.Crashes.targets",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Crashes.Android.Bindings.dll",
+        "lib/MonoAndroid403/Microsoft.AppCenter.Crashes.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.Crashes.dll",
+        "lib/Xamarin.iOS10/Microsoft.AppCenter.Crashes.iOS.Bindings.dll",
+        "lib/netstandard1.0/Microsoft.AppCenter.Crashes.dll",
+        "lib/portable-net45+win8+wpa81+wp8/Microsoft.AppCenter.Crashes.dll",
+        "microsoft.appcenter.crashes.1.14.0.nupkg.sha512",
+        "microsoft.appcenter.crashes.nuspec",
+        "ref/uap10.0/Microsoft.AppCenter.Crashes.dll",
+        "runtimes/win10-arm/lib/uap10.0/Microsoft.AppCenter.Crashes.dll",
+        "runtimes/win10-arm/lib/uap10.0/WatsonRegistrationUtility.winmd",
+        "runtimes/win10-arm/native/WatsonRegistrationUtility.dll",
+        "runtimes/win10-x64/lib/uap10.0/Microsoft.AppCenter.Crashes.dll",
+        "runtimes/win10-x64/lib/uap10.0/WatsonRegistrationUtility.winmd",
+        "runtimes/win10-x64/native/WatsonRegistrationUtility.dll",
+        "runtimes/win10-x86/lib/uap10.0/Microsoft.AppCenter.Crashes.dll",
+        "runtimes/win10-x86/lib/uap10.0/WatsonRegistrationUtility.winmd",
+        "runtimes/win10-x86/native/WatsonRegistrationUtility.dll"
       ]
     },
     "Microsoft.AspNetCore.Connections.Abstractions/2.2.0": {
@@ -1313,7 +1434,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "a/iSwnRZb+LHFk49hQOyThh/ZNC3vsbZsF65XwQIb863qF6msmhdQtxGXFL28Ob2NsCz/drEj28BJd/YPpLRBg==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -1328,7 +1449,7 @@
       ]
     },
     "Microsoft.NETCore.Targets/1.1.0": {
-      "sha512": "HvAzpoaIqrmZfsHAN4rLFji0r7YY5TP8r3SdkziXN7qU9KCpRIG+zfcBx+mIri/jkBNqjq4iWIfuYNtFBjSQ/g==",
+      "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "type": "package",
       "path": "microsoft.netcore.targets/1.1.0",
       "files": [
@@ -1343,12 +1464,11 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "548M6mnBSJWxsIlkQHfbzoYxpiYFXZZSL00p4GHYv8PkiqFBnnT68mW5mGEsA/ch9fDO9GkPgkFQpWiXZN7mAQ==",
+      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "build/netstandard2.0/NETStandard.Library.targets",
@@ -1753,7 +1873,7 @@
       ]
     },
     "System.ComponentModel/4.0.1": {
-      "sha512": "3AOvy/bB7s8yAkolZOlqGeLDrPySuYsgkk7hKIBWn5a/Le7V16PDYQIzj7w7hi4UUXXmEmN/ZehNlAi5eD9r5w==",
+      "sha512": "oBZFnm7seFiVfugsIyOvQCWobNZs7FzqDV/B7tx20Ep/l3UUFCPDkdTnCNaJZTU27zjeODmy2C/cP60u3D4c9w==",
       "type": "package",
       "path": "system.componentmodel/4.0.1",
       "files": [
@@ -2024,7 +2144,7 @@
       ]
     },
     "System.Diagnostics.Tracer/2.0.8": {
-      "sha512": "jCFW3h56qmJcNRUzGr2EqdQz4XqLAVVjubf65RUHCmvWR2QBXkrolKt5GbSXtugrH3qszYDXS0Pkr6StCCiX1Q==",
+      "sha512": "fAFE9+Q4cvX1F1+xcbOVa5vTXMa2YmoAETpbboFmfBR9mV+lmYBRTvvi77eNYKXE5buARPaTzRnulAvxgtesKw==",
       "type": "package",
       "path": "system.diagnostics.tracer/2.0.8",
       "files": [
@@ -2034,7 +2154,6 @@
         "lib/net45/System.Diagnostics.Tracer.pdb",
         "lib/net45/System.Diagnostics.Tracer.xml",
         "lib/netstandard1.3/System.Diagnostics.Tracer.dll",
-        "lib/netstandard1.3/System.Diagnostics.Tracer.dll.mdb",
         "lib/netstandard1.3/System.Diagnostics.Tracer.pdb",
         "lib/netstandard1.3/System.Diagnostics.Tracer.xml",
         "readme.txt",
@@ -2043,7 +2162,7 @@
       ]
     },
     "System.Diagnostics.TraceSource/4.0.0": {
-      "sha512": "q5bGzzvXVi+dIMiPWRhXZV7r+Os3TEOuRW5LHsAUDGpqJHol8XiLokVpsgAfPqHHNkyx1bbv5lRZqRkRrGZKxQ==",
+      "sha512": "6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA==",
       "type": "package",
       "path": "system.diagnostics.tracesource/4.0.0",
       "files": [
@@ -2173,12 +2292,11 @@
       ]
     },
     "System.Globalization/4.0.11": {
-      "sha512": "S1k/4BoV7hCPErZheQDj+6+RCeBPREyYwaMhxH6efE6KqCMhTuMJlXyCtxgWcc/QFDQwiZbcDXZGOtEm7WYHoA==",
+      "sha512": "B95h0YLEL2oSnwF/XjqSWKnwKOy/01VWkNlsCeMTFJLLabflpGV26nK164eRs5GiaRSBGpOxQ3pKoSnnyZN5pg==",
       "type": "package",
       "path": "system.globalization/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2648,7 +2766,7 @@
       ]
     },
     "System.Reactive/3.0.0": {
-      "sha512": "ToVfwQ/Jq6tsnT+j9y8XH+9cmJxRsRP6b2kl9g5z5+tUzE04s/C8ctv1boNnhXl9cZxxFOysg0nBwRfxWr7c0Q==",
+      "sha512": "tm+Kmqs1Gp+fPqd7UvnQHXoQ1iUHD1Cxt9he6dudBFWZqyCJ6XKz/DvD/CQ+Kv/m11Y8iXKp99qhf2cg0IrTpg==",
       "type": "package",
       "path": "system.reactive/3.0.0",
       "files": [
@@ -2659,7 +2777,7 @@
       ]
     },
     "System.Reactive.Core/3.0.0": {
-      "sha512": "b+l2mgNykpCL2RIovARYFc9nKzHE6AI1OnCKM1mjMKZKiCLp6bmEglyFs056sSmexs6YF9ssjQ/l2gcJr13DSw==",
+      "sha512": "1mnBTTNzTDaKYu2fYA0fcbWmWspwXheV9eFR0ynWd0nFjBwgSW0ZUAxe7dfvU5imv+K9QlfhV+pEKGOlJVZ8+w==",
       "type": "package",
       "path": "system.reactive.core/3.0.0",
       "files": [
@@ -2688,7 +2806,7 @@
       ]
     },
     "System.Reactive.Interfaces/3.0.0": {
-      "sha512": "YuSKgSt0cPTPXXqJ7tQYDrSE6O0uGEx2Pr3yXr1BfUhnOzmj4RpgfHK2Nry8PYjy8gEQgisMlbis/i0u7ZIDAQ==",
+      "sha512": "MuLvWYegIrhvUVe3MRMIBxFGx4kiz0FEzN3TTvhX+m3WmJCi5+OE4J7yPWtZjGGTUh5wysGyaF9thcnCzx/J3w==",
       "type": "package",
       "path": "system.reactive.interfaces/3.0.0",
       "files": [
@@ -2703,7 +2821,7 @@
       ]
     },
     "System.Reactive.Linq/3.0.0": {
-      "sha512": "/9YvDG64N7Q1+QwB0yHydev3nOR7NKVJ9IoEyzMBW61Fd8Nn117NV9XhI/KerckKGzyOzkMrVJ50VxZk3GOoqA==",
+      "sha512": "CmQ+WpeOFzwYlDKafLQLT5McvR1TWCi3UudeBnajguvi/8ZGHDoQ2MPTo401EKkSvW48uTsJyvcKXN/C7g91Qg==",
       "type": "package",
       "path": "system.reactive.linq/3.0.0",
       "files": [
@@ -2724,7 +2842,7 @@
       ]
     },
     "System.Reactive.PlatformServices/3.0.0": {
-      "sha512": "hWy/In1feK7fKgmMOCqgU7GWDKBZZbQHbVFgJ1X7My4qsCj8cjPPbxIfLWYwdYwxmBjtSrANWLTNnmAuEsZcHQ==",
+      "sha512": "1yYsCsIqrpu228er3iC1naLcCnIpdDRuyFhD78P6C54YyiR84ElDUjWYEMVneUKxrP6PlwrZp2VEf0DHAHX8gw==",
       "type": "package",
       "path": "system.reactive.platformservices/3.0.0",
       "files": [
@@ -2751,7 +2869,7 @@
       ]
     },
     "System.Reflection/4.1.0": {
-      "sha512": "Oh16UNz+QqxcOCyr3MlkzqgvZDC6jcCg8XNPmNePIiubERFoZEBU8piauLxCBUT9Ba7TTPpd0RbsryJx8b5TMA==",
+      "sha512": "JCKANJ0TI7kzoQzuwB/OoJANy1Lg338B6+JVacPl4TpUwi3cReg3nMLplMq2uqYfHFQpKIlHAUVAJlImZz/4ng==",
       "type": "package",
       "path": "system.reflection/4.1.0",
       "files": [
@@ -3092,7 +3210,7 @@
       ]
     },
     "System.Resources.ResourceManager/4.0.1": {
-      "sha512": "hlHMz9IkMZddp1oCA0WYCt9MV5s+KzYAOdBVnxoy5AH1psoxVe0zAAz1jSZLhnH1vq/PoejgC0fuxNGxdL+jOg==",
+      "sha512": "TxwVeUNoTgUOdQ09gfTjvW411MF+w9MBYL7AtNVc+HtBCFlutPLhUCdZjNkjbhj3bNQWMdHboF0KIWEOjJssbA==",
       "type": "package",
       "path": "system.resources.resourcemanager/4.0.1",
       "files": [
@@ -3149,12 +3267,11 @@
       ]
     },
     "System.Runtime/4.3.0": {
-      "sha512": "kqsiSfCAc8+v3Ez719s21lGthxuNi6lhAGmCGH3jdL9KMK+T8V9zsFrzQ/enDL1ISwTWRlcFh2Nq5yFx6wcU+w==",
+      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
       "type": "package",
       "path": "system.runtime/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3346,7 +3463,7 @@
       ]
     },
     "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
-      "sha512": "DfTIr/mWBABiRQ4ROzrViCgxLF7nkAtUBL9KeMAqxph55pqMjhjCqas/SYqor2UEljWKr7wrShG0F7xNfkNveQ==",
+      "sha512": "oIIXM4w2y3MiEZEXA+RTtfPV+SZ1ymbFdWppHlUciNdNIL0/Uo3HW9q9iN2O7T7KUmRdvjA7C2Gv4exAyW4zEQ==",
       "type": "package",
       "path": "system.runtime.interopservices.windowsruntime/4.0.1",
       "files": [
@@ -3395,7 +3512,7 @@
       ]
     },
     "System.Runtime.Serialization.Primitives/4.1.1": {
-      "sha512": "+mqQrrJsDx5yxIq+wLYKHr6pVc08ETOzJFwE3QvWmEwM4CU5RNKGdqu47bk+HGScaT58ZCVFmjwpp0OBUxy1QA==",
+      "sha512": "HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg==",
       "type": "package",
       "path": "system.runtime.serialization.primitives/4.1.1",
       "files": [
@@ -3535,7 +3652,7 @@
       ]
     },
     "System.Threading/4.0.11": {
-      "sha512": "jiwqrDD/KOsdeMuODFxJcuwqKh+Dvm7Ckvxt3qnZoJP/N7BM1ZKPRm1NLbnReENcDy0jBl/7iNDi/SFrUWejlQ==",
+      "sha512": "N+3xqIcg3VDKyjwwCGaZ9HawG9aC6cSDI+s7ROma310GQo8vilFZa86hqKppwTHleR/G0sfOzhvgnUxWCR/DrQ==",
       "type": "package",
       "path": "system.threading/4.0.11",
       "files": [
@@ -3627,7 +3744,7 @@
       ]
     },
     "System.Threading.Tasks/4.3.0": {
-      "sha512": "fUiP+CyyCjs872OA8trl6p97qma/da1xGq3h4zAbJZk8zyaU4zyEfqW5vbkP80xG/Nimun1vlWBboMEk7XxdEw==",
+      "sha512": "LbSxKEdOUhVe8BezB/9uOGGppt+nZf6e1VFyw6v3DN6lqitm0OSn2uXMOdtP0M3W4iMcqcivm2J6UgqiwwnXiA==",
       "type": "package",
       "path": "system.threading.tasks/4.3.0",
       "files": [
@@ -3695,7 +3812,7 @@
       ]
     },
     "System.Threading.Tasks.Extensions/4.5.1": {
-      "sha512": "rckdhLJtzQ3EI+0BGuq7dUVtCSnerqAoAmL3S6oMRZ4VMZTL3Rq9DS8IDW57c6PYVebA4O0NbSA1BDvyE18UMA==",
+      "sha512": "WSKUTtLhPR8gllzIWO2x6l4lmAIfbyMAiTlyXAis4QBDonXK4b4S6F8zGARX4/P8wH3DH+sLdhamCiHn+fTU1A==",
       "type": "package",
       "path": "system.threading.tasks.extensions/4.5.1",
       "files": [
@@ -3772,7 +3889,7 @@
       ]
     },
     "Xam.Plugin.DeviceInfo/3.1.0": {
-      "sha512": "Q0LbWW/ikR936s8FinWfjHPGw011OhegfZu8DnC0Z+yKhS6MRZjmtCXa1US/zuN65PbYyqdTbPAsnhNn35Bh/A==",
+      "sha512": "PjGxNUMtUE3eSQ3G5TM7V8V9O9qmnPMYwecvV1mwNXeB75myuuBzo3WkZ+NYJHBF2kpt3bBgQwzJG09XjL/Jaw==",
       "type": "package",
       "path": "xam.plugin.deviceinfo/3.1.0",
       "files": [
@@ -3782,7 +3899,6 @@
         "lib/MonoAndroid10/Plugin.DeviceInfo.Abstractions.pdb",
         "lib/MonoAndroid10/Plugin.DeviceInfo.Abstractions.xml",
         "lib/MonoAndroid10/Plugin.DeviceInfo.dll",
-        "lib/MonoAndroid10/Plugin.DeviceInfo.dll.mdb",
         "lib/MonoAndroid10/Plugin.DeviceInfo.pdb",
         "lib/MonoAndroid10/Plugin.DeviceInfo.xml",
         "lib/UAP10/Plugin.DeviceInfo.Abstractions.dll",
@@ -4050,6 +4166,8 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "Com.Airbnb.Xamarin.Forms.Lottie >= 2.7.0",
+      "Microsoft.AppCenter.Analytics >= 1.14.0",
+      "Microsoft.AppCenter.Crashes >= 1.14.0",
       "Microsoft.AspNetCore.SignalR.Client >= 1.1.0",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 12.0.1",
@@ -4060,30 +4178,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\John Kenneth Furog\\.nuget\\packages\\": {},
+    "C:\\Users\\Furog\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
+      "projectUniqueName": "C:\\Users\\Furog\\source\\repos\\QuizBeeApi\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
       "projectName": "QuizBeeApp.Mobile",
-      "projectPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
-      "packagesPath": "C:\\Users\\John Kenneth Furog\\.nuget\\packages\\",
-      "outputPath": "C:\\Source\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\obj\\",
+      "projectPath": "C:\\Users\\Furog\\source\\repos\\QuizBeeApi\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile.csproj",
+      "packagesPath": "C:\\Users\\Furog\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Furog\\source\\repos\\QuizBeeApi\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\QuizBeeApp.Mobile\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\John Kenneth Furog\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Furog\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Nuget.Local": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
         "https://nugetized.blob.core.windows.net/live-reload/index.json": {}
@@ -4105,6 +4222,14 @@
           "Com.Airbnb.Xamarin.Forms.Lottie": {
             "target": "Package",
             "version": "[2.7.0, )"
+          },
+          "Microsoft.AppCenter.Analytics": {
+            "target": "Package",
+            "version": "[1.14.0, )"
+          },
+          "Microsoft.AppCenter.Crashes": {
+            "target": "Package",
+            "version": "[1.14.0, )"
           },
           "Microsoft.AspNetCore.SignalR.Client": {
             "target": "Package",

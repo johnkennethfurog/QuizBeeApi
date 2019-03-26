@@ -56,6 +56,9 @@ namespace QuizBeeApp.Mobile.ViewModels
                     ReferenceNumber = ReferenceCode
                 });
 
+                if (participant == null)
+                    messageService.ShowMessage("Unable to login");
+
                 var param = new NavigationParameters
                 {
                     {"participant",participant }

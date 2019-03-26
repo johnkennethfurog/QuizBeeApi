@@ -1,4 +1,7 @@
-﻿using Prism;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Prism;
 using Prism.Ioc;
 using QuizBeeApp.Mobile.Helpers;
 using QuizBeeApp.Mobile.Interfaces;
@@ -24,11 +27,20 @@ namespace QuizBeeApp.Mobile
 
         protected override async void OnInitialized()
         {
+#if DEBUG
             LiveReload.Init();
-
+#endif
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            AppCenter.Start("android=e341c96b-a490-44de-9980-920a9f6570ce;",
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

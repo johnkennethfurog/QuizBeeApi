@@ -6,13 +6,13 @@ export const environment = {
   production: false,
 
   //LOCAL
-  apiUrl:"http://localhost:5000/api/",
-  apiUrlRoot:"http://localhost:5000/"
+  // apiUrl:"http://localhost:5000/api/",
+  // apiUrlRoot:"http://localhost:5000/"
 
 
   // FAITH
-  // apiUrl:"http://172.16.123.183:5000/api/",
-  // apiUrlRoot:"http://172.16.123.183:5000/"
+  apiUrl: 'http://192.168.1.120:5001/api/',
+  apiUrlRoot: 'http://192.168.1.120:5001/'
 
 
   //HOME

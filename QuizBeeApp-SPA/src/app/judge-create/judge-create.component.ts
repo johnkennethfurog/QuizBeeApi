@@ -104,6 +104,7 @@ export class JudgeCreateComponent implements OnInit {
           }
         },error =>{
           this.alertify.error("Unable to create new Judge");
+          this.reset();
         })
     }
 
@@ -111,6 +112,7 @@ export class JudgeCreateComponent implements OnInit {
       this.judge.name = this.createJudgeForm.get('name').value;
       this.judge.eventCode = this.eventCode;
       this.judge.emailAddress = this.createJudgeForm.get('emailAddress').value;
+      this.judge.refNo = this.createJudgeForm.get('refNo').value;
     }
 
     reset(){

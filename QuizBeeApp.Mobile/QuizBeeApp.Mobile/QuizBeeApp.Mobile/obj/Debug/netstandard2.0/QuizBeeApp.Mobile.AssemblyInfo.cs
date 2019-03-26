@@ -11,14 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadata("EnableLiveReload", "true")]
-[assembly: System.Reflection.AssemblyMetadata("MqttSessionId", "54bf6447680d")]
-[assembly: System.Reflection.AssemblyMetadata("MqttHostName", "localhost")]
-[assembly: System.Reflection.AssemblyMetadata("MqttLocalHostAddress", "192.168.43.129")]
-[assembly: System.Reflection.AssemblyMetadata("MqttPort", "1883")]
-[assembly: System.Reflection.AssemblyMetadata("MqttTopicPrefix", "xlr/")]
-[assembly: System.Reflection.AssemblyMetadata("MqttSecretKey", "rYlXT8/LRdkCw6JJ0dad2LtbuoKBCgP/+gzLO9yr7xs=")]
-[assembly: System.Reflection.AssemblyMetadata("MqttSecretIV", "BMZ2qczdRuQjV0/5FeDQBA==")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuizBeeApp.Mobile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -88,9 +88,9 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material">
       <Version>3.6.0.220655</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.LiveReload">
+    <!--<PackageReference Include="Xamarin.LiveReload">
       <Version>0.3.27</Version>
-    </PackageReference>
+    </PackageReference>-->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyServices\MessageService.cs" />

@@ -14,9 +14,5 @@
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)xamarin.forms\3.6.0.220655\build\Xamarin.Forms.props" Condition="Exists('$(NuGetPackageRoot)xamarin.forms\3.6.0.220655\build\Xamarin.Forms.props')" />
-    <Import Project="$(NuGetPackageRoot)xamarin.livereload\0.3.27\build\Xamarin.LiveReload.props" Condition="Exists('$(NuGetPackageRoot)xamarin.livereload\0.3.27\build\Xamarin.LiveReload.props')" />
   </ImportGroup>
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgXamarin_LiveReload Condition=" '$(PkgXamarin_LiveReload)' == '' ">C:\Users\Furog\.nuget\packages\xamarin.livereload\0.3.27</PkgXamarin_LiveReload>
-  </PropertyGroup>
 </Project>
